@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { Navigation } from "@/components/sections/Navigation";
 import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { Skills } from "@/components/sections/Skills";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { Sun, Moon } from "lucide-react";
 
 export default function Home() {
   const [isLightMode, setIsLightMode] = useState(false);
@@ -29,6 +30,12 @@ export default function Home() {
 
       {/* Hero Section Centerpiece */}
       <Hero />
+
+      {/* About Section */}
+      <About />
+
+      {/* Skills Section */}
+      <Skills />
 
       {/* Design System Sandbox Section (For Sanity-Checking) */}
       <SectionWrapper id="sandbox" borderTop={true} containerClassName="grid grid-cols-1 lg:grid-cols-2 gap-16">
