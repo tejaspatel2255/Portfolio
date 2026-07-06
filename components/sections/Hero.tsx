@@ -101,6 +101,11 @@ export function Hero() {
                   Get In Touch <ArrowUpRight className="w-4 h-4 ml-1 inline-block" />
                 </Button>
               </a>
+              <a href="/resume.pdf" download="Tejas_Patel_Resume.pdf">
+                <Button variant="ghost">
+                  Download CV <ArrowDown className="w-4 h-4 ml-1 inline-block" />
+                </Button>
+              </a>
             </motion.div>
           </div>
 
