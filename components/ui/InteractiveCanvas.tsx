@@ -64,6 +64,8 @@ export function InteractiveCanvas() {
     window.addEventListener("mousemove", handleMouseMove);
     canvas.addEventListener("mouseleave", handleMouseLeave);
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const draw = () => {
       ctx.clearRect(0, 0, width, height);
 
@@ -87,17 +89,19 @@ export function InteractiveCanvas() {
 
       // Draw active connections & nodes
       nodes.forEach((node) => {
-        // Drift Physics
-        node.x += node.vx;
-        node.y += node.vy;
+        if (!prefersReducedMotion) {
+          // Drift Physics
+          node.x += node.vx;
+          node.y += node.vy;
 
-        // Bounce boundaries
-        if (node.x < 0 || node.x > width) node.vx *= -1;
-        if (node.y < 0 || node.y > height) node.vy *= -1;
+          // Bounce boundaries
+          if (node.x < 0 || node.x > width) node.vx *= -1;
+          if (node.y < 0 || node.y > height) node.vy *= -1;
 
-        // Slow glow pulse
-        node.pulse += 0.008 * node.pulseDirection;
-        if (node.pulse > 1 || node.pulse < 0) node.pulseDirection *= -1;
+          // Slow glow pulse
+          node.pulse += 0.008 * node.pulseDirection;
+          if (node.pulse > 1 || node.pulse < 0) node.pulseDirection *= -1;
+        }
 
         // Node Glow
         ctx.fillStyle = `rgba(200, 255, 68, ${0.1 + node.pulse * 0.25})`;
@@ -105,20 +109,22 @@ export function InteractiveCanvas() {
         ctx.arc(node.x, node.y, node.radius + node.pulse * 1.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Connect to Cursor (stark Acid Lime lines)
-        const dx = mouse.x - node.x;
-        const dy = mouse.y - node.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const maxCursorDist = 220;
+        // Connect to Cursor (stark Acid Lime lines) - only if motion is not reduced
+        if (!prefersReducedMotion) {
+          const dx = mouse.x - node.x;
+          const dy = mouse.y - node.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const maxCursorDist = 220;
 
-        if (dist < maxCursorDist) {
-          const alpha = (1 - dist / maxCursorDist) * 0.28;
-          ctx.strokeStyle = `rgba(200, 255, 68, ${alpha})`;
-          ctx.lineWidth = 0.75;
-          ctx.beginPath();
-          ctx.moveTo(node.x, node.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.stroke();
+          if (dist < maxCursorDist) {
+            const alpha = (1 - dist / maxCursorDist) * 0.28;
+            ctx.strokeStyle = `rgba(200, 255, 68, ${alpha})`;
+            ctx.lineWidth = 0.75;
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
         }
 
         // Connect to neighboring nodes (soft gray mesh lines)
@@ -143,16 +149,20 @@ export function InteractiveCanvas() {
         }
       });
 
-      animationFrameId = requestAnimationFrame(draw);
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(draw);
+      }
     };
 
     draw();
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
-      if (canvas) canvas.removeEventListener("mouseleave", handleMouseLeave);
-      cancelAnimationFrame(animationFrameId);
+      if (!prefersReducedMotion) {
+        window.removeEventListener("mousemove", handleMouseMove);
+        if (canvas) canvas.removeEventListener("mouseleave", handleMouseLeave);
+        cancelAnimationFrame(animationFrameId);
+      }
     };
   }, []);
 

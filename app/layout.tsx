@@ -22,9 +22,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tejas Patel | Software Developer & AI Systems Engineer",
+  title: {
+    default: "Tejas Patel | Software & AI Systems Engineer",
+    template: "%s | Tejas Patel",
+  },
   description:
-    "Portfolio of Tejas Patel, a software developer specializing in full-stack web development and applied AI (agentic systems).",
+    "Full-stack product developer specializing in high-performance web systems (React, TypeScript) and applied AI/agentic loops (Python, LangChain).",
+  keywords: [
+    "Tejas Patel",
+    "Software Engineer",
+    "AI Systems Engineer",
+    "Agentic AI",
+    "Full Stack Developer",
+    "React Portfolio",
+    "Next.js Portfolio",
+    "Python Developer",
+  ],
+  authors: [{ name: "Tejas Patel", url: "https://github.com/tejaspatel2255" }],
+  creator: "Tejas Patel",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://github.com/tejaspatel2255",
+    title: "Tejas Patel | Software & AI Systems Engineer",
+    description:
+      "Full-stack product developer specializing in high-performance web systems (React, TypeScript) and applied AI/agentic loops (Python, LangChain).",
+    siteName: "Tejas Patel Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tejas Patel | Software & AI Systems Engineer",
+    description:
+      "Full-stack product developer specializing in high-performance web systems (React, TypeScript) and applied AI/agentic loops (Python, LangChain).",
+    creator: "@pateltejasd",
+  },
 };
 
 export default function RootLayout({

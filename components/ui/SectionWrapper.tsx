@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface SectionWrapperProps extends React.HTMLAttributes<HTMLElement> {
@@ -23,7 +23,9 @@ export function SectionWrapper({
   borderBottom = false,
   ...props
 }: SectionWrapperProps) {
-  const content = animate ? (
+  const shouldReduceMotion = useReducedMotion();
+
+  const content = animate && !shouldReduceMotion ? (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}

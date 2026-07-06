@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -23,6 +23,8 @@ export function Heading({
   ...props
 }: HeadingProps) {
   const Component = tag;
+  const shouldReduceMotion = useReducedMotion();
+  const activeAnimation = shouldReduceMotion ? "none" : animate;
 
   const sizeStyles = {
     display: "text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] font-display uppercase",
@@ -34,7 +36,7 @@ export function Heading({
   };
 
   // Staggered letters animation
-  if (animate === "chars" && titleText) {
+  if (activeAnimation === "chars" && titleText) {
     const letters = Array.from(titleText);
     const container = {
       hidden: { opacity: 0 },
@@ -89,7 +91,7 @@ export function Heading({
   }
 
   // Staggered words animation
-  if (animate === "words" && titleText) {
+  if (activeAnimation === "words" && titleText) {
     const words = titleText.split(" ");
     const container = {
       hidden: { opacity: 0 },
@@ -141,7 +143,7 @@ export function Heading({
   }
 
   // standard fade-up
-  if (animate === "fade-up") {
+  if (activeAnimation === "fade-up") {
     return (
       <Component className={cn(sizeStyles[size], className)} {...props}>
         <motion.span

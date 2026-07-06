@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 
 export function CustomCursor() {
   const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   // Raw position coordinates
   const cursorX = useMotionValue(-100);
@@ -19,6 +20,7 @@ export function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    if (shouldReduceMotion) return;
     setMounted(true);
 
     const moveCursor = (e: MouseEvent) => {
@@ -62,9 +64,9 @@ export function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [cursorX, cursorY, isVisible]);
+  }, [cursorX, cursorY, isVisible, shouldReduceMotion]);
 
-  if (!mounted) return null;
+  if (!mounted || shouldReduceMotion) return null;
 
   return (
     <>
