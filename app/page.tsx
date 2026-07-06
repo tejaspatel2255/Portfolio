@@ -7,6 +7,7 @@ import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
+import { Contact } from "@/components/sections/Contact";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
@@ -45,7 +46,10 @@ export default function Home() {
       {/* Experience Section */}
       <Experience />
 
-      {/* Design System Sandbox Section (For Sanity-Checking) */}
+      {/* Contact Section & Footer */}
+      <Contact />
+
+      {/* Design System Sandbox Section (For Sanity-Checking at the very bottom) */}
       <SectionWrapper id="sandbox" borderTop={true} containerClassName="grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Left Column: Typography Sandbox */}
         <div className="flex flex-col gap-8">
@@ -154,11 +158,6 @@ export default function Home() {
           </div>
         </div>
       </SectionWrapper>
-
-      {/* Footer */}
-      <footer className="border-t border-border-subtle py-8 text-center text-[10px] font-mono text-ink-muted bg-background">
-        D:\PROJECTS\PORTFOLIO // TEJAS PATEL © 2026 // ALL RIGHTS RESERVED
-      </footer>
     </main>
   );
 }
