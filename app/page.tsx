@@ -1,11 +1,12 @@
 "use client";
 
 import React, { useState } from "react";
+import { Navigation } from "@/components/sections/Navigation";
+import { Hero } from "@/components/sections/Hero";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { Sun, Moon, ArrowUpRight, Cpu } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { Sun, Moon } from "lucide-react";
 
 export default function Home() {
   const [isLightMode, setIsLightMode] = useState(false);
@@ -22,111 +23,30 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen transition-colors duration-300">
-      {/* Tiny Editorial Navigation Header */}
-      <header className="sticky top-0 w-full bg-background/80 backdrop-blur-md border-b border-border-subtle z-50 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8.5 h-8.5 bg-accent flex items-center justify-center font-display font-extrabold text-accent-foreground text-sm">
-              T
-            </div>
-            <span className="font-display font-bold tracking-tight uppercase text-xs sm:text-sm">
-              TEJAS PATEL // DEV
-            </span>
-          </div>
-          
-          <div className="flex items-center gap-4 sm:gap-6">
-            <button
-              onClick={toggleTheme}
-              className="p-2 border border-border-subtle hover:border-border-strong hover:bg-surface text-ink-primary transition-colors cursor-pointer focus:outline-none"
-              aria-label="Toggle theme"
-            >
-              {isLightMode ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-            </button>
-            <a
-              href="https://github.com/tejaspatel2255"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ink-secondary hover:text-ink-primary transition-colors"
-            >
-              <GithubIcon className="w-4 h-4" /> Github
-            </a>
-            <a
-              href="https://www.linkedin.com/in/pateltejasd"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ink-secondary hover:text-ink-primary transition-colors"
-            >
-              <LinkedinIcon className="w-4 h-4" /> Linkedin
-            </a>
-          </div>
-        </div>
-      </header>
+    <main className="min-h-screen">
+      {/* Premium Sticky Navigation */}
+      <Navigation />
 
-      {/* Hero / Scaffold Sanity Section */}
-      <SectionWrapper animate={true}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
-          <div className="lg:col-span-8 flex flex-col justify-center gap-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-subtle bg-surface/50 text-accent font-mono text-xs uppercase self-start">
-              <Cpu className="w-3.5 h-3.5 animate-pulse" /> Phase 1: Design Scaffold Active
-            </div>
-            
-            <Heading
-              tag="h1"
-              size="display"
-              animate="chars"
-              titleText="TEJAS PATEL"
-              className="text-ink-primary"
-            />
-            
-            <Heading
-              tag="h2"
-              size="h2"
-              animate="words"
-              titleText="FULL-STACK & APPLIED AI ENGINEER"
-              className="text-ink-secondary"
-            />
+      {/* Hero Section Centerpiece */}
+      <Hero />
 
-            <p className="text-base sm:text-lg md:text-xl text-ink-muted max-w-2xl leading-relaxed font-light">
-              This page validates our <span className="text-ink-primary font-semibold">Interactive Editorial Neo-Brutalist Grid</span>. 
-              Below is the design system sandbox verifying color tokens, custom typography hierarchy, 
-              and magnetic button components under both dark and light modes.
-            </p>
-
-            <div className="flex flex-wrap gap-4 mt-4">
-              <Button variant="brutalist">
-                Brutalist Action <ArrowUpRight className="w-4 h-4 ml-1 inline-block" />
-              </Button>
-              <Button variant="secondary">Secondary Action</Button>
-            </div>
-          </div>
-          
-          {/* Asymmetric Sidebar layout */}
-          <div className="lg:col-span-4 border border-border-strong p-8 bg-surface/20 flex flex-col justify-between min-h-[320px]">
-            <div>
-              <p className="font-mono text-[10px] text-accent uppercase tracking-widest mb-4">// System status</p>
-              <h3 className="font-display font-bold text-xl text-ink-primary mb-2 uppercase">Lighthouse Ready</h3>
-              <p className="text-sm text-ink-secondary leading-relaxed">
-                Using lightweight system layout structures, next/font preloading, zero font swaps, custom SVG noise, and hardware-accelerated transforms.
-              </p>
-            </div>
-            <div className="border-t border-border-subtle pt-6 mt-8">
-              <p className="text-xs text-ink-muted font-mono">
-                OS: Windows // Port: 3000 // Tailwind: v4
-              </p>
-            </div>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Typography & Design System Verification Grid */}
-      <SectionWrapper borderTop={true} containerClassName="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      {/* Design System Sandbox Section (For Sanity-Checking) */}
+      <SectionWrapper id="sandbox" borderTop={true} containerClassName="grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Left Column: Typography Sandbox */}
         <div className="flex flex-col gap-8">
           <div>
-            <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// Typography Tokens</span>
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// Design Sandbox</span>
+              {/* Theme Toggle in Sandbox */}
+              <button
+                onClick={toggleTheme}
+                className="px-3 py-1.5 border border-border-subtle hover:border-border-strong hover:bg-surface text-ink-primary font-mono text-[10px] uppercase tracking-wider transition-colors cursor-pointer focus:outline-none"
+              >
+                {isLightMode ? "Switch to Dark Mode" : "Switch to Light Mode"}
+              </button>
+            </div>
             <Heading tag="h2" size="h2" animate="fade-up" className="text-ink-primary mt-2">
-              Type Scale Sandbox
+              Typography Sandbox
             </Heading>
           </div>
 
@@ -173,9 +93,9 @@ export default function Home() {
         {/* Right Column: Colors & Buttons Sandbox */}
         <div className="flex flex-col gap-8">
           <div>
-            <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// Color & Component Tokens</span>
+            <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// Interactive Tokens</span>
             <Heading tag="h2" size="h2" animate="fade-up" className="text-ink-primary mt-2">
-              Color Palette & Interactive Elements
+              Color Palette & Buttons
             </Heading>
           </div>
 
@@ -221,7 +141,7 @@ export default function Home() {
       </SectionWrapper>
 
       {/* Footer */}
-      <footer className="border-t border-border-subtle py-8 text-center text-[10px] font-mono text-ink-muted">
+      <footer className="border-t border-border-subtle py-8 text-center text-[10px] font-mono text-ink-muted bg-background">
         D:\PROJECTS\PORTFOLIO // TEJAS PATEL © 2026 // ALL RIGHTS RESERVED
       </footer>
     </main>
