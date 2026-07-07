@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
-import { Terminal, Cpu } from "lucide-react";
+import { Terminal, Cpu, ArrowUpRight } from "lucide-react";
 
 interface SkillItem {
   name: string;
@@ -216,6 +216,17 @@ export function Skills() {
               <span>LOG: GitHub integration ready for live endpoints.</span>
             </div>
           </div>
+        </div>
+
+        {/* Next Section Bridge */}
+        <div className="lg:col-span-12 w-full flex justify-end mt-12 border-t border-border-subtle pt-6">
+          <a 
+            href="#testimonials" 
+            className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
+          >
+            <span>NEXT: VIEW RECOMMENDATIONS</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
+          </a>
         </div>
 
       </div>

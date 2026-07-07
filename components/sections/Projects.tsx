@@ -351,6 +351,17 @@ export function Projects() {
           })}
         </div>
 
+        {/* Next Section Bridge */}
+        <div className="lg:col-span-12 w-full flex justify-end mt-12 border-t border-border-subtle pt-6">
+          <a 
+            href="#about" 
+            className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
+          >
+            <span>NEXT: DISCOVER WHO I AM</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
+          </a>
+        </div>
+
       </div>
     </SectionWrapper>
   );

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/Icons";
 import { Mail, ArrowUpRight, Send, CheckCircle2, Loader2 } from "lucide-react";
 
 export function Contact() {
@@ -51,6 +51,26 @@ export function Contact() {
 
           {/* Direct CTA List */}
           <div className="flex flex-col gap-3 mt-2">
+            {/* WhatsApp - Primary Option */}
+            <a 
+              href="https://wa.me/[INSERT_WHATSAPP_NUMBER]?text=Hello%20Tejas%2C%20I%20visited%20your%20portfolio%20and%20would%20love%20to%20connect%21"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/cta border border-border-strong p-4 bg-accent/5 hover:border-accent hover:bg-accent/10 transition-all duration-200 flex items-center justify-between cursor-none select-none"
+            >
+              <div className="flex items-center gap-3">
+                <div className="p-2 border border-border-strong bg-accent text-accent-foreground">
+                  <WhatsappIcon className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="block font-mono text-[8px] text-ink-muted uppercase tracking-wider">INSTANT CONTACT</span>
+                  <span className="block text-sm font-semibold text-ink-primary mt-0.5">Chat on WhatsApp [INSERT_WHATSAPP_NUMBER]</span>
+                </div>
+              </div>
+              <ArrowUpRight className="w-4 h-4 text-ink-muted group-hover/cta:text-accent transition-colors" />
+            </a>
+
+            {/* Email - Secondary Option */}
             <a 
               href="mailto:placeholder_email@gmail.com [EDIT ME]"
               className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between cursor-none select-none"

@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
-import { MapPin, Briefcase, Calendar, Target, HelpCircle } from "lucide-react";
+import { MapPin, Briefcase, Calendar, Target, HelpCircle, ArrowUpRight } from "lucide-react";
 
 export function About() {
   const cardRef = useRef<HTMLDivElement | null>(null);
@@ -169,6 +169,17 @@ export function About() {
               </div>
             </motion.div>
           </div>
+        </div>
+
+        {/* Next Section Bridge */}
+        <div className="lg:col-span-12 flex justify-end mt-8 border-t border-border-subtle pt-6">
+          <a 
+            href="#services" 
+            className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
+          >
+            <span>NEXT: VIEW MY SERVICES</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
+          </a>
         </div>
 
       </div>

@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/Button";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { WhatsappIcon } from "@/components/ui/Icons";
 
 const NAV_LINKS = [
   { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
   { label: "Skills", href: "#skills" },
-  { label: "Experience", href: "#experience" },
+  { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -89,15 +92,9 @@ export function Navigation() {
 
           {/* Desktop Contact CTA */}
           <div className="hidden md:block">
-            <a 
-              href="https://www.linkedin.com/in/pateltejasd"
-              target="_blank" 
-              rel="noopener noreferrer"
-            >
-              <Button variant="brutalist" size="sm">
-                Let&apos;s Connect <ArrowUpRight className="w-3.5 h-3.5 ml-1 inline-block" />
-              </Button>
-            </a>
+            <WhatsAppButton variant="brutalist" size="sm">
+              Let&apos;s Chat <WhatsappIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
+            </WhatsAppButton>
           </div>
 
           {/* Mobile hamburger menu toggle */}
@@ -158,15 +155,9 @@ export function Navigation() {
 
               {/* Socials & CTA Footer */}
               <div className="flex flex-col gap-6 border-t border-border-subtle pt-8 z-10">
-                <a 
-                  href="https://www.linkedin.com/in/pateltejasd" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="brutalist" className="w-full text-center py-4">
-                    Connect on LinkedIn <ArrowUpRight className="w-4 h-4 ml-1 inline-block" />
-                  </Button>
-                </a>
+                <WhatsAppButton variant="brutalist" className="w-full text-center py-4">
+                  Chat on WhatsApp <WhatsappIcon className="w-4 h-4 ml-1.5 inline-block" />
+                </WhatsAppButton>
                 
                 <div className="flex items-center justify-between text-[10px] font-mono text-ink-muted">
                   <span>© 2026 TEJAS PATEL</span>

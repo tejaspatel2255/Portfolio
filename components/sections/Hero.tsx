@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { InteractiveCanvas } from "@/components/ui/InteractiveCanvas";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { WhatsappIcon } from "@/components/ui/Icons";
 import { ArrowDown, ArrowUpRight, Code, Database, Eye } from "lucide-react";
 
 export function Hero() {
@@ -96,11 +98,9 @@ export function Hero() {
                   View My Work <Eye className="w-4 h-4 ml-1.5 inline-block" />
                 </Button>
               </a>
-              <a href="#contact">
-                <Button variant="secondary">
-                  Get In Touch <ArrowUpRight className="w-4 h-4 ml-1 inline-block" />
-                </Button>
-              </a>
+              <WhatsAppButton variant="secondary">
+                Chat on WhatsApp <WhatsappIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
+              </WhatsAppButton>
               <a href="/resume.pdf" download="Tejas_Patel_Resume.pdf">
                 <Button variant="ghost">
                   Download CV <ArrowDown className="w-4 h-4 ml-1 inline-block" />

@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { Navigation } from "@/components/sections/Navigation";
 import { Hero } from "@/components/sections/Hero";
-import { About } from "@/components/sections/About";
-import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
-import { Experience } from "@/components/sections/Experience";
+import { About } from "@/components/sections/About";
+import { Services } from "@/components/sections/Services";
+import { Skills } from "@/components/sections/Skills";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
@@ -34,17 +35,20 @@ export default function Home() {
       {/* Hero Section Centerpiece */}
       <Hero />
 
+      {/* Projects Section */}
+      <Projects />
+
       {/* About Section */}
       <About />
+
+      {/* Services Section */}
+      <Services />
 
       {/* Skills Section */}
       <Skills />
 
-      {/* Projects Section */}
-      <Projects />
-
-      {/* Experience Section */}
-      <Experience />
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* Contact Section & Footer */}
       <Contact />
