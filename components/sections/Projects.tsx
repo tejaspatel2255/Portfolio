@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
@@ -94,7 +94,12 @@ export function Projects() {
     },
   ];
 
-  const shouldReduceMotion = useReducedMotion();
+  const reducedMotionPref = useReducedMotion();
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
+
+  useEffect(() => {
+    setShouldReduceMotion(!!reducedMotionPref);
+  }, [reducedMotionPref]);
 
   // Helper to render responsive wireframe mockups with live visualizers
   const renderMockup = (type: string) => {
