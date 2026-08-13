@@ -1,15 +1,60 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { InteractiveCanvas } from "@/components/ui/InteractiveCanvas";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { WhatsappIcon } from "@/components/ui/Icons";
-import { ArrowDown, ArrowUpRight, Code, Database, Eye } from "lucide-react";
+import { ArrowDown, Eye, Code, Database } from "lucide-react";
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const infoRef = useRef<HTMLDivElement | null>(null);
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion || !sectionRef.current) return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      if (infoRef.current) {
+        gsap.to(infoRef.current, {
+          y: -35,
+          opacity: 0.88,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+      if (cardRef.current) {
+        gsap.to(cardRef.current, {
+          y: -65,
+          opacity: 0.75,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -35,7 +80,7 @@ export function Hero() {
   } as const;
 
   return (
-    <section className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
+    <section ref={sectionRef} className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
       {/* Interactive Centerpiece Canvas Background */}
       <InteractiveCanvas />
 
@@ -55,7 +100,7 @@ export function Hero() {
           className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12"
         >
           {/* Main Info Column */}
-          <div className="lg:col-span-8 flex flex-col justify-center gap-6">
+          <div ref={infoRef} className="lg:col-span-8 flex flex-col justify-center gap-6">
             
             {/* Availability Badge */}
             <motion.div 
@@ -111,6 +156,7 @@ export function Hero() {
 
           {/* Asymmetric Technical Card Column */}
           <motion.div 
+            ref={cardRef}
             variants={itemVariants}
             className="lg:col-span-4 border border-border-strong p-8 bg-surface/30 backdrop-blur-md flex flex-col justify-between min-h-[300px]"
           >

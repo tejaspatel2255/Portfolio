@@ -94,119 +94,156 @@ export function Projects() {
     },
   ];
 
-  // Helper to render responsive wireframe mockups
+  const shouldReduceMotion = useReducedMotion();
+
+  // Helper to render responsive wireframe mockups with live visualizers
   const renderMockup = (type: string) => {
     switch (type) {
       case "map":
         return (
-          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-emerald-400/60">
-            <div className="flex justify-between items-center border-b border-emerald-500/10 pb-2">
-              <span>MAP_GEO_LAYER.json</span>
+          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-emerald-400/70 relative overflow-hidden">
+            <div className="flex justify-between items-center border-b border-emerald-500/10 pb-2 z-10">
+              <span className="font-bold">MAP_GEO_LAYER.json</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             </div>
-            <div className="flex-1 flex items-center justify-center relative">
-              {/* Dummy vector nodes */}
-              <div className="absolute inset-4 border border-dashed border-emerald-500/10 rounded-lg flex items-center justify-center">
-                <span className="text-[10px] tracking-wider text-emerald-400">[ ECOLOGICAL_DASHBOARD ]</span>
+            <div className="flex-1 flex items-center justify-center relative my-2">
+              <div className="absolute inset-2 border border-dashed border-emerald-500/15 rounded-lg flex items-center justify-center">
+                <span className="text-[10px] tracking-wider text-emerald-400 font-bold">[ ECOLOGICAL_DASHBOARD ]</span>
               </div>
-              <div className="w-4 h-4 rounded-full border border-emerald-400 absolute top-10 left-10" />
-              <div className="w-2 h-2 rounded-full bg-emerald-400 absolute bottom-12 right-16" />
+              {/* Radar pulse animation */}
+              {!shouldReduceMotion && (
+                <motion.div
+                  animate={{ scale: [0.8, 2.2], opacity: [0.6, 0] }}
+                  transition={{ repeat: Infinity, duration: 2.4, ease: "easeOut" }}
+                  className="w-12 h-12 rounded-full border border-emerald-400/50 absolute"
+                />
+              )}
+              <div className="w-3.5 h-3.5 rounded-full border-2 border-emerald-400 absolute top-6 left-8 bg-emerald-950/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute bottom-8 right-12 animate-ping" />
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-emerald-500/10 pt-2">
+            <div className="flex justify-between items-center text-[8px] border-t border-emerald-500/10 pt-2 z-10">
               <span>LAT: 21.1702 N</span>
+              <span className="text-emerald-400 font-bold">STREAMING ACTIVE</span>
               <span>LON: 72.8311 E</span>
             </div>
           </div>
         );
       case "terminal":
         return (
-          <div className="w-full h-full border border-amber-500/20 bg-amber-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/70">
+          <div className="w-full h-full border border-amber-500/20 bg-amber-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/80">
             <div className="flex justify-between items-center border-b border-amber-500/10 pb-2">
-              <span>AGENT_LOG_RUN.sh</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+              <span className="font-bold">AGENT_LOG_RUN.sh</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
             </div>
-            <div className="flex-1 py-3 flex flex-col gap-1.5 overflow-hidden">
-              <p>&gt; python main.py --agent-run</p>
-              <p className="text-amber-500/40">&gt; [SYS] Initializing LLM decision nodes...</p>
-              <p className="text-amber-500/40">&gt; [TOOL] Calling github_fetch_repo()...</p>
-              <p className="text-emerald-400">&gt; SUCCESS: Documentation file compiled.</p>
+            <div className="flex-1 py-2 flex flex-col gap-1 overflow-hidden leading-relaxed">
+              <p className="text-amber-300 font-bold">&gt; python main.py --agent-run</p>
+              <p className="text-amber-500/50">&gt; [SYS] Initializing LLM decision graph...</p>
+              <p className="text-amber-500/70">&gt; [TOOL] Executing repository_index()...</p>
+              <div className="flex items-center gap-1 text-emerald-400 font-bold">
+                <span>&gt; SUCCESS: 124 AST nodes parsed.</span>
+                {!shouldReduceMotion && (
+                  <motion.span
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ repeat: Infinity, duration: 0.8 }}
+                    className="w-1.5 h-3 bg-emerald-400 inline-block ml-1"
+                  />
+                )}
+              </div>
             </div>
             <div className="flex justify-between items-center text-[8px] border-t border-amber-500/10 pt-2">
               <span>MEM: 256MB</span>
-              <span>STATUS: SUSPENDED</span>
+              <span>LATENCY: 42ms</span>
             </div>
           </div>
         );
       case "survey":
         return (
-          <div className="w-full h-full border border-cyan-500/20 bg-cyan-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-cyan-400/60">
-            <div className="flex justify-between items-center border-b border-cyan-500/10 pb-2">
-              <span>HEALTH_SURVEY_SHEET</span>
-              <span className="text-[7px] bg-cyan-500/20 px-1 text-cyan-400">OFFLINE_OK</span>
+          <div className="w-full h-full border border-cyan-500/20 bg-cyan-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-cyan-400/70 relative overflow-hidden">
+            {!shouldReduceMotion && (
+              <motion.div
+                animate={{ y: [0, 140, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+                className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent pointer-events-none opacity-40"
+              />
+            )}
+            <div className="flex justify-between items-center border-b border-cyan-500/10 pb-2 z-10">
+              <span className="font-bold">HEALTH_SURVEY_SHEET</span>
+              <span className="text-[7px] bg-cyan-500/20 px-1.5 py-0.5 text-cyan-300 font-bold border border-cyan-500/30">OFFLINE_SYNC</span>
             </div>
-            <div className="flex-1 flex flex-col gap-2 justify-center py-2">
-              <div className="border border-cyan-500/20 p-2 bg-background flex items-center justify-between">
-                <span>01. Survey Identity Verified</span>
-                <div className="w-2.5 h-2.5 bg-cyan-500" />
+            <div className="flex-1 flex flex-col gap-2 justify-center py-2 z-10">
+              <div className="border border-cyan-500/20 p-2 bg-background/80 flex items-center justify-between">
+                <span>01. Identity Verified</span>
+                <span className="w-2.5 h-2.5 bg-cyan-400 inline-block" />
               </div>
-              <div className="border border-cyan-500/20 p-2 bg-background flex items-center justify-between">
-                <span>02. Capture GPS Coordinates</span>
-                <div className="w-2.5 h-2.5 border border-cyan-500/40" />
+              <div className="border border-cyan-500/20 p-2 bg-background/80 flex items-center justify-between">
+                <span>02. GPS Coordinates Cached</span>
+                <span className="w-2.5 h-2.5 border border-cyan-400/60 inline-block animate-pulse" />
               </div>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-cyan-500/10 pt-2">
-              <span>TABLES: supabase_local</span>
-              <span>N=1084</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-cyan-500/10 pt-2 z-10">
+              <span>SUPABASE_OFFLINE</span>
+              <span>N=1,084 ENTRIES</span>
             </div>
           </div>
         );
       case "pos":
         return (
-          <div className="w-full h-full border border-pink-500/20 bg-pink-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-pink-400/60">
+          <div className="w-full h-full border border-pink-500/20 bg-pink-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-pink-400/70">
             <div className="flex justify-between items-center border-b border-pink-500/10 pb-2">
-              <span>SAVALIYA_POS_SYSTEM</span>
-              <span>CART [3]</span>
+              <span className="font-bold">SAVALIYA_POS_SYSTEM</span>
+              <span className="text-pink-300 bg-pink-500/15 px-1 py-0.5 border border-pink-500/20">CART [3]</span>
             </div>
-            <div className="flex-1 flex flex-col gap-1 justify-center">
-              <div className="flex justify-between border-b border-dashed border-pink-500/15 py-1">
+            <div className="flex-1 flex flex-col gap-1.5 justify-center py-1">
+              <div className="flex justify-between border-b border-dashed border-pink-500/20 pb-1">
                 <span>01 / Kesar Pista Ice Cream</span>
-                <span>$4.50</span>
+                <span className="font-bold">$4.50</span>
               </div>
-              <div className="flex justify-between border-b border-dashed border-pink-500/15 py-1">
+              <div className="flex justify-between border-b border-dashed border-pink-500/20 pb-1">
                 <span>02 / Rajbhog Scoop Special</span>
-                <span>$5.00</span>
+                <span className="font-bold">$5.00</span>
               </div>
-              <div className="flex justify-between font-bold text-pink-400 pt-1">
+              <div className="flex justify-between font-extrabold text-pink-300 pt-1 text-[10px]">
                 <span>TOTAL TRANSACTION</span>
-                <span>$9.50</span>
+                <span className="bg-pink-500/20 px-1 font-mono">$9.50</span>
               </div>
             </div>
             <div className="flex justify-between items-center text-[8px] border-t border-pink-500/10 pt-2">
-              <span>TERMINAL: #A08</span>
-              <span>PRINTER: STBY</span>
+              <span>TERMINAL #A08</span>
+              <span className="text-emerald-400 font-bold">READY</span>
             </div>
           </div>
         );
       case "flagship":
       default:
         return (
-          <div className="w-full h-full border border-accent/20 bg-accent/5 p-4 flex flex-col justify-between font-mono text-[9px] text-accent/70">
-            <div className="flex justify-between items-center border-b border-accent/15 pb-2">
-              <span>AGENTIC_ORCHESTRATOR.py</span>
+          <div className="w-full h-full border border-accent/20 bg-accent/5 p-4 flex flex-col justify-between font-mono text-[9px] text-accent/80 relative overflow-hidden">
+            <div className="flex justify-between items-center border-b border-accent/15 pb-2 z-10">
+              <span className="font-bold">AGENTIC_ORCHESTRATOR.py</span>
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
             </div>
-            <div className="flex-1 flex items-center justify-center relative">
-              {/* Dynamic canvas visual grid */}
-              <div className="absolute inset-0 grid grid-cols-5 gap-1 pointer-events-none opacity-20">
+            <div className="flex-1 flex items-center justify-center relative my-2">
+              <div className="absolute inset-0 grid grid-cols-5 gap-1 pointer-events-none opacity-25">
                 {Array.from({ length: 15 }).map((_, i) => (
                   <div key={i} className="border border-accent/30 w-full aspect-square" />
                 ))}
               </div>
-              <span className="text-[10px] tracking-widest text-accent z-10 font-bold uppercase animate-pulse">[ FLAGSHIP_CORE ]</span>
+              {!shouldReduceMotion ? (
+                <motion.div
+                  animate={{ scale: [0.95, 1.05, 0.95] }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                  className="px-3 py-1.5 border border-accent bg-accent/10 text-accent font-bold uppercase tracking-widest z-10 backdrop-blur-sm"
+                >
+                  [ FLAGSHIP_CORE ]
+                </motion.div>
+              ) : (
+                <div className="px-3 py-1.5 border border-accent bg-accent/10 text-accent font-bold uppercase tracking-widest z-10">
+                  [ FLAGSHIP_CORE ]
+                </div>
+              )}
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-accent/15 pt-2">
-              <span>NODES: 32_ACTIVE</span>
-              <span>SPEED: 48ms</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-accent/15 pt-2 z-10">
+              <span>NODES: 32 ACTIVE</span>
+              <span>LATENCY: 48ms</span>
             </div>
           </div>
         );
@@ -250,6 +287,7 @@ export function Projects() {
                 <button
                   onClick={() => handleRowClick(project.id)}
                   aria-expanded={isExpanded}
+                  data-cursor="EXPLORE"
                   className="w-full flex items-center justify-between py-6 text-left cursor-none select-none focus:outline-none"
                 >
                   <div className="flex items-center gap-6 md:gap-8 flex-1">
@@ -321,6 +359,7 @@ export function Projects() {
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
+                              data-cursor="CODE"
                               className="inline-block"
                             >
                               <Button variant="brutalist" size="sm">
@@ -329,6 +368,7 @@ export function Projects() {
                             </a>
                             <a
                               href={project.demoUrl}
+                              data-cursor="DEMO"
                               className="inline-block"
                             >
                               <Button variant="secondary" size="sm">

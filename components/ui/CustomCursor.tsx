@@ -7,6 +7,7 @@ export function CustomCursor() {
   const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [cursorText, setCursorText] = useState<string | null>(null);
   const [isClicking, setIsClicking] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -15,7 +16,7 @@ export function CustomCursor() {
   const cursorY = useMotionValue(-100);
 
   // Smooth springs for the outer lag ring
-  const springConfig = { damping: 30, stiffness: 350, mass: 0.35 };
+  const springConfig = { damping: 28, stiffness: 320, mass: 0.3 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -37,8 +38,17 @@ export function CustomCursor() {
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (!target) return;
-      
-      const isInteractive = 
+
+      const cursorTarget = target.closest("[data-cursor]") as HTMLElement | null;
+      if (cursorTarget) {
+        setCursorText(cursorTarget.getAttribute("data-cursor"));
+        setIsHovered(true);
+        return;
+      } else {
+        setCursorText(null);
+      }
+
+      const isInteractive =
         target.tagName === "BUTTON" ||
         target.tagName === "A" ||
         target.closest("a") ||
@@ -68,20 +78,36 @@ export function CustomCursor() {
 
   if (!mounted || shouldReduceMotion) return null;
 
+  const hasText = !!cursorText;
+
   return (
     <>
-      {/* Outer Follower Ring */}
+      {/* Outer Follower Ring / Badge */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-accent pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+        className="fixed top-0 left-0 rounded-full border border-accent pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center overflow-hidden"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
-          scale: isHovered ? 1.5 : isClicking ? 0.85 : 1,
+          width: hasText ? 64 : 32,
+          height: hasText ? 64 : 32,
           backgroundColor: isHovered ? "var(--color-accent)" : "transparent",
-          mixBlendMode: isHovered ? "difference" : "normal",
+          mixBlendMode: isHovered && !hasText ? "difference" : "normal",
+        }}
+        animate={{
+          scale: isClicking ? 0.85 : isHovered ? (hasText ? 1.25 : 1.5) : 1,
         }}
         transition={{ type: "spring", stiffness: 450, damping: 25 }}
-      />
+      >
+        {hasText && (
+          <motion.span
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="font-mono text-[9px] font-extrabold uppercase tracking-widest text-accent-foreground select-none text-center px-1"
+          >
+            {cursorText}
+          </motion.span>
+        )}
+      </motion.div>
       {/* Inner Pinpoint Dot */}
       <motion.div
         className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-accent pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"

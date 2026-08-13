@@ -90,33 +90,35 @@ export function Heading({
     );
   }
 
-  // Staggered words animation
+  // Staggered words animation with editorial split-line reveal
   if (activeAnimation === "words" && titleText) {
     const words = titleText.split(" ");
     const container = {
       hidden: { opacity: 0 },
       visible: {
         opacity: 1,
-        transition: { staggerChildren: 0.05, delayChildren: delay },
+        transition: { staggerChildren: 0.04, delayChildren: delay },
       },
     } as const;
     const child = {
       visible: {
         opacity: 1,
         y: 0,
+        rotate: 0,
         transition: {
           type: "spring",
-          damping: 18,
-          stiffness: 100,
+          damping: 16,
+          stiffness: 120,
         },
       },
       hidden: {
         opacity: 0,
-        y: 25,
+        y: 32,
+        rotate: 2.5,
         transition: {
           type: "spring",
-          damping: 18,
-          stiffness: 100,
+          damping: 16,
+          stiffness: 120,
         },
       },
     } as const;
@@ -127,12 +129,12 @@ export function Heading({
           variants={container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-40px" }}
           className="inline-flex flex-wrap"
         >
           {words.map((word, index) => (
-            <span key={index} className="inline-block overflow-hidden mr-[0.25em] py-0.5">
-              <motion.span variants={child} className="inline-block">
+            <span key={index} className="inline-block overflow-hidden mr-[0.25em] py-1">
+              <motion.span variants={child} className="inline-block transform-gpu">
                 {word}
               </motion.span>
             </span>

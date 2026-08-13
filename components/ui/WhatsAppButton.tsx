@@ -31,6 +31,7 @@ export function WhatsAppButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      data-cursor="CHAT"
       className={cn("inline-block cursor-none", className)}
     >
       <Button variant={variant} size={size}>
