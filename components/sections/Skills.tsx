@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
 import { Terminal, Cpu, ArrowUpRight } from "lucide-react";
@@ -19,6 +19,7 @@ interface SkillCategory {
 export function Skills() {
   const [activeContext, setActiveContext] = useState<string>("Hover over any technology node to query capabilities...");
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const categories: SkillCategory[] = [
     {
@@ -61,14 +62,31 @@ export function Skills() {
     },
   ];
 
+  const marqueeRow1: SkillItem[] = [
+    { name: "React", context: "React — Building component-driven responsive user interfaces with complex state systems." },
+    { name: "Next.js", context: "Next.js — SSR, ISR, Turbopack, and App Router architectures for optimized load speed." },
+    { name: "TypeScript", context: "TypeScript — Strong type safety, interfaces, and generic constructs for bug-free compiles." },
+    { name: "Tailwind CSS", context: "Tailwind CSS — Writing semantic tokens, utility designs, and fluid layouts." },
+    { name: "Node.js", context: "Node.js — Constructing scalable, asynchronous server scripts and microservices." },
+    { name: "Java", context: "Java — Building modular, structured backend server architectures." },
+    { name: "PostgreSQL", context: "PostgreSQL — Designing relational tables, key constraints, and indexing queries." },
+  ];
+
+  const marqueeRow2: SkillItem[] = [
+    { name: "Python", context: "Python — Writing data analysis scripts, neural nodes, and custom API servers." },
+    { name: "LangChain", context: "LangChain — Integrating tool-calling pipelines, LLM chains, and history memory buffers." },
+    { name: "LLMs / APIs", context: "LLMs / APIs — Direct scripting with Gemini, Claude, and OpenAI endpoints." },
+    { name: "Vector DBs", context: "Vector DBs — Implementing semantic lookups and RAG (Retrieval-Augmented Generation) contexts." },
+    { name: "Docker", context: "Docker — Containerizing full-stack environments for consistent server deployment." },
+    { name: "Supabase", context: "Supabase — Utilizing real-time databases, authentication flows, and Storage buckets." },
+  ];
+
   // Grid sizes for Github contribution mockup flourish
   const cols = 15;
   const rows = 5;
   const totalBlocks = cols * rows;
 
-  // Render dummy intensities
   const getContributionColor = (idx: number) => {
-    // Generate a structured pseudorandom intensity
     const val = (idx * 17) % 7;
     if (val === 0) return "bg-surface-hover/30 border-transparent";
     if (val === 1) return "bg-accent/10 border-accent/20";
@@ -107,24 +125,57 @@ export function Skills() {
   return (
     <SectionWrapper id="skills" borderTop={true}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        
-        {/* Left Side: Skills Category Grid */}
+        {/* Left Side: Skills Category Grid & Dual Infinite Marquee */}
         <div className="lg:col-span-8 flex flex-col gap-8">
           <div>
             <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// CAPABILITIES</span>
             <Heading tag="h2" size="h2" animate="words" titleText="SKILLS PROFILE" className="text-ink-primary mt-2" />
           </div>
 
-          <motion.div 
+          {/* Dual Infinite Auto-Scrolling Marquee Banner */}
+          {!shouldReduceMotion && (
+            <div className="flex flex-col gap-3 overflow-hidden py-2 border-y border-border-strong bg-surface/10 select-none">
+              {/* Row 1: Leftward infinite scroll */}
+              <div className="flex w-max gap-3 animate-marquee hover:[animation-play-state:paused]">
+                {[...marqueeRow1, ...marqueeRow1, ...marqueeRow1].map((skill, idx) => (
+                  <button
+                    key={`r1-${idx}`}
+                    onMouseEnter={() => handleSkillHover(skill)}
+                    onMouseLeave={handleSkillLeave}
+                    className="px-3 py-1 border border-border-subtle bg-background font-mono text-[10px] uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors"
+                  >
+                    {skill.name}
+                  </button>
+                ))}
+              </div>
+
+              {/* Row 2: Rightward infinite scroll */}
+              <div className="flex w-max gap-3 animate-marquee-reverse hover:[animation-play-state:paused]">
+                {[...marqueeRow2, ...marqueeRow2, ...marqueeRow2].map((skill, idx) => (
+                  <button
+                    key={`r2-${idx}`}
+                    onMouseEnter={() => handleSkillHover(skill)}
+                    onMouseLeave={handleSkillLeave}
+                    className="px-3 py-1 border border-border-subtle bg-background font-mono text-[10px] uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors"
+                  >
+                    {skill.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Categorized Staggered Grid */}
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-80px" }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-8"
           >
             {categories.map((cat, idx) => (
-              <motion.div 
-                key={idx} 
+              <motion.div
+                key={idx}
                 variants={itemVariants}
                 className="border border-border-subtle p-6 bg-surface/10 flex flex-col gap-4"
               >
@@ -140,8 +191,8 @@ export function Skills() {
                         onMouseEnter={() => handleSkillHover(skill)}
                         onMouseLeave={handleSkillLeave}
                         className={`px-3 py-1.5 border font-mono text-xs transition-all duration-200 cursor-none select-none ${
-                          isCurrent 
-                            ? "bg-accent border-accent text-accent-foreground font-semibold translate-y-[-1px]" 
+                          isCurrent
+                            ? "bg-accent border-accent text-accent-foreground font-semibold translate-y-[-1px]"
                             : "bg-surface/30 border-border-subtle text-ink-secondary hover:border-border-strong hover:text-ink-primary"
                         }`}
                       >
@@ -155,7 +206,7 @@ export function Skills() {
           </motion.div>
 
           {/* Unified Dynamic Terminal Output Panel */}
-          <div className="border border-border-strong bg-background p-4 flex gap-3.5 items-start mt-4">
+          <div className="border border-border-strong bg-background p-4 flex gap-3.5 items-start mt-2">
             <div className="p-2 border border-border-subtle bg-surface text-accent self-start">
               <Terminal className="w-4 h-4" />
             </div>
@@ -175,18 +226,18 @@ export function Skills() {
               <p className="font-mono text-[9px] text-accent uppercase tracking-widest mb-1">// Active Contributions</p>
               <h4 className="font-display font-bold text-lg text-ink-primary uppercase">Always Building</h4>
               <p className="text-xs text-ink-muted mt-2 leading-relaxed font-light">
-                Continuous iteration on personal workflows, package structures, and open-source contributions. 
+                Continuous iteration on personal workflows, package structures, and open-source contributions.
               </p>
             </div>
 
             {/* Grid display mimicking a GitHub activity graph */}
             <div className="border border-border-subtle bg-background/50 p-4 flex flex-col items-center justify-center">
               <span className="font-mono text-[8px] text-ink-muted uppercase mb-3 block self-start">git_activity_visual_map:</span>
-              <div 
+              <div
                 className="grid gap-1.5"
-                style={{ 
+                style={{
                   gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-                  gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` 
+                  gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
                 }}
               >
                 {Array.from({ length: totalBlocks }).map((_, idx) => (
@@ -220,15 +271,14 @@ export function Skills() {
 
         {/* Next Section Bridge */}
         <div className="lg:col-span-12 w-full flex justify-end mt-12 border-t border-border-subtle pt-6">
-          <a 
-            href="#testimonials" 
+          <a
+            href="#testimonials"
             className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
           >
             <span>NEXT: VIEW RECOMMENDATIONS</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
           </a>
         </div>
-
       </div>
     </SectionWrapper>
   );
