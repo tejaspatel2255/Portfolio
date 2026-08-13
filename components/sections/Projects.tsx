@@ -271,17 +271,21 @@ export function Projects() {
 
         {/* Right Column: Editorial Accordion list */}
         <div className="lg:col-span-8 flex flex-col w-full border-t border-border-strong">
-          {projects.map((project) => {
+          {projects.map((project, idx) => {
             const isExpanded = expandedId === project.id;
             const isHovered = hoveredId === project.id;
             const ProjectIcon = project.icon;
 
             return (
-              <div
+              <motion.div
                 key={project.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.45, delay: idx * 0.07, ease: [0.16, 1, 0.3, 1] }}
                 onMouseEnter={() => setHoveredId(project.id)}
                 onMouseLeave={() => setHoveredId(null)}
-                className="w-full border-b border-border-strong flex flex-col group/row"
+                className="w-full border-b border-border-strong flex flex-col group/row relative overflow-hidden"
               >
                 {/* Accordion Row Header */}
                 <button
@@ -305,7 +309,7 @@ export function Projects() {
                   </div>
 
                   <div className="flex items-center gap-4 ml-4">
-                    <span className={`p-2 border border-border-subtle group-hover/row:border-border-strong transition-colors ${project.themeColor}`}>
+                    <span className={`p-2 border border-border-subtle group-hover/row:border-accent transition-colors ${project.themeColor}`}>
                       <ProjectIcon className="w-4 h-4" />
                     </span>
                     <motion.div
@@ -317,6 +321,19 @@ export function Projects() {
                     </motion.div>
                   </div>
                 </button>
+
+                {/* Hover Tech Stack Marquee */}
+                {isHovered && !isExpanded && !shouldReduceMotion && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden py-1 px-2 bg-accent/5 border-t border-accent/20 font-mono text-[9px] text-accent flex items-center justify-between"
+                  >
+                    <span>TECH STACK // {project.tags.join(" • ")}</span>
+                    <span className="text-[8px] uppercase tracking-wider text-ink-muted">Click to view details</span>
+                  </motion.div>
+                )}
 
                 {/* Expanded Details Panel */}
                 <AnimatePresence initial={false}>
@@ -379,14 +396,14 @@ export function Projects() {
                         </div>
 
                         {/* Interactive Wireframe Mockup */}
-                        <div className="md:col-span-5 aspect-[4/3] w-full bg-background border border-border-strong p-2">
+                        <div className="md:col-span-5 aspect-[4/3] w-full bg-background border border-border-strong p-2 transition-all duration-300 hover:border-accent/50 hover:shadow-[0_0_20px_rgba(204,255,0,0.1)]">
                           {renderMockup(project.mockupType)}
                         </div>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </div>
