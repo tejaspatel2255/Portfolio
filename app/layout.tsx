@@ -5,6 +5,7 @@ import AnimationProvider from "@/components/ui/AnimationProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { PageIntroLoader } from "@/components/ui/PageIntroLoader";
+import { AgentCliModal } from "@/components/ui/AgentCliModal";
 
 const syne = Syne({
   variable: "--font-display",
@@ -75,6 +76,7 @@ export default function RootLayout({
         <PageIntroLoader />
         <ScrollProgressBar />
         <CustomCursor />
+        <AgentCliModal />
         <AnimationProvider>{children}</AnimationProvider>
       </body>
     </html>
