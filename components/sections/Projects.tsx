@@ -291,7 +291,7 @@ export function Projects() {
                 <button
                   onClick={() => handleRowClick(project.id)}
                   aria-expanded={isExpanded}
-                  data-cursor="EXPLORE"
+                  data-cursor-label={`PROJECT_${project.num}`}
                   className="w-full flex items-center justify-between py-6 text-left cursor-none select-none focus:outline-none"
                 >
                   <div className="flex items-center gap-6 md:gap-8 flex-1">

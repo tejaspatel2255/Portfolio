@@ -30,7 +30,7 @@ function NavItem({ link, isActive }: { link: typeof NAV_LINKS[0]; isActive: bool
       onMouseLeave={handleMouseLeave}
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      data-cursor="GO"
+      data-cursor-label="NAVIGATE"
       className={cn(
         "relative text-xs uppercase tracking-widest font-mono font-bold px-3 py-1.5 transition-colors cursor-none select-none",
         isActive ? "text-accent" : "text-ink-secondary hover:text-ink-primary"

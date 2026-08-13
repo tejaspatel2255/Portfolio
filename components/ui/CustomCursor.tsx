@@ -8,6 +8,7 @@ export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [cursorText, setCursorText] = useState<string | null>(null);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isClicking, setIsClicking] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -30,6 +31,7 @@ export function CustomCursor() {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
+      setCoords({ x: Math.round(e.clientX), y: Math.round(e.clientY) });
       if (!isVisible) setIsVisible(true);
     };
 
@@ -42,9 +44,10 @@ export function CustomCursor() {
       const target = e.target as HTMLElement;
       if (!target) return;
 
-      const cursorTarget = target.closest("[data-cursor]") as HTMLElement | null;
+      const cursorTarget = target.closest("[data-cursor-label], [data-cursor]") as HTMLElement | null;
       if (cursorTarget) {
-        setCursorText(cursorTarget.getAttribute("data-cursor"));
+        const label = cursorTarget.getAttribute("data-cursor-label") || cursorTarget.getAttribute("data-cursor");
+        setCursorText(label);
         setIsHovered(true);
         return;
       } else {
@@ -79,41 +82,48 @@ export function CustomCursor() {
     };
   }, [cursorX, cursorY, isVisible, shouldReduceMotion]);
 
-  if (!mounted || shouldReduceMotion) return null;
+  if (!mounted || shouldReduceMotion || !isVisible) return null;
 
-  const hasText = !!cursorText;
+  const hasLabel = !!cursorText;
 
   return (
     <>
-      {/* Outer Follower Ring / Badge */}
+      {/* Outer Follower Ring / AI System Readout Badge */}
       <motion.div
-        className="fixed top-0 left-0 rounded-full border border-accent pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center overflow-hidden"
+        className="fixed top-0 left-0 pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 hidden md:flex items-center justify-center overflow-hidden border border-accent rounded-none shadow-[0_0_12px_rgba(204,255,0,0.2)]"
         style={{
           x: cursorXSpring,
           y: cursorYSpring,
-          width: hasText ? 64 : 32,
-          height: hasText ? 64 : 32,
-          backgroundColor: isHovered ? "var(--color-accent)" : "transparent",
-          mixBlendMode: isHovered && !hasText ? "difference" : "normal",
+          width: hasLabel ? "auto" : 28,
+          height: hasLabel ? 26 : 28,
+          paddingLeft: hasLabel ? 10 : 0,
+          paddingRight: hasLabel ? 10 : 0,
+          backgroundColor: isHovered ? "var(--color-accent)" : "rgba(14, 14, 16, 0.85)",
+          backdropFilter: "blur(4px)",
         }}
         animate={{
-          scale: isClicking ? 0.85 : isHovered ? (hasText ? 1.25 : 1.5) : 1,
+          scale: isClicking ? 0.88 : isHovered ? 1.15 : 1,
         }}
         transition={{ type: "spring", stiffness: 450, damping: 25 }}
       >
-        {hasText && (
+        {hasLabel ? (
           <motion.span
-            initial={{ opacity: 0, scale: 0.6 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="font-mono text-[9px] font-extrabold uppercase tracking-widest text-accent-foreground select-none text-center px-1"
+            className="font-mono text-[9px] font-bold uppercase tracking-widest text-accent-foreground select-none text-center whitespace-nowrap"
           >
             {cursorText}
           </motion.span>
+        ) : (
+          <span className="font-mono text-[7px] text-accent/80 font-semibold uppercase tracking-tighter select-none">
+            {coords.x},{coords.y}
+          </span>
         )}
       </motion.div>
+
       {/* Inner Pinpoint Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-accent pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
+        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-none bg-accent pointer-events-none z-[10000] -translate-x-1/2 -translate-y-1/2 hidden md:block"
         style={{
           x: cursorX,
           y: cursorY,

@@ -183,7 +183,7 @@ export function Contact() {
                 variant="brutalist"
                 type="submit"
                 disabled={status === "submitting"}
-                data-cursor="SEND"
+                data-cursor-label="DISPATCH_QUERY"
                 className="justify-center items-center py-3.5 flex gap-2 font-bold w-full cursor-none"
               >
                 {status === "submitting" ? (
