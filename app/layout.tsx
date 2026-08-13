@@ -6,6 +6,7 @@ import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { PageIntroLoader } from "@/components/ui/PageIntroLoader";
 import { AgentCliModal } from "@/components/ui/AgentCliModal";
+import { ScrollCircuitThread } from "@/components/ui/ScrollCircuitThread";
 
 const syne = Syne({
   variable: "--font-display",
@@ -75,6 +76,7 @@ export default function RootLayout({
         <div className="noise-overlay" />
         <PageIntroLoader />
         <ScrollProgressBar />
+        <ScrollCircuitThread />
         <CustomCursor />
         <AgentCliModal />
         <AnimationProvider>{children}</AnimationProvider>
