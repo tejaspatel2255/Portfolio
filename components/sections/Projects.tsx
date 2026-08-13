@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
-import { ArrowUpRight, ChevronDown, Monitor, Map, Terminal, ClipboardList, CreditCard, Cpu } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Map, Terminal, ClipboardList, CreditCard, Cpu } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 
 interface Project {
@@ -376,7 +376,7 @@ export function Projects() {
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              data-cursor="CODE"
+                              data-cursor-label="VIEW_CODE"
                               className="inline-block"
                             >
                               <Button variant="brutalist" size="sm">
@@ -385,7 +385,7 @@ export function Projects() {
                             </a>
                             <a
                               href={project.demoUrl}
-                              data-cursor="DEMO"
+                              data-cursor-label="LIVE_DEMO"
                               className="inline-block"
                             >
                               <Button variant="secondary" size="sm">
