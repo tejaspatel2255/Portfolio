@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/Icons";
-import { Mail, ArrowUpRight, Send, CheckCircle2, Loader2 } from "lucide-react";
+import { Mail, ArrowUpRight, Send, Loader2 } from "lucide-react";
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const shouldReduceMotion = useReducedMotion();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,7 +31,6 @@ export function Contact() {
   return (
     <SectionWrapper id="contact" borderTop={true} containerClassName="pb-0 lg:pb-0">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        
         {/* Left Side: Call to Action Details */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div>
@@ -52,10 +52,11 @@ export function Contact() {
           {/* Direct CTA List */}
           <div className="flex flex-col gap-3 mt-2">
             {/* WhatsApp - Primary Option */}
-            <a 
+            <a
               href="https://wa.me/[INSERT_WHATSAPP_NUMBER]?text=Hello%20Tejas%2C%20I%20visited%20your%20portfolio%20and%20would%20love%20to%20connect%21"
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor="CHAT"
               className="group/cta border border-border-strong p-4 bg-accent/5 hover:border-accent hover:bg-accent/10 transition-all duration-200 flex items-center justify-between cursor-none select-none"
             >
               <div className="flex items-center gap-3">
@@ -71,8 +72,9 @@ export function Contact() {
             </a>
 
             {/* Email - Secondary Option */}
-            <a 
-              href="mailto:placeholder_email@gmail.com [EDIT ME]"
+            <a
+              href="mailto:placeholder_email@gmail.com"
+              data-cursor="EMAIL"
               className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between cursor-none select-none"
             >
               <div className="flex items-center gap-3">
@@ -81,17 +83,18 @@ export function Contact() {
                 </div>
                 <div>
                   <span className="block font-mono text-[8px] text-ink-muted uppercase tracking-wider">EMAIL DIRECT</span>
-                  <span className="block text-sm font-semibold text-ink-primary mt-0.5">placeholder_email@gmail.com [EDIT ME]</span>
+                  <span className="block text-sm font-semibold text-ink-primary mt-0.5">placeholder_email@gmail.com</span>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-ink-muted group-hover/cta:text-accent transition-colors" />
             </a>
 
             <div className="grid grid-cols-2 gap-3">
-              <a 
+              <a
                 href="https://www.linkedin.com/in/pateltejasd"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
+                data-cursor="LINKEDIN"
                 className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between cursor-none select-none"
               >
                 <div className="flex items-center gap-2.5">
@@ -101,10 +104,11 @@ export function Contact() {
                 <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover/cta:text-accent transition-colors" />
               </a>
 
-              <a 
+              <a
                 href="https://github.com/tejaspatel2255"
-                target="_blank" 
+                target="_blank"
                 rel="noopener noreferrer"
+                data-cursor="GITHUB"
                 className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between cursor-none select-none"
               >
                 <div className="flex items-center gap-2.5">
@@ -117,12 +121,11 @@ export function Contact() {
           </div>
         </div>
 
-        {/* Right Side: Brutalist Form */}
+        {/* Right Side: Brutalist Form with Tactile Focus States & Animated SVG Checkmark */}
         <div className="lg:col-span-7 border border-border-strong p-6 md:p-8 bg-surface/20">
           <p className="font-mono text-[9px] text-accent uppercase tracking-widest mb-6">// Query Dispatcher Form</p>
-          
+
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            
             {/* Input Row Name */}
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="font-mono text-[10px] text-ink-muted uppercase tracking-wider">
@@ -136,7 +139,7 @@ export function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="e.g. John Doe"
-                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:outline-none transition-colors cursor-none"
+                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200 cursor-none"
               />
             </div>
 
@@ -153,7 +156,7 @@ export function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="e.g. john@company.com"
-                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:outline-none transition-colors cursor-none"
+                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200 cursor-none"
               />
             </div>
 
@@ -170,22 +173,37 @@ export function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Describe your project, timeline, or position requirements..."
-                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:outline-none transition-colors resize-none cursor-none"
+                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200 resize-none cursor-none"
               />
             </div>
 
             {/* Submit Action */}
             <div className="flex flex-col gap-4 mt-2">
-              <Button 
-                variant="brutalist" 
-                type="submit" 
+              <Button
+                variant="brutalist"
+                type="submit"
                 disabled={status === "submitting"}
-                className="justify-center items-center py-3.5 flex gap-2 font-bold w-full"
+                data-cursor="SEND"
+                className="justify-center items-center py-3.5 flex gap-2 font-bold w-full cursor-none"
               >
                 {status === "submitting" ? (
                   <>
                     Sending Query... <Loader2 className="w-4 h-4 animate-spin text-accent" />
                   </>
+                ) : status === "success" ? (
+                  <span className="flex items-center gap-2 text-accent">
+                    Query Sent!
+                    <svg className="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <motion.path
+                        initial={{ pathLength: 0 }}
+                        animate={{ pathLength: 1 }}
+                        transition={{ duration: 0.45, ease: "easeOut" }}
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </span>
                 ) : (
                   <>
                     Send Message <Send className="w-4 h-4 ml-1 inline-block" />
@@ -200,20 +218,18 @@ export function Contact() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="border border-emerald-500/20 bg-emerald-950/20 p-4 flex gap-3 items-start font-mono text-[10px] text-emerald-400"
+                    className="border border-emerald-500/30 bg-emerald-950/20 p-4 flex gap-3 items-start font-mono text-[10px] text-emerald-400"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <span className="block font-bold">STATUS: CAPTURED SUCCESS [MOCK]</span>
+                      <span className="block font-bold">// STATUS: DISPATCH SUCCESS [MOCK]</span>
                       <p className="mt-1 text-emerald-400/80 leading-relaxed">
-                        Message simulated successfully! To activate this form to route real emails, wire the submit handler in `components/sections/Contact.tsx` to Formspree, Resend, or a Next.js Server Action.
+                        Message simulated successfully! Connect `Contact.tsx` to Formspree, Resend, or a Next.js Server Action to route live emails.
                       </p>
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
-
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "./Button";
 import { WhatsappIcon } from "./Icons";
 import { cn } from "@/lib/utils";
@@ -20,19 +21,21 @@ export function WhatsAppButton({
   message = "Hello Tejas, I visited your portfolio and would love to connect!",
   children,
 }: WhatsAppButtonProps) {
-  // Placeholder WhatsApp number. USER must replace this.
-  const whatsappNumber = "[INSERT_WHATSAPP_NUMBER]"; 
-  
+  const shouldReduceMotion = useReducedMotion();
+  const whatsappNumber = "[INSERT_WHATSAPP_NUMBER]";
   const encodedMessage = encodeURIComponent(message);
   const href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
   return (
-    <a
+    <motion.a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       data-cursor="CHAT"
-      className={cn("inline-block cursor-none", className)}
+      animate={shouldReduceMotion ? {} : { scale: [1, 1.025, 1] }}
+      transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+      whileTap={{ scale: 0.95 }}
+      className={cn("inline-block cursor-none select-none", className)}
     >
       <Button variant={variant} size={size}>
         {children || (
@@ -41,6 +44,6 @@ export function WhatsAppButton({
           </>
         )}
       </Button>
-    </a>
+    </motion.a>
   );
 }
