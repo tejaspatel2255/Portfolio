@@ -129,10 +129,10 @@ export function About() {
               className="relative w-full h-full border-2 border-border-strong bg-surface z-10 p-6 flex flex-col justify-between"
             >
               {/* Corner crosshairs decoration */}
-              <span className="absolute top-2 left-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span >
-              <span className="absolute top-2 right-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span >
-              <span className="absolute bottom-2 left-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span >
-              <span className="absolute bottom-2 right-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span >
+              <span className="absolute top-2 left-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
+              <span className="absolute top-2 right-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
+              <span className="absolute bottom-2 left-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
+              <span className="absolute bottom-2 right-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
 
               {/* Card Header info */}
               <div className="flex justify-between items-start pt-2">

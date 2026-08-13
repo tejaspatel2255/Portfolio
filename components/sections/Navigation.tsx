@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Skills", href: "#skills" },
+  { label: "Experience", href: "#experience" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -127,7 +128,7 @@ export function Navigation() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 220 }}
-              className="fixed inset-y-0 right-0 w-full sm:max-w-md bg-background border-l border-border-strong z-45 flex flex-col justify-between p-8 pt-28 shadow-2xl md:hidden"
+              className="fixed inset-y-0 right-0 w-full sm:max-w-md bg-background border-l border-border-strong z-[45] flex flex-col justify-between p-8 pt-28 shadow-2xl md:hidden"
             >
               {/* Asymmetric decorative grid line */}
               <div className="absolute inset-y-0 left-8 w-px bg-border-subtle/10 pointer-events-none z-0" />

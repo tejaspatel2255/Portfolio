@@ -7,6 +7,7 @@ import { Projects } from "@/components/sections/Projects";
 import { About } from "@/components/sections/About";
 import { Services } from "@/components/sections/Services";
 import { Skills } from "@/components/sections/Skills";
+import { Experience } from "@/components/sections/Experience";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 import { Heading } from "@/components/ui/Heading";
@@ -46,6 +47,9 @@ export default function Home() {
 
       {/* Skills Section */}
       <Skills />
+
+      {/* Experience Section */}
+      <Experience />
 
       {/* Testimonials Section */}
       <Testimonials />
