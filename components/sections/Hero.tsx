@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -15,6 +15,9 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const infoRef = useRef<HTMLDivElement | null>(null);
   const cardRef = useRef<HTMLDivElement | null>(null);
+
+  // 3D tilt interaction logic for Technical Capabilities Card
+  const [tiltStyle, setTiltStyle] = useState({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg)" });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -54,6 +57,26 @@ export function Hero() {
 
     return () => ctx.revert();
   }, []);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+    setTiltStyle({
+      transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`,
+    });
+  };
+
+  const handleCardMouseLeave = () => {
+    setTiltStyle({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg)" });
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -105,10 +128,11 @@ export function Hero() {
             {/* Availability Badge */}
             <motion.div 
               variants={itemVariants} 
-              className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-subtle bg-surface/40 text-accent font-mono text-[10px] uppercase tracking-widest self-start backdrop-blur-sm"
+              data-cursor="HIRE ME"
+              className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-subtle bg-surface/40 text-accent font-mono text-[10px] uppercase tracking-widest self-start backdrop-blur-sm cursor-none"
             >
               <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
-              AVAILABLE FOR ROLES & CONTRACTS // INDIA
+              AVAILABLE FOR ROLES &amp; CONTRACTS // INDIA
             </motion.div>
 
             {/* Giant Title */}
@@ -118,7 +142,7 @@ export function Hero() {
                 size="display"
                 animate="chars"
                 titleText="TEJAS PATEL"
-                className="text-ink-primary font-black block"
+                className="text-ink-primary font-black block select-none"
               />
             </motion.div>
 
@@ -138,7 +162,7 @@ export function Hero() {
 
             {/* Action Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mt-2">
-              <a href="#work">
+              <a href="#work" data-cursor="EXPLORE" className="inline-block cursor-none">
                 <Button variant="brutalist">
                   View My Work <Eye className="w-4 h-4 ml-1.5 inline-block" />
                 </Button>
@@ -146,7 +170,7 @@ export function Hero() {
               <WhatsAppButton variant="secondary">
                 Chat on WhatsApp <WhatsappIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
               </WhatsAppButton>
-              <a href="/resume.pdf" download="Tejas_Patel_Resume.pdf">
+              <a href="/resume.pdf" download="Tejas_Patel_Resume.pdf" data-cursor="CV" className="inline-block cursor-none">
                 <Button variant="ghost">
                   Download CV <ArrowDown className="w-4 h-4 ml-1 inline-block" />
                 </Button>
@@ -158,7 +182,11 @@ export function Hero() {
           <motion.div 
             ref={cardRef}
             variants={itemVariants}
-            className="lg:col-span-4 border border-border-strong p-8 bg-surface/30 backdrop-blur-md flex flex-col justify-between min-h-[300px]"
+            onMouseMove={handleCardMouseMove}
+            onMouseLeave={handleCardMouseLeave}
+            style={tiltStyle}
+            data-cursor="SYSTEMS"
+            className="lg:col-span-4 border border-border-strong p-8 bg-surface/30 backdrop-blur-md flex flex-col justify-between min-h-[300px] transition-transform duration-150 ease-out cursor-none group select-none"
           >
             <div>
               <p className="font-mono text-[9px] text-accent uppercase tracking-widest mb-4">// Capabilities</p>
