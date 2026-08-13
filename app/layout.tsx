@@ -3,6 +3,8 @@ import { Syne, Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AnimationProvider from "@/components/ui/AnimationProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
+import { PageIntroLoader } from "@/components/ui/PageIntroLoader";
 
 const syne = Syne({
   variable: "--font-display",
@@ -70,6 +72,8 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background text-foreground selection:bg-accent selection:text-accent-foreground font-body overflow-x-hidden">
         <div className="noise-overlay" />
+        <PageIntroLoader />
+        <ScrollProgressBar />
         <CustomCursor />
         <AnimationProvider>{children}</AnimationProvider>
       </body>
