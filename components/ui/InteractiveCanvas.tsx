@@ -17,6 +17,9 @@ export function InteractiveCanvas() {
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouchDevice = !window.matchMedia("(pointer: fine)").matches;
+
     const handleResize = () => {
       if (!canvas) return;
       width = canvas.width = canvas.offsetWidth;
@@ -38,56 +41,67 @@ export function InteractiveCanvas() {
     );
     observer.observe(canvas);
 
-    // Dynamic Nodes representing AI agent pathways
-    const nodeCount = 38;
-    const nodes: Array<{
+    // Node count scaled by viewport width (fewer on mobile)
+    const isMobile = width < 768;
+    const nodeCount = isMobile ? 18 : 36;
+
+    interface DepthNode {
       x: number;
       y: number;
       vx: number;
       vy: number;
       radius: number;
+      depth: number; // Parallax depth layer factor (0.3 to 1.5)
       pulse: number;
       pulseDirection: number;
-    }> = [];
+    }
+
+    const nodes: DepthNode[] = [];
 
     for (let i = 0; i < nodeCount; i++) {
+      const depth = Math.random() * 1.2 + 0.3; // depth range [0.3, 1.5]
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        radius: Math.random() * 1.5 + 1,
+        vx: (Math.random() - 0.5) * 0.3 * depth,
+        vy: (Math.random() - 0.5) * 0.3 * depth,
+        radius: (Math.random() * 1.2 + 1) * depth,
+        depth: depth,
         pulse: Math.random(),
         pulseDirection: Math.random() > 0.5 ? 1 : -1,
       });
     }
 
-    const mouse = { x: -1000, y: -1000 };
+    const mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isVisible) return;
+      if (!isVisible || isTouchDevice) return;
       const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      mouse.targetX = e.clientX - rect.left;
+      mouse.targetY = e.clientY - rect.top;
     };
 
     const handleMouseLeave = () => {
-      mouse.x = -1000;
-      mouse.y = -1000;
+      mouse.targetX = -1000;
+      mouse.targetY = -1000;
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseleave", handleMouseLeave);
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!isTouchDevice) {
+      window.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("mouseleave", handleMouseLeave);
+    }
 
     const draw = () => {
       if (!isVisible) return;
 
+      // Smooth mouse interpolation
+      mouse.x += (mouse.targetX - mouse.x) * 0.08;
+      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
       ctx.clearRect(0, 0, width, height);
 
-      // Draw subtle background grid overlay
-      ctx.strokeStyle = "rgba(142, 142, 147, 0.04)";
+      // Subtle background grid overlay
+      ctx.strokeStyle = "rgba(142, 142, 147, 0.035)";
       ctx.lineWidth = 1;
       const gridSize = 64;
 
@@ -104,7 +118,7 @@ export function InteractiveCanvas() {
         ctx.stroke();
       }
 
-      // Draw active connections & nodes
+      // Draw active connections & nodes with depth field offset
       nodes.forEach((node) => {
         if (!prefersReducedMotion) {
           node.x += node.vx;
@@ -117,44 +131,66 @@ export function InteractiveCanvas() {
           if (node.pulse > 1 || node.pulse < 0) node.pulseDirection *= -1;
         }
 
-        ctx.fillStyle = `rgba(200, 255, 68, ${0.1 + node.pulse * 0.25})`;
+        // Parallax cursor displacement scaled by node depth
+        let renderX = node.x;
+        let renderY = node.y;
+
+        if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+          const offsetX = (mouse.x - width / 2) * 0.03 * node.depth;
+          const offsetY = (mouse.y - height / 2) * 0.03 * node.depth;
+          renderX += offsetX;
+          renderY += offsetY;
+        }
+
+        // Render node dot
+        const alpha = 0.12 + node.pulse * 0.25 * (node.depth / 1.5);
+        ctx.fillStyle = `rgba(200, 255, 68, ${alpha})`;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius + node.pulse * 1.5, 0, Math.PI * 2);
+        ctx.arc(renderX, renderY, node.radius + node.pulse * 1.2, 0, Math.PI * 2);
         ctx.fill();
 
-        if (!prefersReducedMotion) {
-          const dx = mouse.x - node.x;
-          const dy = mouse.y - node.y;
+        // Mouse proximity connection
+        if (!prefersReducedMotion && mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+          const dx = mouse.x - renderX;
+          const dy = mouse.y - renderY;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxCursorDist = 220;
+          const maxCursorDist = 180;
 
           if (dist < maxCursorDist) {
-            const alpha = (1 - dist / maxCursorDist) * 0.28;
-            ctx.strokeStyle = `rgba(200, 255, 68, ${alpha})`;
-            ctx.lineWidth = 0.75;
+            const lineAlpha = (1 - dist / maxCursorDist) * 0.22 * node.depth;
+            ctx.strokeStyle = `rgba(200, 255, 68, ${lineAlpha})`;
+            ctx.lineWidth = 0.7 * node.depth;
             ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
+            ctx.moveTo(renderX, renderY);
             ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
           }
         }
 
+        // Mesh interconnect between adjacent nodes
         for (let j = 0; j < nodes.length; j++) {
           const other = nodes[j];
           if (node === other) continue;
 
-          const odx = other.x - node.x;
-          const ody = other.y - node.y;
+          let otherRenderX = other.x;
+          let otherRenderY = other.y;
+          if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+            otherRenderX += (mouse.x - width / 2) * 0.03 * other.depth;
+            otherRenderY += (mouse.y - height / 2) * 0.03 * other.depth;
+          }
+
+          const odx = otherRenderX - renderX;
+          const ody = otherRenderY - renderY;
           const odist = Math.sqrt(odx * odx + ody * ody);
-          const maxMeshDist = 120;
+          const maxMeshDist = 100;
 
           if (odist < maxMeshDist) {
-            const alpha = (1 - odist / maxMeshDist) * 0.08;
-            ctx.strokeStyle = `rgba(243, 243, 245, ${alpha})`;
-            ctx.lineWidth = 0.45;
+            const meshAlpha = (1 - odist / maxMeshDist) * 0.07;
+            ctx.strokeStyle = `rgba(243, 243, 245, ${meshAlpha})`;
+            ctx.lineWidth = 0.4;
             ctx.beginPath();
-            ctx.moveTo(node.x, node.y);
-            ctx.lineTo(other.x, other.y);
+            ctx.moveTo(renderX, renderY);
+            ctx.lineTo(otherRenderX, otherRenderY);
             ctx.stroke();
           }
         }
@@ -170,13 +206,15 @@ export function InteractiveCanvas() {
     return () => {
       observer.disconnect();
       window.removeEventListener("resize", handleResize);
-      if (!prefersReducedMotion) {
+      if (!isTouchDevice) {
         window.removeEventListener("mousemove", handleMouseMove);
         if (canvas) canvas.removeEventListener("mouseleave", handleMouseLeave);
+      }
+      if (!prefersReducedMotion) {
         cancelAnimationFrame(animationFrameId);
       }
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 opacity-70" />;
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 opacity-75" />;
 }
