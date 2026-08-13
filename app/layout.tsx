@@ -7,6 +7,7 @@ import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { PageIntroLoader } from "@/components/ui/PageIntroLoader";
 import { AgentCliModal } from "@/components/ui/AgentCliModal";
 import { ScrollCircuitThread } from "@/components/ui/ScrollCircuitThread";
+import { DynamicScrollNoise } from "@/components/ui/DynamicScrollNoise";
 
 const syne = Syne({
   variable: "--font-display",
@@ -73,7 +74,7 @@ export default function RootLayout({
       className={`${syne.variable} ${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground selection:bg-accent selection:text-accent-foreground font-body overflow-x-hidden">
-        <div className="noise-overlay" />
+        <DynamicScrollNoise />
         <PageIntroLoader />
         <ScrollProgressBar />
         <ScrollCircuitThread />
