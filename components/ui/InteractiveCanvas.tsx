@@ -13,6 +13,7 @@ export function InteractiveCanvas() {
     if (!ctx) return;
 
     let animationFrameId: number;
+    let isVisible = true;
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
@@ -23,6 +24,19 @@ export function InteractiveCanvas() {
     };
 
     window.addEventListener("resize", handleResize);
+
+    // Pause animation when off-screen to conserve CPU/GPU
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && !prefersReducedMotion) {
+          cancelAnimationFrame(animationFrameId);
+          draw();
+        }
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(canvas);
 
     // Dynamic Nodes representing AI agent pathways
     const nodeCount = 38;
@@ -51,6 +65,7 @@ export function InteractiveCanvas() {
     const mouse = { x: -1000, y: -1000 };
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (!isVisible) return;
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
@@ -67,13 +82,15 @@ export function InteractiveCanvas() {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const draw = () => {
+      if (!isVisible) return;
+
       ctx.clearRect(0, 0, width, height);
 
       // Draw subtle background grid overlay
       ctx.strokeStyle = "rgba(142, 142, 147, 0.04)";
       ctx.lineWidth = 1;
       const gridSize = 64;
-      
+
       for (let x = 0; x < width; x += gridSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -90,26 +107,21 @@ export function InteractiveCanvas() {
       // Draw active connections & nodes
       nodes.forEach((node) => {
         if (!prefersReducedMotion) {
-          // Drift Physics
           node.x += node.vx;
           node.y += node.vy;
 
-          // Bounce boundaries
           if (node.x < 0 || node.x > width) node.vx *= -1;
           if (node.y < 0 || node.y > height) node.vy *= -1;
 
-          // Slow glow pulse
           node.pulse += 0.008 * node.pulseDirection;
           if (node.pulse > 1 || node.pulse < 0) node.pulseDirection *= -1;
         }
 
-        // Node Glow
         ctx.fillStyle = `rgba(200, 255, 68, ${0.1 + node.pulse * 0.25})`;
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius + node.pulse * 1.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Connect to Cursor (stark Acid Lime lines) - only if motion is not reduced
         if (!prefersReducedMotion) {
           const dx = mouse.x - node.x;
           const dy = mouse.y - node.y;
@@ -127,7 +139,6 @@ export function InteractiveCanvas() {
           }
         }
 
-        // Connect to neighboring nodes (soft gray mesh lines)
         for (let j = 0; j < nodes.length; j++) {
           const other = nodes[j];
           if (node === other) continue;
@@ -149,7 +160,7 @@ export function InteractiveCanvas() {
         }
       });
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && isVisible) {
         animationFrameId = requestAnimationFrame(draw);
       }
     };
@@ -157,6 +168,7 @@ export function InteractiveCanvas() {
     draw();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       if (!prefersReducedMotion) {
         window.removeEventListener("mousemove", handleMouseMove);

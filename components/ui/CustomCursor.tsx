@@ -15,13 +15,16 @@ export function CustomCursor() {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // Smooth springs for the outer lag ring
+  // Smooth springs for outer follower ring
   const springConfig = { damping: 28, stiffness: 320, mass: 0.3 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    if (typeof window === "undefined" || shouldReduceMotion) return;
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+    if (!isFinePointer) return;
+
     setMounted(true);
 
     const moveCursor = (e: MouseEvent) => {
