@@ -26,73 +26,7 @@ export function Projects() {
   const [expandedId, setExpandedId] = useState<string | null>("01");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
-  const projects: Project[] = [
-    {
-      id: "01",
-      num: "01",
-      name: "Environmental Education Platform",
-      shortDesc: "TypeScript/React web app for environmental learning.",
-      problem: "[EDIT ME] Creating an interactive, visual dashboard to teach and track ecological sustainability metrics for schools.",
-      tags: ["React", "TypeScript", "Leaflet.js", "Tailwind CSS", "Framer Motion"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Map,
-      themeColor: "text-emerald-400 border-emerald-400/20 bg-emerald-950/20",
-      mockupType: "map",
-    },
-    {
-      id: "02",
-      num: "02",
-      name: "Agentic AI Project",
-      shortDesc: "Python-based autonomous agent system.",
-      problem: "[EDIT ME] Orchestrating multiple LLM reasoning engines with custom tools to automate repository documentation and code reviews.",
-      tags: ["Python", "LangChain", "OpenAI API", "Docker", "Vector DBs"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Terminal,
-      themeColor: "text-amber-400 border-amber-400/20 bg-amber-950/20",
-      mockupType: "terminal",
-    },
-    {
-      id: "03",
-      num: "03",
-      name: "Community Health Survey",
-      shortDesc: "A data-collection/survey web tool.",
-      problem: "[EDIT ME] Formulating responsive, offline-first survey streams to capture local health indicators in areas with poor internet connection.",
-      tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: ClipboardList,
-      themeColor: "text-cyan-400 border-cyan-400/20 bg-cyan-950/20",
-      mockupType: "survey",
-    },
-    {
-      id: "04",
-      num: "04",
-      name: "Savaliya Ice Cream POS",
-      shortDesc: "A TypeScript point-of-sale system for a retail business.",
-      problem: "[EDIT ME] Managing inventory, checkout logs, and real-time transaction reporting for a high-volume confectionery retailer.",
-      tags: ["TypeScript", "Node.js", "Express", "PostgreSQL", "Tailwind CSS"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: CreditCard,
-      themeColor: "text-pink-400 border-pink-400/20 bg-pink-950/20",
-      mockupType: "pos",
-    },
-    {
-      id: "05",
-      num: "05",
-      name: "[Featured Project] Agentic Orchestrator",
-      shortDesc: "Bespoke agent execution visualizer.",
-      problem: "[EDIT ME] Next-generation development dashboard for deploying, debugging, and tracing agentic loop states in real time.",
-      tags: ["Next.js", "TypeScript", "Python", "WebSockets", "FastAPI", "Tailwind CSS"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Cpu,
-      themeColor: "text-accent border-accent/20 bg-accent/10",
-      mockupType: "flagship",
-    },
-  ];
+  const projects: Project[] = [];
 
   const reducedMotionPref = useReducedMotion();
   const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
