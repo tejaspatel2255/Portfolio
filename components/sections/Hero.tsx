@@ -136,13 +136,21 @@ export function Hero() {
             </motion.div>
 
             {/* Giant Title */}
-            <motion.div variants={itemVariants}>
+            <motion.div variants={itemVariants} className="flex flex-col select-none">
               <Heading
                 tag="h1"
                 size="display"
                 animate="chars"
-                titleText="TEJAS PATEL"
-                className="text-ink-primary font-black block select-none whitespace-nowrap"
+                titleText="TEJAS"
+                className="text-ink-primary font-black block leading-none"
+              />
+              <Heading
+                tag="span"
+                size="display"
+                animate="chars"
+                titleText="PATEL"
+                delay={0.08}
+                className="text-ink-primary font-black block leading-none"
               />
             </motion.div>
 

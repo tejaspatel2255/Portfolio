@@ -4,8 +4,8 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
-  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+export interface HeadingProps extends React.HTMLAttributes<HTMLElement> {
+  tag?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "div";
   size?: "display" | "h1" | "h2" | "h3" | "h4" | "body-lg";
   animate?: "words" | "chars" | "fade-up" | "none";
   titleText?: string;
@@ -27,7 +27,7 @@ export function Heading({
   const activeAnimation = shouldReduceMotion ? "none" : animate;
 
   const sizeStyles = {
-    display: "text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tighter leading-[0.9] font-display uppercase",
+    display: "text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-[0.88] font-display uppercase",
     h1: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[0.95] font-display uppercase",
     h2: "text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.0] font-display uppercase",
     h3: "text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-[1.1] font-display uppercase",
