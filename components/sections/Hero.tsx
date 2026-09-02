@@ -142,7 +142,7 @@ export function Hero() {
                 size="display"
                 animate="chars"
                 titleText="TEJAS PATEL"
-                className="text-ink-primary font-black block select-none"
+                className="text-ink-primary font-black block select-none whitespace-nowrap"
               />
             </motion.div>
 

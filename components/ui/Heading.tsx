@@ -27,7 +27,7 @@ export function Heading({
   const activeAnimation = shouldReduceMotion ? "none" : animate;
 
   const sizeStyles = {
-    display: "text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] font-display uppercase",
+    display: "text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tighter leading-[0.9] font-display uppercase",
     h1: "text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[0.95] font-display uppercase",
     h2: "text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.0] font-display uppercase",
     h3: "text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight leading-[1.1] font-display uppercase",
@@ -37,7 +37,7 @@ export function Heading({
 
   // Staggered letters animation
   if (activeAnimation === "chars" && titleText) {
-    const letters = Array.from(titleText);
+    const words = titleText.split(" ");
     const container = {
       hidden: { opacity: 0 },
       visible: {
@@ -73,17 +73,23 @@ export function Heading({
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="inline-block"
+          className="inline-block max-w-full"
         >
-          {letters.map((letter, index) => (
-            <motion.span
-              variants={child}
-              key={index}
-              className="inline-block"
-              style={{ display: letter === " " ? "inline" : "inline-block" }}
-            >
-              {letter === " " ? "\u00A0" : letter}
-            </motion.span>
+          {words.map((word, wordIndex) => (
+            <span key={wordIndex} className="inline-block whitespace-nowrap">
+              {Array.from(word).map((letter, letterIndex) => (
+                <motion.span
+                  variants={child}
+                  key={letterIndex}
+                  className="inline-block"
+                >
+                  {letter}
+                </motion.span>
+              ))}
+              {wordIndex < words.length - 1 && (
+                <span className="inline-block">&nbsp;</span>
+              )}
+            </span>
           ))}
         </motion.span>
       </Component>
