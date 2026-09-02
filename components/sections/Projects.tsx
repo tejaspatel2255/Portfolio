@@ -8,17 +8,19 @@ import { Button } from "@/components/ui/Button";
 import { 
   ArrowUpRight, 
   ChevronDown, 
-  Map, 
+  TrendingUp, 
   Terminal, 
-  ClipboardList, 
   CreditCard, 
-  Cpu, 
-  Shield, 
-  MessageSquare, 
-  Calendar, 
-  Camera, 
-  Code,
-  Building2
+  Wallet, 
+  Radio, 
+  BarChart2, 
+  Activity, 
+  Scale, 
+  Leaf, 
+  Package, 
+  Users, 
+  Building2,
+  Cpu
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 
@@ -34,7 +36,7 @@ interface Project {
   clientLabel?: string;
   icon: React.ComponentType<any>;
   themeColor: string;
-  mockupType: "map" | "terminal" | "survey" | "pos" | "flagship" | "code" | "shield" | "chat" | "calendar" | "camera";
+  mockupType: string;
 }
 
 export function Projects() {
@@ -45,132 +47,128 @@ export function Projects() {
     {
       id: "01",
       num: "01",
-      name: "Setu Identity Trust Graph",
-      shortDesc: "Graph-based identity correlation & attack simulation engine.",
-      problem: "Synthesizing cross-entity identity records, correlating high-risk nodes, and simulating fraud attack propagation vectors in real time. Built for Bank of Baroda Hackathon 2026.",
-      tags: ["React", "TypeScript", "D3.js / Graph", "Python", "Tailwind CSS", "FastAPI"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Shield,
+      name: "AI-Powered Paper Trading Web App",
+      shortDesc: "Virtual Indian stock market (NSE/BSE) trading simulator with AI signal engine.",
+      problem: "Virtual Indian stock market (NSE/BSE) trading simulator with ₹10,00,000 of virtual capital, real-time quotes and charts, and an AI signal engine (Random Forest) predicting Buy/Hold/Sell calls.",
+      tags: ["React (Vite)", "Tailwind CSS", "Recharts", "FastAPI (Python)", "Supabase (Postgres)", "scikit-learn"],
+      githubUrl: "https://github.com/tejaspatel2255/AI-Powered-Paper-Trading-Web-App",
+      demoUrl: "https://ai-powered-paper-trading-web-app.vercel.app/",
+      icon: TrendingUp,
       themeColor: "text-emerald-400 border-emerald-400/20 bg-emerald-950/20",
-      mockupType: "shield",
+      mockupType: "trading",
     },
     {
       id: "02",
       num: "02",
-      name: "RepoLens AI Repository Analyzer",
-      shortDesc: "MERN stack GitHub repository analyzer powered by OpenRouter AI.",
-      problem: "Delivering automated codebase audits, architecture summaries, and security vulnerability scans with multi-model AI fallback routines.",
-      tags: ["React", "Node.js", "Express", "MongoDB", "Supabase", "OpenRouter API"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
+      name: "CodeLens AI",
+      shortDesc: "Full-stack AI code-intelligence platform with live memory visualizer.",
+      problem: "Step-by-step execution tracing with a live memory visualizer, a defect scanner with 1-click fix, an automated test generator, a multi-language transpiler, and a context-aware AI chat assistant.",
+      tags: ["React 18", "Vite", "Tailwind CSS", "Framer Motion", "Node.js/Express", "Supabase", "Groq (Llama 3.3 70B)"],
+      githubUrl: "https://github.com/tejaspatel2255/CodeLens-AI",
+      demoUrl: "https://code-lens-ai-gray.vercel.app/",
       icon: Terminal,
       themeColor: "text-amber-400 border-amber-400/20 bg-amber-950/20",
-      mockupType: "terminal",
+      mockupType: "codelens",
     },
     {
       id: "03",
       num: "03",
-      name: "FlowChat Secure Messaging",
-      shortDesc: "Cross-platform Flutter chat app with hardware App Lock & biometrics.",
-      problem: "Engineering real-time multi-platform messaging with hardware-backed encryption, background content masking, PIN/biometrics, and group streams.",
-      tags: ["Flutter", "Dart", "Supabase", "SQLite", "Biometrics API", "Secure Storage"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: MessageSquare,
+      name: "POS Web App (Universal Multi-Tenant SaaS POS)",
+      shortDesc: "Multi-tenant SaaS point-of-sale platform with offline-first billing.",
+      problem: "Multi-tenant SaaS point-of-sale platform with offline-first billing (IndexedDB + Service Worker/PWA), role-based access control, real-time sales dashboards, and per-store brand/theme customization.",
+      tags: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "Zustand", "TanStack Query", "Supabase"],
+      githubUrl: "https://github.com/tejaspatel2255/POS-Web-App",
+      demoUrl: "https://pos-web-app-murex.vercel.app/",
+      icon: CreditCard,
       themeColor: "text-cyan-400 border-cyan-400/20 bg-cyan-950/20",
-      mockupType: "chat",
+      mockupType: "pos",
     },
     {
       id: "04",
       num: "04",
-      name: "Laptop Appointment Booking System",
-      shortDesc: "Full-stack diagnostic scheduling & appointment management portal.",
-      problem: "Streamlining service slot reservations, hardware diagnostic workflow logs, and real-time customer status notifications.",
-      tags: ["AngularJS", "Node.js", "Express", "MongoDB", "Bootstrap"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Calendar,
+      name: "FinanceFlow — AI-Powered Personal Finance Dashboard",
+      shortDesc: "Personal finance tracker with cashflow analytics & multi-model AI fallback.",
+      problem: "Personal finance tracker with interactive cashflow analytics, natural-language queries about your spending, branded PDF statement exports, and a multi-model AI fallback chain for summaries.",
+      tags: ["React", "Vite", "Tailwind CSS", "Recharts", "Node.js/Express", "Supabase", "OpenRouter (Gemini/Llama)"],
+      githubUrl: "https://github.com/tejaspatel2255/FinanceFlow-with-AI-insights",
+      demoUrl: "https://finance-flow-with-ai-insights.vercel.app/",
+      icon: Wallet,
       themeColor: "text-purple-400 border-purple-400/20 bg-purple-950/20",
-      mockupType: "calendar",
+      mockupType: "finance",
     },
     {
       id: "05",
       num: "05",
-      name: "Autonomous Agent CLI & Orchestrator",
-      shortDesc: "Terminal-driven LLM multi-agent workflow visualizer & command palette.",
-      problem: "Orchestrating tool execution loops, memory graphs, and structured JSON output for autonomous developer agent networks.",
-      tags: ["Python", "LangChain", "Next.js", "TypeScript", "WebSockets", "FastAPI"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Cpu,
+      name: "CrisisSwarm — Multi-Agent Disaster Response",
+      shortDesc: "Multi-agent disaster response system (Microsoft Build AI Hackathon 2026).",
+      problem: "Multi-agent disaster-response system where six specialized agents (Commander, Triage, Resource, Routing, Comms, Reporter) share one situation brief and coordinate casualty triage, resource allocation, and public alerts in real time.",
+      tags: ["Python", "Groq (Llama 3.3)", "Streamlit", "Docker"],
+      githubUrl: "https://github.com/tejaspatel2255/Mircosoft-crisisswarm",
+      demoUrl: "https://mircosoft-crisisswarm-4tt3i7yffmkwvdn6w9kiv7.streamlit.app/",
+      icon: Radio,
       themeColor: "text-accent border-accent/20 bg-accent/10",
-      mockupType: "flagship",
+      mockupType: "disaster",
     },
     {
       id: "06",
       num: "06",
-      name: "EcoLearn Sustainability Dashboard",
-      shortDesc: "Interactive environmental education platform & eco-metrics dashboard.",
-      problem: "Visualizing carbon offset metrics, interactive map layers, and gamified environmental learning tracks for educational institutions.",
-      tags: ["React", "TypeScript", "Leaflet.js", "Tailwind CSS", "Chart.js"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Map,
-      themeColor: "text-emerald-400 border-emerald-400/20 bg-emerald-950/20",
-      mockupType: "map",
+      name: "Market Analysis — AI Stock Analysis Platform",
+      shortDesc: "AI market analyst chat agent for Indian & global market intelligence.",
+      problem: "AI market analyst chat agent for real-time insight on Indian and global markets, presented in a glassmorphic \"cosmic night\" interface.",
+      tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Python", "FastAPI", "LangChain"],
+      githubUrl: "https://github.com/tejaspatel2255/Market-Analysis",
+      icon: BarChart2,
+      themeColor: "text-blue-400 border-blue-400/20 bg-blue-950/20",
+      mockupType: "market",
     },
     {
       id: "07",
       num: "07",
-      name: "Smart Face Recognition Attendance System",
-      shortDesc: "Computer vision automated attendance logging engine with facial verification.",
-      problem: "Automating classroom and office check-ins using deep learning face detection with anti-spoofing verification and real-time log exports.",
-      tags: ["Python", "OpenCV", "TensorFlow", "Flask", "SQLite"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Camera,
-      themeColor: "text-pink-400 border-pink-400/20 bg-pink-950/20",
-      mockupType: "camera",
+      name: "HealthCompanion — AI Triage Assistant",
+      shortDesc: "Educational AI health-triage companion with structured PDF summaries.",
+      problem: "Educational AI health-triage companion that asks clarifying questions, accepts optional vitals input, and exports a structured PDF summary — built explicitly as an educational tool, not a diagnostic one.",
+      tags: ["React (CRA)", "Tailwind CSS", "jsPDF", "FastAPI", "Groq (Llama 3)", "Web Speech API"],
+      githubUrl: "https://github.com/tejaspatel2255/HealthCompanion-AI-Triage-Assistant",
+      icon: Activity,
+      themeColor: "text-rose-400 border-rose-400/20 bg-rose-950/20",
+      mockupType: "health",
     },
     {
       id: "08",
       num: "08",
-      name: "Low-Latency Telemetry & Analytics Pipeline",
-      shortDesc: "High-throughput event ingestion and real-time dashboard visualizer.",
-      problem: "Processing microservice event streams and rendering live WebSocket telemetry metrics with sub-50ms update latency.",
-      tags: ["Node.js", "TypeScript", "PostgreSQL", "Redis", "Tailwind CSS"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Code,
-      themeColor: "text-blue-400 border-blue-400/20 bg-blue-950/20",
-      mockupType: "code",
+      name: "Bitcoin Prediction & AI Insight App",
+      shortDesc: "Ensemble ML forecasting platform (Prophet + LSTM + Random Forest) for BTC.",
+      problem: "Ensemble ML forecasting platform (Prophet + LSTM + Random Forest) for Bitcoin price trends, paired with AI-generated market reports on an interactive Streamlit dashboard.",
+      tags: ["Python", "FastAPI", "Streamlit", "TensorFlow", "scikit-learn", "Prophet", "Supabase", "OpenRouter"],
+      githubUrl: "https://github.com/tejaspatel2255/Bitcoin-Prediction",
+      icon: TrendingUp,
+      themeColor: "text-amber-400 border-amber-400/20 bg-amber-950/20",
+      mockupType: "bitcoin",
     },
     {
       id: "09",
       num: "09",
-      name: "Neo-Brutalist Portfolio Engine",
-      shortDesc: "High-performance editorial web portfolio engine with AI CLI.",
-      problem: "Crafting a 60fps editorial interface with Lenis smooth scroll, GSAP scrub timelines, custom dark tokens, and integrated Agent CLI modal.",
-      tags: ["Next.js 16", "React 19", "TypeScript", "Tailwind v4", "GSAP", "Lenis"],
-      githubUrl: "https://github.com/tejaspatel2255/Portfolio",
-      demoUrl: "https://github.com/tejaspatel2255/Portfolio",
-      icon: Code,
-      themeColor: "text-accent border-accent/20 bg-accent/10",
-      mockupType: "flagship",
+      name: "Explainable AI — Loan Approval Decision System",
+      shortDesc: "Credit-decision support system with SHAP/LIME default risk auditing.",
+      problem: "Credit-decision support system that predicts loan default risk with SHAP/LIME/counterfactual explanations, cross-group fairness auditing, and governance artifacts (model cards, audit logs) for regulatory compliance.",
+      tags: ["Python", "scikit-learn", "XGBoost", "SHAP/LIME", "FastAPI", "Streamlit"],
+      githubUrl: "https://github.com/tejaspatel2255/Explainable-AI-Loan-Approval_Decision",
+      icon: Scale,
+      themeColor: "text-indigo-400 border-indigo-400/20 bg-indigo-950/20",
+      mockupType: "xai",
     },
     {
       id: "10",
       num: "10",
-      name: "DevPulse Workspace Hub",
-      shortDesc: "Minimalist developer task backlog and repository activity visualizer.",
-      problem: "Unifying fragmented developer activity logs, commit histories, and task backlogs into a single terminal-inspired command overview.",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS", "GraphQL", "Prisma"],
-      githubUrl: "https://github.com/tejaspatel2255",
-      demoUrl: "#",
-      icon: Terminal,
-      themeColor: "text-amber-400 border-amber-400/20 bg-amber-950/20",
-      mockupType: "terminal",
+      name: "EcoLearn — Gamified Environmental Education Platform",
+      shortDesc: "Role-based environmental learning platform with AI eco-tutor.",
+      problem: "Role-based (Student / Teacher / Admin) environmental education platform with interactive lessons, real-world eco-challenges, badges, leaderboards, and an AI eco-tutor for hint-only guidance.",
+      tags: ["Next.js", "React 19", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Express", "MongoDB", "Gemini API"],
+      githubUrl: "https://github.com/tejaspatel2255/ecolearn",
+      demoUrl: "https://ecolearn-frontend-delta.vercel.app/",
+      icon: Leaf,
+      themeColor: "text-emerald-400 border-emerald-400/20 bg-emerald-950/20",
+      mockupType: "ecolearn",
     },
   ];
 
@@ -178,26 +176,28 @@ export function Projects() {
     {
       id: "C1",
       num: "C1",
-      name: "Savaliya Ice Cream Retail POS & Store System",
-      shortDesc: "Custom retail point-of-sale & real-time inventory management software.",
-      problem: "Managing high-volume counter sales transactions, real-time inventory updates, daily revenue reports, and receipt processing for Savaliya Ice Cream.",
-      tags: ["TypeScript", "Node.js", "Express", "PostgreSQL", "Tailwind CSS"],
-      clientLabel: "Client Deliverable // Savaliya Ice Cream",
-      icon: CreditCard,
-      themeColor: "text-pink-400 border-pink-400/20 bg-pink-950/20",
-      mockupType: "pos",
+      name: "Blazze Overseas LLP",
+      shortDesc: "Export site for premium spices, grains & pulses with WhatsApp enquiry flow.",
+      problem: "Marketing and export site for a premium spices, grains, and pulses exporter — product catalog by category, certifications (ISO/FSSAI/APEDA), and a WhatsApp-first multi-country enquiry flow.",
+      tags: ["Next.js", "Tailwind CSS", "Framer Motion", "WhatsApp Integration"],
+      demoUrl: "https://blaze-overseas-llp.vercel.app/",
+      clientLabel: "Client Deliverable // Blazze Overseas LLP",
+      icon: Package,
+      themeColor: "text-amber-400 border-amber-400/20 bg-amber-950/20",
+      mockupType: "blazze",
     },
     {
       id: "C2",
       num: "C2",
-      name: "Community Health Survey & Data Collection Tool",
-      shortDesc: "Offline-first health survey data aggregation web application.",
-      problem: "Deploying responsive offline survey streams to capture field health metrics in low-connectivity rural zones with automated Supabase cloud sync.",
-      tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Tailwind CSS"],
-      clientLabel: "Client Deliverable // Community Health Org",
-      icon: ClipboardList,
-      themeColor: "text-cyan-400 border-cyan-400/20 bg-cyan-950/20",
-      mockupType: "survey",
+      name: "Family Registry (Blood Group Collection App)",
+      shortDesc: "Multi-role Flutter app for digitizing family blood-group records.",
+      problem: "Multi-role (Admin / Operator / Head of Family) Flutter app for digitizing family blood-group records via a guided 4-step registration form, with international phone support and offline-resilient draft saving.",
+      tags: ["Flutter (Dart)", "Supabase (Postgres + Auth)", "Storage", "Provider", "GoRouter"],
+      githubUrl: "https://github.com/tejaspatel2255/family-registry",
+      clientLabel: "Client Deliverable // Family Registry",
+      icon: Users,
+      themeColor: "text-rose-400 border-rose-400/20 bg-rose-950/20",
+      mockupType: "family",
     },
   ];
 
@@ -208,194 +208,224 @@ export function Projects() {
     setShouldReduceMotion(Boolean(reducedMotionPref));
   }, [reducedMotionPref]);
 
-  const renderMockup = (type: Project["mockupType"]) => {
+  const renderMockup = (type: string) => {
     switch (type) {
-      case "shield":
+      case "trading":
         return (
           <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-emerald-400/80 relative overflow-hidden">
             <div className="flex justify-between items-center border-b border-emerald-500/20 pb-2 z-10">
-              <span className="font-bold">IDENTITY_GRAPH_NODE</span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-bold">NIFTY50_PAPER_TRADER</span>
+              <span className="text-emerald-300 bg-emerald-500/20 px-1 py-0.5">CAPITAL: ₹10,00,000</span>
             </div>
-            <div className="flex-1 flex flex-col items-center justify-center gap-2 my-2 z-10">
-              <div className="border border-emerald-500/30 bg-emerald-950/40 p-2 text-center w-full">
-                <span className="block text-[8px] text-emerald-500">SYNTHETIC_SCORE: 0.94</span>
-                <span className="font-bold text-emerald-300">ALERT: ATTACK_VECTOR_DETECTED</span>
+            <div className="flex-1 flex flex-col justify-center gap-1.5 my-2 z-10">
+              <div className="flex justify-between border-b border-emerald-500/10 pb-1">
+                <span>SIGNAL ENGINE: RANDOM_FOREST</span>
+                <span className="text-emerald-400 font-bold">BUY CALL 88.4%</span>
+              </div>
+              <div className="flex justify-between text-emerald-300">
+                <span>RECHARTS CANE_STICK</span>
+                <span>PROFIT: +₹42,150</span>
               </div>
             </div>
             <div className="flex justify-between items-center text-[8px] border-t border-emerald-500/20 pt-2 z-10">
-              <span>ENTITIES: 1,420</span>
-              <span>CORRELATION: ACTIVE</span>
+              <span>SUPABASE RLS</span>
+              <span>LIVE QUOTES: ACTIVE</span>
             </div>
           </div>
         );
-      case "chat":
+      case "codelens":
         return (
-          <div className="w-full h-full border border-cyan-500/20 bg-cyan-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-cyan-400/80">
-            <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
-              <span className="font-bold">FLOWCHAT_ENCRYPTED</span>
-              <span className="text-cyan-300 bg-cyan-500/20 px-1 py-0.5 border border-cyan-500/30">APP_LOCKED</span>
+          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/80 relative overflow-hidden">
+            <div className="flex justify-between items-center border-b border-amber-500/20 pb-2 z-10">
+              <span className="font-bold">CODELENS_TRACER.ts</span>
+              <span className="text-amber-300 bg-amber-500/20 px-1 py-0.5">GROQ LLAMA-3.3</span>
             </div>
-            <div className="flex-1 flex flex-col gap-2 justify-center py-2">
-              <div className="self-start bg-cyan-950/40 border border-cyan-500/30 p-2 max-w-[80%]">
-                <span>[BIOMETRIC AUTH PASSED]</span>
-              </div>
-              <div className="self-end bg-cyan-500/20 border border-cyan-400/40 p-2 text-cyan-200 max-w-[80%]">
-                <span>Stream encrypted packet #1084</span>
-              </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2 z-10">
+              <span className="text-amber-500">&gt; Memory trace node #04...</span>
+              <span className="text-amber-300">&gt; 1-click defect fix suggested</span>
+              <span className="text-emerald-400 font-bold">&gt; Transpiler: TS -&gt; Python</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-cyan-500/20 pt-2">
-              <span>STORAGE: AES-256</span>
-              <span>PIN: ARMED</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-amber-500/20 pt-2 z-10">
+              <span>MEMORY VISUALIZER</span>
+              <span>LATENCY: 14ms</span>
             </div>
           </div>
         );
-      case "calendar":
+      case "finance":
         return (
           <div className="w-full h-full border border-purple-500/20 bg-purple-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-purple-400/80">
             <div className="flex justify-between items-center border-b border-purple-500/20 pb-2">
-              <span className="font-bold">DIAGNOSTIC_SCHEDULE</span>
-              <span className="text-purple-300 bg-purple-500/20 px-1 py-0.5">SLOT_RESERVED</span>
+              <span className="font-bold">FINANCEFLOW_AI</span>
+              <span className="text-purple-300 bg-purple-500/20 px-1 py-0.5">CASHFLOW</span>
             </div>
             <div className="flex-1 flex flex-col gap-1.5 justify-center py-2">
               <div className="flex justify-between border-b border-purple-500/20 pb-1">
-                <span>10:30 AM / Hardware Check</span>
-                <span className="text-emerald-400 font-bold">CONFIRMED</span>
+                <span>NL Query: &quot;Monthly Spend&quot;</span>
+                <span className="text-emerald-400 font-bold">-$1,420</span>
               </div>
-              <div className="flex justify-between border-b border-purple-500/20 pb-1">
-                <span>02:15 PM / OS Reinstall</span>
-                <span className="text-amber-400 font-bold">PENDING</span>
+              <div className="flex justify-between text-purple-300">
+                <span>PDF Statement Export</span>
+                <span className="font-bold">OPENROUTER SYNC</span>
               </div>
             </div>
             <div className="flex justify-between items-center text-[8px] border-t border-purple-500/20 pt-2">
-              <span>SLOTS: 14 TODAY</span>
-              <span>SYNC: COMPLETE</span>
+              <span>FALLBACK CHAIN</span>
+              <span>GEMINI / LLAMA</span>
             </div>
           </div>
         );
-      case "camera":
+      case "disaster":
         return (
-          <div className="w-full h-full border border-pink-500/20 bg-pink-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-pink-400/80 relative overflow-hidden">
-            <div className="flex justify-between items-center border-b border-pink-500/20 pb-2 z-10">
-              <span className="font-bold">VISION_FRAME_CAPTURE</span>
-              <span className="text-emerald-400 font-bold">MATCH 99.2%</span>
+          <div className="w-full h-full border border-accent/20 bg-accent/5 p-4 flex flex-col justify-between font-mono text-[9px] text-accent/80 relative overflow-hidden">
+            <div className="flex justify-between items-center border-b border-accent/15 pb-2 z-10">
+              <span className="font-bold">CRISIS_SWARM_ORCH</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
             </div>
-            <div className="flex-1 flex items-center justify-center my-2 z-10 border border-dashed border-pink-500/40 p-2">
-              <div className="text-center">
-                <span className="block font-bold text-pink-300">[ FACE_DETECTED ]</span>
-                <span className="text-[8px] text-pink-500">LOG_ID: #ATT_2026_09</span>
+            <div className="flex-1 flex items-center justify-center relative my-2">
+              <div className="text-center px-3 py-1.5 border border-accent bg-accent/10 text-accent font-bold uppercase tracking-widest z-10">
+                [ 6 AGENTS ACTIVE ]
               </div>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-pink-500/20 pt-2 z-10">
-              <span>OPENCV: 60 FPS</span>
-              <span>ANTI-SPOOF: TRUE</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-accent/15 pt-2 z-10">
+              <span>MS BUILD HACKATHON</span>
+              <span>GROQ LLAMA-3.3</span>
             </div>
           </div>
         );
-      case "map":
+      case "market":
         return (
-          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-emerald-400/70 relative overflow-hidden">
-            <div className="flex justify-between items-center border-b border-emerald-500/10 pb-2 z-10">
-              <span className="font-bold">LEAFLET_GEO_NODE</span>
-              <span className="text-[8px] bg-emerald-500/20 px-1 text-emerald-300">LIVE_METRICS</span>
+          <div className="w-full h-full border border-blue-500/20 bg-blue-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-blue-400/80">
+            <div className="flex justify-between items-center border-b border-blue-500/20 pb-2">
+              <span className="font-bold">MARKET_ANALYST_AI</span>
+              <span className="text-blue-300 bg-blue-500/20 px-1 py-0.5">FASTAPI</span>
             </div>
-            <div className="flex-1 flex items-center justify-center relative my-2 z-10">
-              <div className="border border-emerald-500/30 p-3 bg-background/80 text-center w-full">
-                <span className="block text-[8px] text-emerald-500">ECO_INDEX</span>
-                <span className="font-bold text-emerald-300 text-xs">88.4 PKT/HARVEST</span>
-              </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span className="text-blue-300">&gt; Cosmic Night Glassmorphism</span>
+              <span className="text-emerald-400 font-bold">&gt; LangChain query agent ready</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-emerald-500/10 pt-2 z-10">
-              <span>LAT: 21.1702 N</span>
-              <span>LON: 72.8311 E</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-blue-500/20 pt-2">
+              <span>GLOBAL &amp; NSE DATA</span>
+              <span>STREAM: ACTIVE</span>
             </div>
           </div>
         );
-      case "terminal":
+      case "health":
         return (
-          <div className="w-full h-full border border-amber-500/20 bg-amber-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/70">
-            <div className="flex justify-between items-center border-b border-amber-500/10 pb-2">
-              <span className="font-bold">REPOLENS_CLI</span>
-              <span className="text-[8px] bg-amber-500/20 px-1 text-amber-300">GEMINI_2.5</span>
+          <div className="w-full h-full border border-rose-500/20 bg-rose-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-rose-400/80">
+            <div className="flex justify-between items-center border-b border-rose-500/20 pb-2">
+              <span className="font-bold">HEALTH_TRIAGE_AI</span>
+              <span className="text-rose-300 bg-rose-500/20 px-1 py-0.5">EDUCATIONAL</span>
             </div>
-            <div className="flex-1 flex flex-col gap-1 justify-center font-mono py-2">
-              <span className="text-amber-500">&gt; querying openrouter API...</span>
-              <span className="text-amber-300">&gt; parsing architecture nodes...</span>
-              <span className="text-emerald-400 font-bold">&gt; AUDIT_COMPLETE: 0 VULNS</span>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span>Clarifying vitals prompt...</span>
+              <span className="text-emerald-400 font-bold">jsPDF summary generated</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-amber-500/10 pt-2">
-              <span>MEM: 256MB</span>
-              <span>LATENCY: 42ms</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-rose-500/20 pt-2">
+              <span>GROQ LLAMA-3</span>
+              <span>SPEECH API</span>
             </div>
           </div>
         );
-      case "survey":
+      case "bitcoin":
         return (
-          <div className="w-full h-full border border-cyan-500/20 bg-cyan-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-cyan-400/70 relative overflow-hidden">
-            <div className="flex justify-between items-center border-b border-cyan-500/10 pb-2 z-10">
-              <span className="font-bold">HEALTH_SURVEY_SHEET</span>
-              <span className="text-[7px] bg-cyan-500/20 px-1.5 py-0.5 text-cyan-300 font-bold border border-cyan-500/30">OFFLINE_SYNC</span>
+          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/80">
+            <div className="flex justify-between items-center border-b border-amber-500/20 pb-2">
+              <span className="font-bold">BTC_ENSEMBLE_ML</span>
+              <span className="text-amber-300 bg-amber-500/20 px-1 py-0.5">STREAMLIT</span>
             </div>
-            <div className="flex-1 flex flex-col gap-2 justify-center py-2 z-10">
-              <div className="border border-cyan-500/20 p-2 bg-background/80 flex items-center justify-between">
-                <span>01. Identity Verified</span>
-                <span className="w-2.5 h-2.5 bg-cyan-400 inline-block" />
-              </div>
-              <div className="border border-cyan-500/20 p-2 bg-background/80 flex items-center justify-between">
-                <span>02. GPS Coordinates Cached</span>
-                <span className="w-2.5 h-2.5 border border-cyan-400/60 inline-block animate-pulse" />
-              </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span>Models: Prophet + LSTM + RF</span>
+              <span className="text-emerald-400 font-bold">OpenRouter report ready</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-cyan-500/10 pt-2 z-10">
-              <span>SUPABASE_OFFLINE</span>
-              <span>N=1,084 ENTRIES</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-amber-500/20 pt-2">
+              <span>TENSORFLOW</span>
+              <span>GEMINI FLASH</span>
+            </div>
+          </div>
+        );
+      case "xai":
+        return (
+          <div className="w-full h-full border border-indigo-500/20 bg-indigo-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-indigo-400/80">
+            <div className="flex justify-between items-center border-b border-indigo-500/20 pb-2">
+              <span className="font-bold">EXPLAINABLE_AI_XAI</span>
+              <span className="text-indigo-300 bg-indigo-500/20 px-1 py-0.5">SHAP / LIME</span>
+            </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span>Default risk XGBoost tree...</span>
+              <span className="text-emerald-400 font-bold">Fairness audit: PASS</span>
+            </div>
+            <div className="flex justify-between items-center text-[8px] border-t border-indigo-500/20 pt-2">
+              <span>MODEL CARDS</span>
+              <span>REGULATORY OK</span>
+            </div>
+          </div>
+        );
+      case "ecolearn":
+        return (
+          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-emerald-400/80">
+            <div className="flex justify-between items-center border-b border-emerald-500/20 pb-2">
+              <span className="font-bold">ECOLEARN_GAMIFIED</span>
+              <span className="text-emerald-300 bg-emerald-500/20 px-1 py-0.5">GEMINI TUTOR</span>
+            </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span>Student / Teacher Portal</span>
+              <span className="text-emerald-400 font-bold">Leaderboard Socket.io</span>
+            </div>
+            <div className="flex justify-between items-center text-[8px] border-t border-emerald-500/20 pt-2">
+              <span>NEXT.JS 19</span>
+              <span>MONGODB SYNC</span>
+            </div>
+          </div>
+        );
+      case "blazze":
+        return (
+          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/80">
+            <div className="flex justify-between items-center border-b border-amber-500/20 pb-2">
+              <span className="font-bold">BLAZZE_OVERSEAS_LLP</span>
+              <span className="text-amber-300 bg-amber-500/20 px-1 py-0.5">EXPORTER</span>
+            </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span>Catalog: Spices &amp; Grains</span>
+              <span className="text-emerald-400 font-bold">ISO / APEDA Verified</span>
+            </div>
+            <div className="flex justify-between items-center text-[8px] border-t border-amber-500/20 pt-2">
+              <span>NEXT.JS + TAILWIND</span>
+              <span>WHATSAPP FLOW</span>
+            </div>
+          </div>
+        );
+      case "family":
+        return (
+          <div className="w-full h-full border border-rose-500/20 bg-rose-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-rose-400/80">
+            <div className="flex justify-between items-center border-b border-rose-500/20 pb-2">
+              <span className="font-bold">FAMILY_BLOOD_REGISTRY</span>
+              <span className="text-rose-300 bg-rose-500/20 px-1 py-0.5">FLUTTER</span>
+            </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span>4-Step Guided Registration</span>
+              <span className="text-emerald-400 font-bold">Supabase Draft Sync</span>
+            </div>
+            <div className="flex justify-between items-center text-[8px] border-t border-rose-500/20 pt-2">
+              <span>INTL PHONE SUPPORT</span>
+              <span>OFFLINE READY</span>
             </div>
           </div>
         );
       case "pos":
-        return (
-          <div className="w-full h-full border border-pink-500/20 bg-pink-950/5 p-4 flex flex-col justify-between font-mono text-[9px] text-pink-400/70">
-            <div className="flex justify-between items-center border-b border-pink-500/10 pb-2">
-              <span className="font-bold">SAVALIYA_POS_SYSTEM</span>
-              <span className="text-pink-300 bg-pink-500/15 px-1 py-0.5 border border-pink-500/20">CART [3]</span>
-            </div>
-            <div className="flex-1 flex flex-col gap-1.5 justify-center py-1">
-              <div className="flex justify-between border-b border-dashed border-pink-500/20 pb-1">
-                <span>01 / Kesar Pista Ice Cream</span>
-                <span className="font-bold">$4.50</span>
-              </div>
-              <div className="flex justify-between border-b border-dashed border-pink-500/20 pb-1">
-                <span>02 / Rajbhog Scoop Special</span>
-                <span className="font-bold">$5.00</span>
-              </div>
-            </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-pink-500/10 pt-2">
-              <span>TERMINAL #A08</span>
-              <span className="text-emerald-400 font-bold">READY</span>
-            </div>
-          </div>
-        );
-      case "flagship":
       default:
         return (
-          <div className="w-full h-full border border-accent/20 bg-accent/5 p-4 flex flex-col justify-between font-mono text-[9px] text-accent/80 relative overflow-hidden">
-            <div className="flex justify-between items-center border-b border-accent/15 pb-2 z-10">
-              <span className="font-bold">AGENTIC_ORCHESTRATOR.py</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
+          <div className="w-full h-full border border-cyan-500/20 bg-cyan-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-cyan-400/80">
+            <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
+              <span className="font-bold">SAAS_POS_BILLING</span>
+              <span className="text-cyan-300 bg-cyan-500/20 px-1 py-0.5">OFFLINE PWA</span>
             </div>
-            <div className="flex-1 flex items-center justify-center relative my-2">
-              <div className="absolute inset-0 grid grid-cols-5 gap-1 pointer-events-none opacity-25">
-                {Array.from({ length: 15 }).map((_, i) => (
-                  <div key={i} className="border border-accent/30 w-full aspect-square" />
-                ))}
-              </div>
-              <div className="px-3 py-1.5 border border-accent bg-accent/10 text-accent font-bold uppercase tracking-widest z-10 backdrop-blur-sm">
-                [ CORE_ORCHESTRATOR ]
-              </div>
+            <div className="flex-1 flex flex-col justify-center gap-1 my-2">
+              <span>Multi-Tenant Store Engine</span>
+              <span className="text-emerald-400 font-bold">IndexedDB + RLS</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-accent/15 pt-2 z-10">
-              <span>NODES: 32 ACTIVE</span>
-              <span>LATENCY: 48ms</span>
+            <div className="flex justify-between items-center text-[8px] border-t border-cyan-500/20 pt-2">
+              <span>ZUSTAND STATE</span>
+              <span>TANSTACK QUERY</span>
             </div>
           </div>
         );
@@ -520,7 +550,7 @@ export function Projects() {
                         </Button>
                       </a>
                     )}
-                    {project.demoUrl && project.demoUrl !== "#" && (
+                    {project.demoUrl && (
                       <a
                         href={project.demoUrl}
                         target="_blank"
@@ -529,7 +559,7 @@ export function Projects() {
                         className="inline-block"
                       >
                         <Button variant="secondary" size="sm">
-                          Live Demo <ArrowUpRight className="w-3.5 h-3.5 ml-1 inline-block" />
+                          {project.githubUrl ? "Live Demo" : "Visit Site"} <ArrowUpRight className="w-3.5 h-3.5 ml-1 inline-block" />
                         </Button>
                       </a>
                     )}
@@ -586,7 +616,7 @@ export function Projects() {
               <Heading tag="h2" size="h2" animate="words" titleText="CLIENT WORK" className="text-ink-primary mt-2" />
             </div>
             <p className="text-sm text-ink-muted leading-relaxed font-light max-w-sm mt-2">
-              Bespoke commercial software deliverables engineered for retail businesses and community organizations.
+              Bespoke commercial software deliverables engineered for retail businesses and export clients.
             </p>
           </div>
 
