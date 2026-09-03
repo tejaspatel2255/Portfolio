@@ -76,7 +76,7 @@ export function About() {
   };
 
   const quickFacts = [
-    { icon: MapPin, label: "Location", value: "Surat, Gujarat, India [VERIFY]" },
+    { icon: MapPin, label: "Location", value: "Nadiad, Gujarat, India" },
     { icon: Calendar, label: "Experience", value: "3+ Years Building [VERIFY]" },
     { icon: Target, label: "Primary Focus", value: "Full-Stack + Agentic AI Systems" },
     { icon: Briefcase, label: "Availability", value: "Open for Roles / Contracts" },

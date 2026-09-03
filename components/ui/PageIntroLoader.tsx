@@ -72,7 +72,7 @@ export function PageIntroLoader() {
           <div className="flex justify-between items-center text-xs text-ink-muted">
             <span className="text-accent uppercase tracking-widest">// SYSTEM BOOT SEQUENCE</span>
             <span className="hidden sm:inline">CLICK OR TAP TO SKIP [ESC]</span>
-            <span>LOC // SURAT, IN</span>
+            <span>LOC // NADIAD, IN</span>
           </div>
 
           {/* Center Brand Name & System Boot Terminal */}

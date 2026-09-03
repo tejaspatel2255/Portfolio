@@ -150,7 +150,7 @@ export function Hero() {
 
             {/* Sub-meta details */}
             <motion.div variants={itemVariants} className="flex gap-8 items-center text-[10px] font-mono text-ink-muted border-t border-border-subtle pt-6 mt-4">
-              <span>LOC // SURAT, INDIA</span>
+              <span>LOC // NADIAD, INDIA</span>
               <span>EST. 2026</span>
               <span className="text-accent">// SOFTWARE &amp; AI ENGINEER</span>
             </motion.div>
