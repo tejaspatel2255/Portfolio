@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,15 +9,11 @@ import { Button } from "@/components/ui/Button";
 import { InteractiveCanvas } from "@/components/ui/InteractiveCanvas";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { WhatsappIcon } from "@/components/ui/Icons";
-import { ArrowDown, Eye, Code, Database } from "lucide-react";
+import { ArrowDown, Eye } from "lucide-react";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const infoRef = useRef<HTMLDivElement | null>(null);
-  const cardRef = useRef<HTMLDivElement | null>(null);
-
-  // 3D tilt interaction logic for Technical Capabilities Card
-  const [tiltStyle, setTiltStyle] = useState({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg)" });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -40,43 +36,10 @@ export function Hero() {
           },
         });
       }
-      if (cardRef.current) {
-        gsap.to(cardRef.current, {
-          y: -65,
-          opacity: 0.75,
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
-
-  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
-    setTiltStyle({
-      transform: `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`,
-    });
-  };
-
-  const handleCardMouseLeave = () => {
-    setTiltStyle({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg)" });
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -103,7 +66,7 @@ export function Hero() {
   } as const;
 
   return (
-    <section ref={sectionRef} className="relative min-h-[95vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
+    <section ref={sectionRef} className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
       {/* Interactive Centerpiece Canvas Background */}
       <InteractiveCanvas />
 
@@ -115,15 +78,15 @@ export function Hero() {
         <div className="w-px h-full bg-border-subtle/10" />
       </div>
 
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16 z-10 relative mt-8 sm:mt-12">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16 z-10 relative mt-4 sm:mt-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12"
+          className="w-full"
         >
           {/* Main Info Column */}
-          <div ref={infoRef} className="lg:col-span-8 flex flex-col justify-center gap-6">
+          <div ref={infoRef} className="flex flex-col justify-center gap-6 max-w-4xl">
             
             {/* Availability Badge */}
             <motion.div 
@@ -163,7 +126,7 @@ export function Hero() {
 
             {/* Bullet Paragraph */}
             <motion.div variants={itemVariants}>
-              <p className="text-base sm:text-lg text-ink-muted max-w-xl leading-relaxed font-light">
+              <p className="text-base sm:text-lg text-ink-muted max-w-2xl leading-relaxed font-light">
                 I engineer end-to-end web applications (TypeScript, Next.js, Node) and construct custom agentic AI systems (Python, LLM graphs). Focused on building software that solves user needs with performance and intelligence.
               </p>
             </motion.div>
@@ -184,66 +147,22 @@ export function Hero() {
                 </Button>
               </a>
             </motion.div>
-          </div>
 
-          {/* Asymmetric Technical Card Column */}
-          <motion.div 
-            ref={cardRef}
-            variants={itemVariants}
-            onMouseMove={handleCardMouseMove}
-            onMouseLeave={handleCardMouseLeave}
-            style={tiltStyle}
-            data-cursor="SYSTEMS"
-            className="lg:col-span-4 border border-border-strong p-8 bg-surface/30 backdrop-blur-md flex flex-col justify-between min-h-[300px] transition-transform duration-150 ease-out cursor-none group select-none"
-          >
-            <div>
-              <p className="font-mono text-[9px] text-accent uppercase tracking-widest mb-4">// Capabilities</p>
-              
-              <div className="flex flex-col gap-6">
-                <div className="flex gap-4 items-start">
-                  <div className="p-2 border border-border-subtle bg-background text-accent">
-                    <Code className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-bold text-sm uppercase text-ink-primary tracking-wide">01 / Full-Stack Engineering</h4>
-                    <p className="text-xs text-ink-muted mt-1 leading-relaxed">
-                      TypeScript, React, Next.js, and Java/Node server architectures.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4 items-start">
-                  <div className="p-2 border border-border-subtle bg-background text-accent">
-                    <Database className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="font-display font-bold text-sm uppercase text-ink-primary tracking-wide">02 / Applied Agentic AI</h4>
-                    <p className="text-xs text-ink-muted mt-1 leading-relaxed">
-                      Custom agent networks, tool integration, and structural data retrieval.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-t border-border-subtle pt-6 mt-8 flex justify-between items-center text-[10px] font-mono text-ink-muted">
+            {/* Sub-meta details */}
+            <motion.div variants={itemVariants} className="flex gap-8 items-center text-[10px] font-mono text-ink-muted border-t border-border-subtle pt-6 mt-4">
               <span>LOC // SURAT, INDIA</span>
               <span>EST. 2026</span>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
+              <span className="text-accent">// SOFTWARE &amp; AI ENGINEER</span>
+            </motion.div>
 
-      {/* Animated Scroll Cue Indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 pointer-events-none z-10 flex flex-col items-center gap-2">
-        <span className="text-[9px] font-mono text-ink-muted tracking-widest uppercase">Scroll to explore</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-          className="w-5 h-8 border border-border-strong rounded-full flex justify-center pt-1.5"
-        >
-          <motion.div className="w-1 h-1.5 bg-accent rounded-full" />
+          </div>
         </motion.div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute -bottom-8 left-6 md:left-12 lg:left-16 flex items-center gap-2 font-mono text-[9px] text-ink-muted uppercase tracking-widest select-none pointer-events-none">
+          <ArrowDown className="w-3 h-3 text-accent animate-bounce" />
+          <span>Scroll to explore</span>
+        </div>
       </div>
     </section>
   );
