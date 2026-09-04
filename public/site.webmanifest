@@ -1,0 +1,14 @@
+{
+  "name": "Tejas Patel — Software & AI Systems Engineer",
+  "short_name": "Tejas Patel",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#0c0d0e",
+  "background_color": "#0c0d0e",
+  "display": "standalone"
+}

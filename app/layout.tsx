@@ -26,41 +26,85 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tejaspatel2255.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Tejas Patel | Software & AI Systems Engineer",
+    default: "Tejas Patel — Software & AI Systems Engineer",
     template: "%s | Tejas Patel",
   },
   description:
-    "Full-stack product developer specializing in high-performance web systems (React, TypeScript) and applied AI/agentic loops (Python, LangChain).",
+    "I engineer end-to-end web applications (TypeScript, Next.js, Node) and construct custom agentic AI systems (Python, LLM graphs). Focused on building software that solves user needs with performance and intelligence.",
   keywords: [
     "Tejas Patel",
     "Software Engineer",
     "AI Systems Engineer",
     "Agentic AI",
     "Full Stack Developer",
-    "React Portfolio",
-    "Next.js Portfolio",
+    "React Developer",
+    "Next.js Developer",
     "Python Developer",
+    "Nadiad Gujarat India",
   ],
   authors: [{ name: "Tejas Patel", url: "https://github.com/tejaspatel2255" }],
   creator: "Tejas Patel",
+  publisher: "Tejas Patel",
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/favicon.svg", sizes: "180x180", type: "image/svg+xml" }],
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://github.com/tejaspatel2255",
-    title: "Tejas Patel | Software & AI Systems Engineer",
+    url: siteUrl,
+    title: "Tejas Patel — Software & AI Systems Engineer",
     description:
-      "Full-stack product developer specializing in high-performance web systems (React, TypeScript) and applied AI/agentic loops (Python, LangChain).",
+      "I engineer end-to-end web applications (TypeScript, Next.js, Node) and construct custom agentic AI systems (Python, LLM graphs). Focused on building software that solves user needs with performance and intelligence.",
     siteName: "Tejas Patel Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tejas Patel | Software & AI Systems Engineer",
+    title: "Tejas Patel — Software & AI Systems Engineer",
     description:
-      "Full-stack product developer specializing in high-performance web systems (React, TypeScript) and applied AI/agentic loops (Python, LangChain).",
+      "I engineer end-to-end web applications (TypeScript, Next.js, Node) and construct custom agentic AI systems (Python, LLM graphs).",
     creator: "@pateltejasd",
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Tejas Patel",
+  "jobTitle": "Software & Applied AI Systems Engineer",
+  "url": siteUrl,
+  "sameAs": [
+    "https://github.com/tejaspatel2255",
+    "https://www.linkedin.com/in/pateltejasd"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Nadiad",
+    "addressRegion": "Gujarat",
+    "addressCountry": "India"
+  },
+  "knowsAbout": [
+    "Full-Stack Web Development",
+    "TypeScript",
+    "Next.js",
+    "React",
+    "Python",
+    "Agentic AI Systems",
+    "LLM Graph Architectures",
+    "FastAPI"
+  ]
 };
 
 export default function RootLayout({
@@ -73,6 +117,12 @@ export default function RootLayout({
       lang="en"
       className={`${syne.variable} ${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full bg-background text-foreground selection:bg-accent selection:text-accent-foreground font-body overflow-x-hidden">
         <DynamicScrollNoise />
         <PageIntroLoader />
