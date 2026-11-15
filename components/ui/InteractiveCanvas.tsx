@@ -14,16 +14,25 @@ export function InteractiveCanvas() {
 
     let animationFrameId: number;
     let isVisible = true;
-    let width = (canvas.width = canvas.offsetWidth);
-    let height = (canvas.height = canvas.offsetHeight);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let width = canvas.offsetWidth;
+    let height = canvas.offsetHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isTouchDevice = !window.matchMedia("(pointer: fine)").matches;
 
     const handleResize = () => {
       if (!canvas) return;
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
+      const currentDpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = canvas.offsetWidth;
+      height = canvas.offsetHeight;
+      canvas.width = width * currentDpr;
+      canvas.height = height * currentDpr;
+      ctx.setTransform(currentDpr, 0, 0, currentDpr, 0, 0);
+      draw();
     };
 
     window.addEventListener("resize", handleResize);
@@ -72,18 +81,25 @@ export function InteractiveCanvas() {
       });
     }
 
-    const mouse = { x: -1000, y: -1000, targetX: -1000, targetY: -1000 };
+    const mouse = {
+      x: width / 2,
+      y: height / 2,
+      targetX: width / 2,
+      targetY: height / 2,
+      influence: 0,
+      targetInfluence: 0,
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!isVisible || isTouchDevice) return;
       const rect = canvas.getBoundingClientRect();
       mouse.targetX = e.clientX - rect.left;
       mouse.targetY = e.clientY - rect.top;
+      mouse.targetInfluence = 1;
     };
 
     const handleMouseLeave = () => {
-      mouse.targetX = -1000;
-      mouse.targetY = -1000;
+      mouse.targetInfluence = 0;
     };
 
     if (!isTouchDevice) {
@@ -94,9 +110,10 @@ export function InteractiveCanvas() {
     const draw = () => {
       if (!isVisible) return;
 
-      // Smooth mouse interpolation
+      // Smooth mouse interpolation and influence easing
       mouse.x += (mouse.targetX - mouse.x) * 0.08;
       mouse.y += (mouse.targetY - mouse.y) * 0.08;
+      mouse.influence += (mouse.targetInfluence - mouse.influence) * 0.08;
 
       ctx.clearRect(0, 0, width, height);
 
@@ -118,7 +135,9 @@ export function InteractiveCanvas() {
         ctx.stroke();
       }
 
-      // Draw active connections & nodes with depth field offset
+      // First pass: update positions, draw nodes & mouse proximity lines
+      const renderedNodes: { renderX: number; renderY: number; depth: number }[] = [];
+
       nodes.forEach((node) => {
         if (!prefersReducedMotion) {
           node.x += node.vx;
@@ -131,16 +150,18 @@ export function InteractiveCanvas() {
           if (node.pulse > 1 || node.pulse < 0) node.pulseDirection *= -1;
         }
 
-        // Parallax cursor displacement scaled by node depth
+        // Parallax cursor displacement scaled by node depth and mouse influence
         let renderX = node.x;
         let renderY = node.y;
 
-        if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
-          const offsetX = (mouse.x - width / 2) * 0.03 * node.depth;
-          const offsetY = (mouse.y - height / 2) * 0.03 * node.depth;
+        if (!isTouchDevice && mouse.influence > 0.001) {
+          const offsetX = (mouse.x - width / 2) * 0.03 * node.depth * mouse.influence;
+          const offsetY = (mouse.y - height / 2) * 0.03 * node.depth * mouse.influence;
           renderX += offsetX;
           renderY += offsetY;
         }
+
+        renderedNodes.push({ renderX, renderY, depth: node.depth });
 
         // Render node dot
         const alpha = 0.12 + node.pulse * 0.25 * (node.depth / 1.5);
@@ -150,14 +171,14 @@ export function InteractiveCanvas() {
         ctx.fill();
 
         // Mouse proximity connection
-        if (!prefersReducedMotion && mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
+        if (!prefersReducedMotion && !isTouchDevice && mouse.influence > 0.001) {
           const dx = mouse.x - renderX;
           const dy = mouse.y - renderY;
           const dist = Math.sqrt(dx * dx + dy * dy);
           const maxCursorDist = 180;
 
           if (dist < maxCursorDist) {
-            const lineAlpha = (1 - dist / maxCursorDist) * 0.22 * node.depth;
+            const lineAlpha = (1 - dist / maxCursorDist) * 0.22 * node.depth * mouse.influence;
             ctx.strokeStyle = `rgba(200, 255, 68, ${lineAlpha})`;
             ctx.lineWidth = 0.7 * node.depth;
             ctx.beginPath();
@@ -166,35 +187,29 @@ export function InteractiveCanvas() {
             ctx.stroke();
           }
         }
+      });
 
-        // Mesh interconnect between adjacent nodes
-        for (let j = 0; j < nodes.length; j++) {
-          const other = nodes[j];
-          if (node === other) continue;
-
-          let otherRenderX = other.x;
-          let otherRenderY = other.y;
-          if (mouse.x > 0 && mouse.y > 0 && !isTouchDevice) {
-            otherRenderX += (mouse.x - width / 2) * 0.03 * other.depth;
-            otherRenderY += (mouse.y - height / 2) * 0.03 * other.depth;
-          }
-
-          const odx = otherRenderX - renderX;
-          const ody = otherRenderY - renderY;
+      // Second pass: mesh interconnect between unique pairs with i < j
+      const maxMeshDist = 100;
+      for (let i = 0; i < renderedNodes.length; i++) {
+        const a = renderedNodes[i];
+        for (let j = i + 1; j < renderedNodes.length; j++) {
+          const b = renderedNodes[j];
+          const odx = b.renderX - a.renderX;
+          const ody = b.renderY - a.renderY;
           const odist = Math.sqrt(odx * odx + ody * ody);
-          const maxMeshDist = 100;
 
           if (odist < maxMeshDist) {
             const meshAlpha = (1 - odist / maxMeshDist) * 0.07;
             ctx.strokeStyle = `rgba(243, 243, 245, ${meshAlpha})`;
             ctx.lineWidth = 0.4;
             ctx.beginPath();
-            ctx.moveTo(renderX, renderY);
-            ctx.lineTo(otherRenderX, otherRenderY);
+            ctx.moveTo(a.renderX, a.renderY);
+            ctx.lineTo(b.renderX, b.renderY);
             ctx.stroke();
           }
         }
-      });
+      }
 
       if (!prefersReducedMotion && isVisible) {
         animationFrameId = requestAnimationFrame(draw);

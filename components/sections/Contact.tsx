@@ -33,7 +33,7 @@ export function Contact() {
         {/* Left Side: Call to Action Details */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div>
-            <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// CONVERSION</span>
+            <span className="font-mono text-xs text-accent uppercase tracking-widest block">// CONVERSION</span>
             <Heading tag="h2" size="h2" animate="words" titleText="GET IN TOUCH" className="text-ink-primary mt-2" />
           </div>
 
@@ -63,7 +63,7 @@ export function Contact() {
                   <WhatsappIcon className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="block font-mono text-[8px] text-ink-muted uppercase tracking-wider">INSTANT CONTACT</span>
+                  <span className="block font-mono text-[11px] text-ink-muted uppercase tracking-wider">INSTANT CONTACT</span>
                   <span className="block text-sm font-semibold text-ink-primary mt-0.5">Chat on WhatsApp [INSERT_WHATSAPP_NUMBER]</span>
                 </div>
               </div>
@@ -81,7 +81,7 @@ export function Contact() {
                   <Mail className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="block font-mono text-[8px] text-ink-muted uppercase tracking-wider">EMAIL DIRECT</span>
+                  <span className="block font-mono text-[11px] text-ink-muted uppercase tracking-wider">EMAIL DIRECT</span>
                   <span className="block text-sm font-semibold text-ink-primary mt-0.5">placeholder_email@gmail.com</span>
                 </div>
               </div>
@@ -98,7 +98,7 @@ export function Contact() {
               >
                 <div className="flex items-center gap-2.5">
                   <LinkedinIcon className="w-4.5 h-4.5 text-accent" />
-                  <span className="font-mono text-[10px] text-ink-primary uppercase tracking-wider font-bold">LinkedIn</span>
+                  <span className="font-mono text-xs text-ink-primary uppercase tracking-wider font-bold">LinkedIn</span>
                 </div>
                 <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover/cta:text-accent transition-colors" />
               </a>
@@ -112,7 +112,7 @@ export function Contact() {
               >
                 <div className="flex items-center gap-2.5">
                   <GithubIcon className="w-4.5 h-4.5 text-accent" />
-                  <span className="font-mono text-[10px] text-ink-primary uppercase tracking-wider font-bold">GitHub</span>
+                  <span className="font-mono text-xs text-ink-primary uppercase tracking-wider font-bold">GitHub</span>
                 </div>
                 <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover/cta:text-accent transition-colors" />
               </a>
@@ -122,12 +122,12 @@ export function Contact() {
 
         {/* Right Side: Brutalist Form with Tactile Focus States & Animated SVG Checkmark */}
         <div className="lg:col-span-7 border border-border-strong p-6 md:p-8 bg-surface/20">
-          <p className="font-mono text-[9px] text-accent uppercase tracking-widest mb-6">// Query Dispatcher Form</p>
+          <p className="font-mono text-[11px] text-accent uppercase tracking-widest mb-6">// Query Dispatcher Form</p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             {/* Input Row Name */}
             <div className="flex flex-col gap-2">
-              <label htmlFor="name" className="font-mono text-[10px] text-ink-muted uppercase tracking-wider">
+              <label htmlFor="name" className="font-mono text-xs text-ink-muted uppercase tracking-wider">
                 01 / Your Name
               </label>
               <input
@@ -144,7 +144,7 @@ export function Contact() {
 
             {/* Input Row Email */}
             <div className="flex flex-col gap-2">
-              <label htmlFor="email" className="font-mono text-[10px] text-ink-muted uppercase tracking-wider">
+              <label htmlFor="email" className="font-mono text-xs text-ink-muted uppercase tracking-wider">
                 02 / Your Email Address
               </label>
               <input
@@ -161,7 +161,7 @@ export function Contact() {
 
             {/* Input Row Message */}
             <div className="flex flex-col gap-2">
-              <label htmlFor="message" className="font-mono text-[10px] text-ink-muted uppercase tracking-wider">
+              <label htmlFor="message" className="font-mono text-xs text-ink-muted uppercase tracking-wider">
                 03 / Message Detail
               </label>
               <textarea
@@ -217,7 +217,7 @@ export function Contact() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="border border-emerald-500/30 bg-emerald-950/20 p-4 flex gap-3 items-start font-mono text-[10px] text-emerald-400"
+                    className="border border-emerald-500/30 bg-emerald-950/20 p-4 flex gap-3 items-start font-mono text-xs text-emerald-400"
                   >
                     <div>
                       <span className="block font-bold">// STATUS: DISPATCH SUCCESS [MOCK]</span>
@@ -234,7 +234,7 @@ export function Contact() {
       </div>
 
       {/* Styled Footer Block */}
-      <footer className="border-t border-border-subtle mt-16 md:mt-24 py-12 flex flex-col sm:flex-row justify-between items-center gap-6 font-mono text-[10px] text-ink-muted">
+      <footer className="border-t border-border-subtle mt-16 md:mt-24 py-12 flex flex-col sm:flex-row justify-between items-center gap-6 font-mono text-xs text-ink-muted">
         <div className="flex flex-col gap-1 items-center sm:items-start text-center sm:text-left">
           <span>© {new Date().getFullYear()} TEJAS PATEL</span>
         </div>

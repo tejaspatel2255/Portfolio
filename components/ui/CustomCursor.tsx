@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
 export function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
+  const isVisibleRef = useRef(false);
   const [isHovered, setIsHovered] = useState(false);
   const [cursorText, setCursorText] = useState<string | null>(null);
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isClicking, setIsClicking] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const finePointer = useMediaQuery("(pointer: fine)");
@@ -30,12 +30,22 @@ export function CustomCursor() {
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-      setCoords({ x: Math.round(e.clientX), y: Math.round(e.clientY) });
-      if (!isVisible) setIsVisible(true);
+      if (!isVisibleRef.current) {
+        isVisibleRef.current = true;
+        setIsVisible(true);
+      }
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
+    const handleMouseLeave = () => {
+      isVisibleRef.current = false;
+      setIsVisible(false);
+    };
+
+    const handleMouseEnter = () => {
+      isVisibleRef.current = true;
+      setIsVisible(true);
+    };
+
     const handleMouseDown = () => setIsClicking(true);
     const handleMouseUp = () => setIsClicking(false);
 
@@ -80,7 +90,7 @@ export function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [cursorX, cursorY, finePointer, shouldReduceMotion, isVisible]);
+  }, [cursorX, cursorY, finePointer, shouldReduceMotion]);
 
   if (!finePointer || shouldReduceMotion || !isVisible) return null;
 
@@ -110,15 +120,11 @@ export function CustomCursor() {
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="font-mono text-[9px] font-bold uppercase tracking-widest text-accent-foreground select-none text-center whitespace-nowrap"
+            className="font-mono text-[11px] font-bold uppercase tracking-widest text-accent-foreground select-none text-center whitespace-nowrap"
           >
             {cursorText}
           </motion.span>
-        ) : (
-          <span className="font-mono text-[7px] text-accent/80 font-semibold uppercase tracking-tighter select-none">
-            {coords.x},{coords.y}
-          </span>
-        )}
+        ) : null}
       </motion.div>
 
       {/* Inner Pinpoint Dot */}

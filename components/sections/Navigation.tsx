@@ -206,7 +206,7 @@ export function Navigation() {
 
               {/* Menu lists */}
               <div className="flex flex-col gap-6 z-10">
-                <p className="font-mono text-[10px] text-accent uppercase tracking-widest mb-2">// Navigation</p>
+                <p className="font-mono text-xs text-accent uppercase tracking-widest mb-2">// Navigation</p>
                 {NAV_LINKS.map((link, idx) => (
                   <motion.div
                     initial={{ opacity: 0, x: 25 }}
@@ -235,7 +235,7 @@ export function Navigation() {
                   Chat on WhatsApp <WhatsappIcon className="w-4 h-4 ml-1.5 inline-block" />
                 </WhatsAppButton>
 
-                <div className="flex items-center justify-between text-[10px] font-mono text-ink-muted">
+                <div className="flex items-center justify-between text-xs font-mono text-ink-muted">
                   <span>© {new Date().getFullYear()} TEJAS PATEL</span>
                   <div className="flex gap-4">
                     <a

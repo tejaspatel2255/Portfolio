@@ -47,7 +47,7 @@ export function Services() {
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           <div className="lg:col-span-5">
-            <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// WHAT I DO</span>
+            <span className="font-mono text-xs text-accent uppercase tracking-widest block">// WHAT I DO</span>
             <Heading tag="h2" size="h2" animate="words" titleText="SERVICES &amp; CAPABILITIES" className="text-ink-primary mt-2" />
           </div>
           <div className="lg:col-span-7 lg:pt-6">
@@ -97,7 +97,7 @@ export function Services() {
                   {service.techTags.map((tag, tagIdx) => (
                     <span
                       key={tagIdx}
-                      className="px-2 py-0.5 bg-background/60 border border-border-subtle text-[9px] font-mono text-ink-muted uppercase group-hover:border-border-strong transition-colors"
+                      className="px-2 py-0.5 bg-background/60 border border-border-subtle text-[11px] font-mono text-ink-muted uppercase group-hover:border-border-strong transition-colors whitespace-nowrap"
                     >
                       {tag}
                     </span>

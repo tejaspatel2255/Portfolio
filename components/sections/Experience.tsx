@@ -83,7 +83,7 @@ export function Experience() {
         {/* Left Column: Heading */}
         <div className="lg:col-span-4 flex flex-col gap-4">
           <div>
-            <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// THE JOURNEY</span>
+            <span className="font-mono text-xs text-accent uppercase tracking-widest block">// THE JOURNEY</span>
             <Heading tag="h2" size="h2" animate="words" titleText="EXPERIENCE TIMELINE" className="text-ink-primary mt-2" />
           </div>
           <p className="text-sm text-ink-muted leading-relaxed font-light max-w-sm mt-2">
@@ -124,7 +124,7 @@ export function Experience() {
                 <div className="border border-border-subtle bg-surface/10 p-6 hover:border-border-strong transition-colors duration-250 flex flex-col gap-4">
                   <div className="flex flex-wrap items-start justify-between gap-2 border-b border-border-subtle/50 pb-3">
                     <div>
-                      <span className="font-mono text-[9px] text-accent uppercase tracking-widest block mb-1">
+                      <span className="font-mono text-[11px] text-accent uppercase tracking-widest block mb-1">
                         {item.period}
                       </span>
                       <h3 className="font-display font-bold text-base md:text-lg uppercase text-ink-primary">
@@ -145,7 +145,7 @@ export function Experience() {
                       {item.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 border border-border-subtle bg-background/50 text-ink-muted font-mono text-[9px]"
+                          className="px-2 py-0.5 border border-border-subtle bg-background/50 text-ink-muted font-mono text-[11px] whitespace-nowrap"
                         >
                           {tag}
                         </span>

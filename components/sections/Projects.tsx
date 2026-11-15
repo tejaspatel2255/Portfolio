@@ -41,7 +41,6 @@ interface Project {
 
 export function Projects() {
   const [expandedId, setExpandedId] = useState<string | null>("01");
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const personalProjects: Project[] = [
     {
@@ -207,7 +206,7 @@ export function Projects() {
     switch (type) {
       case "trading":
         return (
-          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-emerald-400/80 relative overflow-hidden">
+          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-emerald-400/80 relative overflow-hidden">
             <div className="flex justify-between items-center border-b border-emerald-500/20 pb-2 z-10">
               <span className="font-bold">NIFTY50_PAPER_TRADER</span>
               <span className="text-emerald-300 bg-emerald-500/20 px-1 py-0.5">CAPITAL: ₹10,00,000</span>
@@ -222,7 +221,7 @@ export function Projects() {
                 <span>PROFIT: +₹42,150</span>
               </div>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-emerald-500/20 pt-2 z-10">
+            <div className="flex justify-between items-center text-[11px] border-t border-emerald-500/20 pt-2 z-10">
               <span>SUPABASE RLS</span>
               <span>LIVE QUOTES: ACTIVE</span>
             </div>
@@ -230,7 +229,7 @@ export function Projects() {
         );
       case "codelens":
         return (
-          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/80 relative overflow-hidden">
+          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-amber-400/80 relative overflow-hidden">
             <div className="flex justify-between items-center border-b border-amber-500/20 pb-2 z-10">
               <span className="font-bold">CODELENS_TRACER.ts</span>
               <span className="text-amber-300 bg-amber-500/20 px-1 py-0.5">GROQ LLAMA-3.3</span>
@@ -240,7 +239,7 @@ export function Projects() {
               <span className="text-amber-300">&gt; 1-click defect fix suggested</span>
               <span className="text-emerald-400 font-bold">&gt; Transpiler: TS -&gt; Python</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-amber-500/20 pt-2 z-10">
+            <div className="flex justify-between items-center text-[11px] border-t border-amber-500/20 pt-2 z-10">
               <span>MEMORY VISUALIZER</span>
               <span>LATENCY: 14ms</span>
             </div>
@@ -248,7 +247,7 @@ export function Projects() {
         );
       case "finance":
         return (
-          <div className="w-full h-full border border-purple-500/20 bg-purple-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-purple-400/80">
+          <div className="w-full h-full border border-purple-500/20 bg-purple-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-purple-400/80">
             <div className="flex justify-between items-center border-b border-purple-500/20 pb-2">
               <span className="font-bold">FINANCEFLOW_AI</span>
               <span className="text-purple-300 bg-purple-500/20 px-1 py-0.5">CASHFLOW</span>
@@ -263,7 +262,7 @@ export function Projects() {
                 <span className="font-bold">OPENROUTER SYNC</span>
               </div>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-purple-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-purple-500/20 pt-2">
               <span>FALLBACK CHAIN</span>
               <span>GEMINI / LLAMA</span>
             </div>
@@ -271,7 +270,7 @@ export function Projects() {
         );
       case "disaster":
         return (
-          <div className="w-full h-full border border-accent/20 bg-accent/5 p-4 flex flex-col justify-between font-mono text-[9px] text-accent/80 relative overflow-hidden">
+          <div className="w-full h-full border border-accent/20 bg-accent/5 p-4 flex flex-col justify-between font-mono text-[11px] text-accent/80 relative overflow-hidden">
             <div className="flex justify-between items-center border-b border-accent/15 pb-2 z-10">
               <span className="font-bold">CRISIS_SWARM_ORCH</span>
               <span className="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
@@ -281,7 +280,7 @@ export function Projects() {
                 [ 6 AGENTS ACTIVE ]
               </div>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-accent/15 pt-2 z-10">
+            <div className="flex justify-between items-center text-[11px] border-t border-accent/15 pt-2 z-10">
               <span>MS BUILD HACKATHON</span>
               <span>GROQ LLAMA-3.3</span>
             </div>
@@ -289,7 +288,7 @@ export function Projects() {
         );
       case "market":
         return (
-          <div className="w-full h-full border border-blue-500/20 bg-blue-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-blue-400/80">
+          <div className="w-full h-full border border-blue-500/20 bg-blue-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-blue-400/80">
             <div className="flex justify-between items-center border-b border-blue-500/20 pb-2">
               <span className="font-bold">MARKET_ANALYST_AI</span>
               <span className="text-blue-300 bg-blue-500/20 px-1 py-0.5">FASTAPI</span>
@@ -298,7 +297,7 @@ export function Projects() {
               <span className="text-blue-300">&gt; Cosmic Night Glassmorphism</span>
               <span className="text-emerald-400 font-bold">&gt; LangChain query agent ready</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-blue-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-blue-500/20 pt-2">
               <span>GLOBAL &amp; NSE DATA</span>
               <span>STREAM: ACTIVE</span>
             </div>
@@ -306,7 +305,7 @@ export function Projects() {
         );
       case "health":
         return (
-          <div className="w-full h-full border border-rose-500/20 bg-rose-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-rose-400/80">
+          <div className="w-full h-full border border-rose-500/20 bg-rose-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-rose-400/80">
             <div className="flex justify-between items-center border-b border-rose-500/20 pb-2">
               <span className="font-bold">HEALTH_TRIAGE_AI</span>
               <span className="text-rose-300 bg-rose-500/20 px-1 py-0.5">EDUCATIONAL</span>
@@ -315,7 +314,7 @@ export function Projects() {
               <span>Clarifying vitals prompt...</span>
               <span className="text-emerald-400 font-bold">jsPDF summary generated</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-rose-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-rose-500/20 pt-2">
               <span>GROQ LLAMA-3</span>
               <span>SPEECH API</span>
             </div>
@@ -323,7 +322,7 @@ export function Projects() {
         );
       case "bitcoin":
         return (
-          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/80">
+          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-amber-400/80">
             <div className="flex justify-between items-center border-b border-amber-500/20 pb-2">
               <span className="font-bold">BTC_ENSEMBLE_ML</span>
               <span className="text-amber-300 bg-amber-500/20 px-1 py-0.5">STREAMLIT</span>
@@ -332,7 +331,7 @@ export function Projects() {
               <span>Models: Prophet + LSTM + RF</span>
               <span className="text-emerald-400 font-bold">OpenRouter report ready</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-amber-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-amber-500/20 pt-2">
               <span>TENSORFLOW</span>
               <span>GEMINI FLASH</span>
             </div>
@@ -340,7 +339,7 @@ export function Projects() {
         );
       case "xai":
         return (
-          <div className="w-full h-full border border-indigo-500/20 bg-indigo-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-indigo-400/80">
+          <div className="w-full h-full border border-indigo-500/20 bg-indigo-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-indigo-400/80">
             <div className="flex justify-between items-center border-b border-indigo-500/20 pb-2">
               <span className="font-bold">EXPLAINABLE_AI_XAI</span>
               <span className="text-indigo-300 bg-indigo-500/20 px-1 py-0.5">SHAP / LIME</span>
@@ -349,7 +348,7 @@ export function Projects() {
               <span>Default risk XGBoost tree...</span>
               <span className="text-emerald-400 font-bold">Fairness audit: PASS</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-indigo-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-indigo-500/20 pt-2">
               <span>MODEL CARDS</span>
               <span>REGULATORY OK</span>
             </div>
@@ -357,7 +356,7 @@ export function Projects() {
         );
       case "ecolearn":
         return (
-          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-emerald-400/80">
+          <div className="w-full h-full border border-emerald-500/20 bg-emerald-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-emerald-400/80">
             <div className="flex justify-between items-center border-b border-emerald-500/20 pb-2">
               <span className="font-bold">ECOLEARN_GAMIFIED</span>
               <span className="text-emerald-300 bg-emerald-500/20 px-1 py-0.5">GEMINI TUTOR</span>
@@ -366,7 +365,7 @@ export function Projects() {
               <span>Student / Teacher Portal</span>
               <span className="text-emerald-400 font-bold">Leaderboard Socket.io</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-emerald-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-emerald-500/20 pt-2">
               <span>NEXT.JS 19</span>
               <span>MONGODB SYNC</span>
             </div>
@@ -374,7 +373,7 @@ export function Projects() {
         );
       case "blazze":
         return (
-          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-amber-400/80">
+          <div className="w-full h-full border border-amber-500/20 bg-amber-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-amber-400/80">
             <div className="flex justify-between items-center border-b border-amber-500/20 pb-2">
               <span className="font-bold">BLAZZE_OVERSEAS_LLP</span>
               <span className="text-amber-300 bg-amber-500/20 px-1 py-0.5">EXPORTER</span>
@@ -383,7 +382,7 @@ export function Projects() {
               <span>Catalog: Spices &amp; Grains</span>
               <span className="text-emerald-400 font-bold">ISO / APEDA Verified</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-amber-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-amber-500/20 pt-2">
               <span>NEXT.JS + TAILWIND</span>
               <span>WHATSAPP FLOW</span>
             </div>
@@ -391,7 +390,7 @@ export function Projects() {
         );
       case "family":
         return (
-          <div className="w-full h-full border border-rose-500/20 bg-rose-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-rose-400/80">
+          <div className="w-full h-full border border-rose-500/20 bg-rose-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-rose-400/80">
             <div className="flex justify-between items-center border-b border-rose-500/20 pb-2">
               <span className="font-bold">FAMILY_BLOOD_REGISTRY</span>
               <span className="text-rose-300 bg-rose-500/20 px-1 py-0.5">FLUTTER</span>
@@ -400,7 +399,7 @@ export function Projects() {
               <span>4-Step Guided Registration</span>
               <span className="text-emerald-400 font-bold">Supabase Draft Sync</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-rose-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-rose-500/20 pt-2">
               <span>INTL PHONE SUPPORT</span>
               <span>OFFLINE READY</span>
             </div>
@@ -409,7 +408,7 @@ export function Projects() {
       case "pos":
       default:
         return (
-          <div className="w-full h-full border border-cyan-500/20 bg-cyan-950/10 p-4 flex flex-col justify-between font-mono text-[9px] text-cyan-400/80">
+          <div className="w-full h-full border border-cyan-500/20 bg-cyan-950/10 p-4 flex flex-col justify-between font-mono text-[11px] text-cyan-400/80">
             <div className="flex justify-between items-center border-b border-cyan-500/20 pb-2">
               <span className="font-bold">SAAS_POS_BILLING</span>
               <span className="text-cyan-300 bg-cyan-500/20 px-1 py-0.5">OFFLINE PWA</span>
@@ -418,7 +417,7 @@ export function Projects() {
               <span>Multi-Tenant Store Engine</span>
               <span className="text-emerald-400 font-bold">IndexedDB + RLS</span>
             </div>
-            <div className="flex justify-between items-center text-[8px] border-t border-cyan-500/20 pt-2">
+            <div className="flex justify-between items-center text-[11px] border-t border-cyan-500/20 pt-2">
               <span>ZUSTAND STATE</span>
               <span>TANSTACK QUERY</span>
             </div>
@@ -433,7 +432,6 @@ export function Projects() {
 
   const renderProjectRow = (project: Project, idx: number) => {
     const isExpanded = expandedId === project.id;
-    const isHovered = hoveredId === project.id;
     const ProjectIcon = project.icon;
 
     return (
@@ -443,8 +441,6 @@ export function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-30px" }}
         transition={{ duration: 0.45, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
-        onMouseEnter={() => setHoveredId(project.id)}
-        onMouseLeave={() => setHoveredId(null)}
         className="w-full border-b border-border-strong flex flex-col group/row relative overflow-hidden"
       >
         {/* Accordion Row Header */}
@@ -482,19 +478,6 @@ export function Projects() {
           </div>
         </button>
 
-        {/* Hover Tech Stack Marquee */}
-        {isHovered && !isExpanded && !shouldReduceMotion && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="overflow-hidden py-1 px-2 bg-accent/5 border-t border-accent/20 font-mono text-[9px] text-accent flex items-center justify-between"
-          >
-            <span>TECH STACK // {project.tags.join(" • ")}</span>
-            <span className="text-[8px] uppercase tracking-wider text-ink-muted">Click to view details</span>
-          </motion.div>
-        )}
-
         {/* Expanded Details Panel */}
         <AnimatePresence initial={false}>
           {isExpanded && (
@@ -509,7 +492,7 @@ export function Projects() {
                 {/* Summary Info */}
                 <div className="md:col-span-7 flex flex-col gap-5">
                   <div>
-                    <span className="font-mono text-[9px] text-accent uppercase tracking-widest block">// Project problem statement</span>
+                    <span className="font-mono text-[11px] text-accent uppercase tracking-widest block">// Project problem statement</span>
                     <p className="text-sm text-ink-secondary leading-relaxed font-light mt-1">
                       {project.problem}
                     </p>
@@ -517,12 +500,12 @@ export function Projects() {
 
                   {/* Tech Tags */}
                   <div>
-                    <span className="font-mono text-[9px] text-ink-muted uppercase tracking-widest block mb-2">// Technologies</span>
+                    <span className="font-mono text-[11px] text-ink-muted uppercase tracking-widest block mb-2">// Technologies</span>
                     <div className="flex flex-wrap gap-1.5">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 border border-border-subtle bg-surface/20 text-ink-secondary font-mono text-[10px]"
+                          className="px-2 py-0.5 border border-border-subtle bg-surface/20 text-ink-secondary font-mono text-xs whitespace-nowrap"
                         >
                           {tag}
                         </span>
@@ -557,7 +540,7 @@ export function Projects() {
                       </Button>
                     )}
                     {project.clientLabel && (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-accent/30 bg-accent/10 font-mono text-[10px] text-accent uppercase tracking-wider">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-accent/30 bg-accent/10 font-mono text-xs text-accent uppercase tracking-wider whitespace-nowrap">
                         <Building2 className="w-3 h-3 text-accent" />
                         {project.clientLabel}
                       </span>
@@ -586,7 +569,7 @@ export function Projects() {
           {/* Left Column: Heading */}
           <div className="lg:col-span-4 flex flex-col gap-4">
             <div>
-              <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// SELECTED REPOS</span>
+              <span className="font-mono text-xs text-accent uppercase tracking-widest block">// SELECTED REPOS</span>
               <Heading tag="h2" size="h2" animate="words" titleText="PROJECTS SHOWCASE" className="text-ink-primary mt-2" />
             </div>
             <p className="text-sm text-ink-muted leading-relaxed font-light max-w-sm mt-2">
@@ -605,7 +588,7 @@ export function Projects() {
           {/* Left Column: Client Work Heading */}
           <div className="lg:col-span-4 flex flex-col gap-4">
             <div>
-              <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// CLIENT DELIVERABLES</span>
+              <span className="font-mono text-xs text-accent uppercase tracking-widest block">// CLIENT DELIVERABLES</span>
               <Heading tag="h2" size="h2" animate="words" titleText="CLIENT WORK" className="text-ink-primary mt-2" />
             </div>
             <p className="text-sm text-ink-muted leading-relaxed font-light max-w-sm mt-2">

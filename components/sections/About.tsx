@@ -89,7 +89,7 @@ export function About() {
           {/* Left Side: Bio & Quick Facts */}
           <div ref={bioRef} className="lg:col-span-7 flex flex-col gap-8">
             <div>
-              <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// WHO I AM</span>
+              <span className="font-mono text-xs text-accent uppercase tracking-widest block">// WHO I AM</span>
               <Heading tag="h2" size="h2" animate="words" titleText="ABOUT ME" className="text-ink-primary mt-2" />
             </div>
 
@@ -141,7 +141,7 @@ export function About() {
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="block font-mono text-[9px] text-ink-muted uppercase tracking-wider">{fact.label}</span>
+                      <span className="block font-mono text-[11px] text-ink-muted uppercase tracking-wider">{fact.label}</span>
                       <span className="block text-sm font-semibold text-ink-primary mt-1">{fact.value}</span>
                     </div>
                   </div>
@@ -169,15 +169,15 @@ export function About() {
                 className="relative w-full h-full border-2 border-border-strong bg-surface z-10 p-6 flex flex-col justify-between"
               >
                 {/* Corner crosshairs decoration */}
-                <span className="absolute top-2 left-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
-                <span className="absolute top-2 right-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
-                <span className="absolute bottom-2 left-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
-                <span className="absolute bottom-2 right-2 font-mono text-[9px] text-border-strong pointer-events-none">+</span>
+                <span className="absolute top-2 left-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
+                <span className="absolute top-2 right-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
+                <span className="absolute bottom-2 left-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
+                <span className="absolute bottom-2 right-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
 
                 {/* Card Header info */}
                 <div className="flex justify-between items-start pt-2">
-                  <span className="font-mono text-[9px] text-accent uppercase tracking-widest">// PORTRAIT_IMG_VAR</span>
-                  <span className="font-mono text-[9px] text-ink-muted">SYS_READY</span>
+                  <span className="font-mono text-[11px] text-accent uppercase tracking-widest">// PORTRAIT_IMG_VAR</span>
+                  <span className="font-mono text-[11px] text-ink-muted">SYS_READY</span>
                 </div>
 
                 {/* Stylized Avatar Placeholder */}
@@ -188,10 +188,10 @@ export function About() {
                       <span className="font-display font-extrabold text-accent text-sm">TP</span>
                     </div>
                   </div>
-                  <span className="font-mono text-[9px] text-ink-muted uppercase mt-4 tracking-widest z-10">
+                  <span className="font-mono text-[11px] text-ink-muted uppercase mt-4 tracking-widest z-10">
                     Portrait Placeholder
                   </span>
-                  <span className="font-mono text-[8px] text-accent mt-1 z-10">
+                  <span className="font-mono text-[11px] text-accent mt-1 z-10">
                     [ REPLACE WITH REAL IMAGE ]
                   </span>
                 </div>
@@ -200,9 +200,9 @@ export function About() {
                 <div className="flex justify-between items-center border-t border-border-subtle pt-4">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    <span className="font-mono text-[9px] text-ink-secondary">TEJAS PATEL</span>
+                    <span className="font-mono text-[11px] text-ink-secondary">TEJAS PATEL</span>
                   </div>
-                  <span className="font-mono text-[9px] text-ink-muted">W:340px // H:425px</span>
+                  <span className="font-mono text-[11px] text-ink-muted">W:340px // H:425px</span>
                 </div>
               </motion.div>
             </div>

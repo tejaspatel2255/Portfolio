@@ -219,11 +219,11 @@ export function AgentCliModal() {
         onClick={() => setIsOpen(true)}
         aria-label="Open Command Palette & Agent CLI"
         data-cursor-label="CLI_PALETTE"
-        className="fixed bottom-6 left-6 z-40 px-3.5 py-2 border border-border-strong bg-background/95 backdrop-blur-md font-mono text-[10px] uppercase text-accent tracking-wider flex items-center gap-2 hover:border-accent hover:shadow-[0_0_15px_rgba(204,255,0,0.15)] transition-all select-none"
+        className="fixed bottom-6 left-6 z-40 px-3.5 py-2 border border-border-strong bg-background/95 backdrop-blur-md font-mono text-xs uppercase text-accent tracking-wider flex items-center gap-2 hover:border-accent hover:shadow-[0_0_15px_rgba(204,255,0,0.15)] transition-all select-none whitespace-nowrap"
       >
         <Terminal className="w-3.5 h-3.5 text-accent animate-pulse" />
         <span className="hidden sm:inline">&gt; AGENT_CLI</span>
-        <span className="bg-accent/15 px-1.5 py-0.5 text-[8px] text-accent border border-accent/30 font-bold">[Ctrl+K]</span>
+        <span className="bg-accent/15 px-1.5 py-0.5 text-[11px] text-accent border border-accent/30 font-bold whitespace-nowrap">[Ctrl+K]</span>
       </button>
 
       {/* Command Palette Modal Dialog Overlay */}
@@ -251,7 +251,7 @@ export function AgentCliModal() {
                   <span className="font-bold text-ink-primary">TEJAS_PATEL_COMMAND_PALETTE.sh</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-[9px] text-ink-muted hidden sm:inline">ESC TO CLOSE</span>
+                  <span className="text-[11px] text-ink-muted hidden sm:inline whitespace-nowrap">ESC TO CLOSE</span>
                   <button
                     onClick={() => setIsOpen(false)}
                     className="p-1 hover:text-accent text-ink-muted transition-colors cursor-pointer"
@@ -302,7 +302,7 @@ export function AgentCliModal() {
                 />
                 <button
                   type="submit"
-                  className="px-3 py-1.5 border border-border-strong bg-background hover:border-accent hover:text-accent font-mono text-[10px] uppercase text-ink-primary flex items-center gap-1 transition-colors cursor-pointer"
+                  className="px-3 py-1.5 border border-border-strong bg-background hover:border-accent hover:text-accent font-mono text-xs uppercase text-ink-primary flex items-center gap-1 transition-colors cursor-pointer whitespace-nowrap"
                 >
                   <span>EXEC</span>
                   <CornerDownLeft className="w-3 h-3" />

@@ -115,7 +115,7 @@ export function Skills() {
         {/* Skills Category Grid & Dual Infinite Marquee */}
         <div className="lg:col-span-12 flex flex-col gap-8">
           <div>
-            <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// CAPABILITIES</span>
+            <span className="font-mono text-xs text-accent uppercase tracking-widest block">// CAPABILITIES</span>
             <Heading tag="h2" size="h2" animate="words" titleText="SKILLS PROFILE" className="text-ink-primary mt-2" />
           </div>
 
@@ -133,7 +133,7 @@ export function Skills() {
                     tabIndex={-1}
                     onMouseEnter={() => handleSkillSelect(skill)}
                     onMouseLeave={handleSkillLeave}
-                    className="px-3 py-1 border border-border-subtle bg-background font-mono text-[10px] uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors"
+                    className="px-3 py-1 border border-border-subtle bg-background font-mono text-xs uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors whitespace-nowrap"
                   >
                     {skill.name}
                   </button>
@@ -148,7 +148,7 @@ export function Skills() {
                     tabIndex={-1}
                     onMouseEnter={() => handleSkillSelect(skill)}
                     onMouseLeave={handleSkillLeave}
-                    className="px-3 py-1 border border-border-subtle bg-background font-mono text-[10px] uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors"
+                    className="px-3 py-1 border border-border-subtle bg-background font-mono text-xs uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors whitespace-nowrap"
                   >
                     {skill.name}
                   </button>

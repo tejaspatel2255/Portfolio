@@ -66,17 +66,9 @@ export function Hero() {
   } as const;
 
   return (
-    <section id="home" ref={sectionRef} className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
+    <section id="home" ref={sectionRef} className="relative min-h-[90svh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
       {/* Interactive Centerpiece Canvas Background */}
       <InteractiveCanvas />
-
-      {/* Structured Editorial Grid lines */}
-      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-7xl px-6 md:px-12 lg:px-16 pointer-events-none flex justify-between z-0">
-        <div className="w-px h-full bg-border-subtle/10" />
-        <div className="w-px h-full bg-border-subtle/10 hidden md:block" />
-        <div className="w-px h-full bg-border-subtle/10 hidden lg:block" />
-        <div className="w-px h-full bg-border-subtle/10" />
-      </div>
 
       <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16 z-10 relative mt-4 sm:mt-8">
         <motion.div
@@ -92,7 +84,7 @@ export function Hero() {
             <motion.div 
               variants={itemVariants} 
               data-cursor="HIRE ME"
-              className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-subtle bg-surface/40 text-accent font-mono text-[10px] uppercase tracking-widest self-start backdrop-blur-sm"
+              className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-subtle bg-surface/40 text-accent font-mono text-xs uppercase tracking-widest self-start backdrop-blur-sm whitespace-nowrap"
             >
               <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
               AVAILABLE FOR ROLES &amp; CONTRACTS // INDIA
@@ -145,7 +137,7 @@ export function Hero() {
             </motion.div>
 
             {/* Sub-meta details */}
-            <motion.div variants={itemVariants} className="flex gap-8 items-center text-[10px] font-mono text-ink-muted border-t border-border-subtle pt-6 mt-4">
+            <motion.div variants={itemVariants} className="flex gap-8 items-center text-xs font-mono text-ink-muted border-t border-border-subtle pt-6 mt-4">
               <span>LOC // NADIAD, INDIA</span>
               <span className="text-accent">// SOFTWARE &amp; AI ENGINEER</span>
             </motion.div>
@@ -154,7 +146,7 @@ export function Hero() {
         </motion.div>
 
         {/* Scroll Indicator */}
-        <div className="absolute -bottom-8 left-6 md:left-12 lg:left-16 flex items-center gap-2 font-mono text-[9px] text-ink-muted uppercase tracking-widest select-none pointer-events-none">
+        <div className="absolute -bottom-8 left-6 md:left-12 lg:left-16 flex items-center gap-2 font-mono text-[11px] text-ink-muted uppercase tracking-widest select-none pointer-events-none">
           <ArrowDown className="w-3 h-3 text-accent animate-bounce" />
           <span>Scroll to explore</span>
         </div>

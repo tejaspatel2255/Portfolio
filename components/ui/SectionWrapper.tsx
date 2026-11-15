@@ -52,14 +52,6 @@ export function SectionWrapper({
       )}
       {...props}
     >
-      {/* Decorative Editorial Grid lines */}
-      <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-full max-w-7xl px-6 md:px-12 lg:px-16 pointer-events-none flex justify-between z-0">
-        <div className="w-px h-full bg-border-subtle/10" />
-        <div className="w-px h-full bg-border-subtle/10 hidden md:block" />
-        <div className="w-px h-full bg-border-subtle/10 hidden lg:block" />
-        <div className="w-px h-full bg-border-subtle/10" />
-      </div>
-
       {content}
     </section>
   );
