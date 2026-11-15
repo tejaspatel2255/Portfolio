@@ -66,7 +66,7 @@ export function Hero() {
   } as const;
 
   return (
-    <section ref={sectionRef} className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
+    <section id="home" ref={sectionRef} className="relative min-h-[90vh] flex items-center justify-center pt-24 pb-12 overflow-hidden border-b border-border-subtle bg-background">
       {/* Interactive Centerpiece Canvas Background */}
       <InteractiveCanvas />
 
@@ -92,7 +92,7 @@ export function Hero() {
             <motion.div 
               variants={itemVariants} 
               data-cursor="HIRE ME"
-              className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-subtle bg-surface/40 text-accent font-mono text-[10px] uppercase tracking-widest self-start backdrop-blur-sm cursor-none"
+              className="inline-flex items-center gap-2 px-3 py-1.5 border border-border-subtle bg-surface/40 text-accent font-mono text-[10px] uppercase tracking-widest self-start backdrop-blur-sm"
             >
               <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
               AVAILABLE FOR ROLES &amp; CONTRACTS // INDIA
@@ -133,19 +133,15 @@ export function Hero() {
 
             {/* Action Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mt-2">
-              <a href="#work" data-cursor="EXPLORE" className="inline-block cursor-none">
-                <Button variant="brutalist">
-                  View My Work <Eye className="w-4 h-4 ml-1.5 inline-block" />
-                </Button>
-              </a>
+              <Button href="#work" data-cursor="EXPLORE" variant="brutalist">
+                View My Work <Eye className="w-4 h-4 ml-1.5 inline-block" />
+              </Button>
               <WhatsAppButton variant="secondary">
                 Chat on WhatsApp <WhatsappIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
               </WhatsAppButton>
-              <a href="/resume.pdf" download="Tejas_Patel_Resume.pdf" data-cursor="CV" className="inline-block cursor-none">
-                <Button variant="ghost">
-                  Download CV <ArrowDown className="w-4 h-4 ml-1 inline-block" />
-                </Button>
-              </a>
+              <Button href="/resume.pdf" download="Tejas_Patel_Resume.pdf" data-cursor="CV" variant="ghost">
+                Download CV <ArrowDown className="w-4 h-4 ml-1 inline-block" />
+              </Button>
             </motion.div>
 
             {/* Sub-meta details */}

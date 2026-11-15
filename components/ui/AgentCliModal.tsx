@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, X, CornerDownLeft } from "lucide-react";
+import { useLenis } from "@/components/ui/AnimationProvider";
 
 interface LogEntry {
   id: string;
@@ -18,6 +19,8 @@ export function AgentCliModal() {
   
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const nextIdRef = useRef(3);
+  const lenis = useLenis();
 
   const [logs, setLogs] = useState<LogEntry[]>([
     { id: "1", type: "system", text: "TEJAS PATEL // COMMAND PALETTE & AI AGENT CLI" },
@@ -54,25 +57,34 @@ export function AgentCliModal() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  // Focus input on modal open & auto scroll logs
+  // Modal open/close: focus input & lock scroll via Lenis
   useEffect(() => {
     if (isOpen) {
+      lenis?.stop();
       setTimeout(() => inputRef.current?.focus(), 100);
+      return () => {
+        lenis?.start();
+      };
     }
-  }, [isOpen]);
+  }, [isOpen, lenis]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
 
   const addLog = (type: LogEntry["type"], text: string) => {
-    setLogs((prev) => [...prev, { id: Math.random().toString(), type, text }]);
+    const id = String(nextIdRef.current++);
+    setLogs((prev) => [...prev, { id, type, text }]);
   };
 
   const scrollToSection = (sectionId: string) => {
     const target = document.getElementById(sectionId);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+      if (lenis) {
+        lenis.scrollTo(target);
+      } else {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
       addLog("success", `Navigated to section #${sectionId}`);
       setTimeout(() => setIsOpen(false), 400);
     } else {
@@ -95,6 +107,7 @@ export function AgentCliModal() {
 
     if (lowerCmd === "clear") {
       setLogs([]);
+      inputRef.current?.focus();
       return;
     }
 
@@ -114,54 +127,68 @@ export function AgentCliModal() {
       addLog("output", "  copy email         — Copy email address to clipboard");
       addLog("output", "  resume / view resume — Open CV / Resume PDF");
       addLog("output", "  clear / exit       — Clear logs or close palette modal");
+      inputRef.current?.focus();
       return;
     }
 
     // Section Navigation Commands
     if (lowerCmd === "work" || lowerCmd === "projects") {
       scrollToSection("work");
+      inputRef.current?.focus();
       return;
     }
     if (lowerCmd === "about") {
       scrollToSection("about");
+      inputRef.current?.focus();
       return;
     }
     if (lowerCmd === "services") {
       scrollToSection("services");
+      inputRef.current?.focus();
       return;
     }
     if (lowerCmd === "skills") {
       scrollToSection("skills");
+      inputRef.current?.focus();
       return;
     }
     if (lowerCmd === "experience") {
       scrollToSection("experience");
+      inputRef.current?.focus();
       return;
     }
     if (lowerCmd === "contact") {
       scrollToSection("contact");
+      inputRef.current?.focus();
       return;
     }
 
     // Action Commands
     if (lowerCmd === "copy email" || lowerCmd === "email") {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
-        await navigator.clipboard.writeText("placeholder_email@gmail.com");
-        addLog("success", "SUCCESS: Email 'placeholder_email@gmail.com' copied to clipboard.");
+        try {
+          await navigator.clipboard.writeText("placeholder_email@gmail.com");
+          addLog("success", "SUCCESS: Email 'placeholder_email@gmail.com' copied to clipboard.");
+        } catch {
+          addLog("output", "Email: placeholder_email@gmail.com");
+        }
       } else {
         addLog("output", "Email: placeholder_email@gmail.com");
       }
+      inputRef.current?.focus();
       return;
     }
 
     if (lowerCmd === "resume" || lowerCmd === "view resume") {
       window.open("/resume.pdf", "_blank");
       addLog("success", "Opened /resume.pdf in a new tab.");
+      inputRef.current?.focus();
       return;
     }
 
     // Default fallback
     addLog("error", `Command not recognized: '${cmd}'. Type 'help' for available commands.`);
+    inputRef.current?.focus();
   };
 
   const handleKeyDownHistory = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -192,7 +219,7 @@ export function AgentCliModal() {
         onClick={() => setIsOpen(true)}
         aria-label="Open Command Palette & Agent CLI"
         data-cursor-label="CLI_PALETTE"
-        className="fixed bottom-6 left-6 z-40 px-3.5 py-2 border border-border-strong bg-background/95 backdrop-blur-md font-mono text-[10px] uppercase text-accent tracking-wider flex items-center gap-2 hover:border-accent hover:shadow-[0_0_15px_rgba(204,255,0,0.15)] transition-all cursor-none select-none"
+        className="fixed bottom-6 left-6 z-40 px-3.5 py-2 border border-border-strong bg-background/95 backdrop-blur-md font-mono text-[10px] uppercase text-accent tracking-wider flex items-center gap-2 hover:border-accent hover:shadow-[0_0_15px_rgba(204,255,0,0.15)] transition-all select-none"
       >
         <Terminal className="w-3.5 h-3.5 text-accent animate-pulse" />
         <span className="hidden sm:inline">&gt; AGENT_CLI</span>
@@ -207,6 +234,9 @@ export function AgentCliModal() {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-background/80 backdrop-blur-md"
           >
             <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Command palette"
               initial={{ opacity: 0, scale: 0.95, y: 15 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -232,7 +262,10 @@ export function AgentCliModal() {
               </div>
 
               {/* Logs & Command Window */}
-              <div className="p-4 sm:p-6 flex-1 overflow-y-auto font-mono text-xs leading-relaxed space-y-2 max-h-[50vh] bg-background/90">
+              <div
+                data-lenis-prevent
+                className="p-4 sm:p-6 flex-1 overflow-y-auto font-mono text-xs leading-relaxed space-y-2 max-h-[50vh] bg-background/90"
+              >
                 {logs.map((log) => (
                   <div
                     key={log.id}
@@ -260,6 +293,7 @@ export function AgentCliModal() {
                 <input
                   ref={inputRef}
                   type="text"
+                  aria-label="Command input"
                   value={inputVal}
                   onChange={(e) => setInputVal(e.target.value)}
                   onKeyDown={handleKeyDownHistory}

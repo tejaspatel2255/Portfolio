@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 import { Menu, X } from "lucide-react";
@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { WhatsappIcon } from "@/components/ui/Icons";
 import { useMagnetic } from "@/lib/magnetic";
+import { useLenis } from "@/components/ui/AnimationProvider";
 
 const NAV_LINKS = [
   { label: "Work", href: "#work", id: "work" },
@@ -31,7 +32,7 @@ function NavItem({ link, isActive }: { link: typeof NAV_LINKS[0]; isActive: bool
       transition={{ type: "spring", stiffness: 200, damping: 15 }}
       data-cursor-label="NAVIGATE"
       className={cn(
-        "relative text-xs uppercase tracking-widest font-mono font-bold px-3 py-1.5 transition-colors cursor-none select-none",
+        "relative text-xs uppercase tracking-widest font-mono font-bold px-3 py-1.5 transition-colors select-none",
         isActive ? "text-accent" : "text-ink-secondary hover:text-ink-primary"
       )}
     >
@@ -51,8 +52,9 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>("work");
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [activeSection, setActiveSection] = useState<string>("");
+  const lastScrollY = useRef(0);
+  const lenis = useLenis();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,26 +64,30 @@ export function Navigation() {
       setIsScrolled(currentScrollY > 20);
 
       // Hide/Reveal scroll tracking
-      if (currentScrollY > lastScrollY && currentScrollY > 120) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
         setIsHidden(true);
       } else {
         setIsHidden(false);
       }
 
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Section Observer for active section tracking
   useEffect(() => {
-    const sectionIds = NAV_LINKS.map((link) => link.id);
+    const sectionIds = ["home", ...NAV_LINKS.map((link) => link.id)];
     const handleObserver = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+          if (entry.target.id === "home") {
+            setActiveSection("");
+          } else {
+            setActiveSection(entry.target.id);
+          }
         }
       });
     };
@@ -98,6 +104,26 @@ export function Navigation() {
 
     return () => observer.disconnect();
   }, []);
+
+  // Mobile menu scroll lock and keyboard escape listener
+  useEffect(() => {
+    if (isOpen) {
+      lenis?.stop();
+      setIsHidden(false);
+
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setIsOpen(false);
+        }
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleKeyDown);
+        lenis?.start();
+      };
+    }
+  }, [isOpen, lenis]);
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -117,7 +143,7 @@ export function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between">
           {/* Brand Wordmark */}
-          <a href="#" data-cursor="HOME" className="flex items-center gap-3 group select-none cursor-none">
+          <a href="#home" data-cursor="HOME" className="flex items-center gap-3 group select-none">
             <div className="w-8.5 h-8.5 bg-accent flex items-center justify-center font-display font-extrabold text-accent-foreground text-xs tracking-tighter transition-transform duration-300 group-hover:rotate-6">
               TP
             </div>
@@ -143,6 +169,8 @@ export function Navigation() {
           {/* Mobile hamburger menu toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav-panel"
             className="md:hidden p-2 text-ink-primary hover:bg-surface border border-border-subtle hover:border-border-strong transition-colors cursor-pointer"
             aria-label="Toggle Menu"
           >
@@ -166,6 +194,7 @@ export function Navigation() {
 
             {/* Slide-in container */}
             <motion.div
+              id="mobile-nav-panel"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}

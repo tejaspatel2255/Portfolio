@@ -56,7 +56,7 @@ export function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="CHAT"
-              className="group/cta border border-border-strong p-4 bg-accent/5 hover:border-accent hover:bg-accent/10 transition-all duration-200 flex items-center justify-between cursor-none select-none"
+              className="group/cta border border-border-strong p-4 bg-accent/5 hover:border-accent hover:bg-accent/10 transition-all duration-200 flex items-center justify-between select-none"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 border border-border-strong bg-accent text-accent-foreground">
@@ -74,7 +74,7 @@ export function Contact() {
             <a
               href="mailto:placeholder_email@gmail.com"
               data-cursor="EMAIL"
-              className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between cursor-none select-none"
+              className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between select-none"
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 border border-border-subtle bg-surface text-accent">
@@ -94,7 +94,7 @@ export function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="LINKEDIN"
-                className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between cursor-none select-none"
+                className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between select-none"
               >
                 <div className="flex items-center gap-2.5">
                   <LinkedinIcon className="w-4.5 h-4.5 text-accent" />
@@ -108,7 +108,7 @@ export function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="GITHUB"
-                className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between cursor-none select-none"
+                className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between select-none"
               >
                 <div className="flex items-center gap-2.5">
                   <GithubIcon className="w-4.5 h-4.5 text-accent" />
@@ -138,7 +138,7 @@ export function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="e.g. John Doe"
-                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200 cursor-none"
+                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200"
               />
             </div>
 
@@ -155,7 +155,7 @@ export function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="e.g. john@company.com"
-                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200 cursor-none"
+                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200"
               />
             </div>
 
@@ -172,7 +172,7 @@ export function Contact() {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Describe your project, timeline, or position requirements..."
-                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200 resize-none cursor-none"
+                className="w-full bg-background border border-border-subtle p-3 text-sm text-ink-primary placeholder:text-ink-muted/50 focus:border-accent focus:shadow-[0_0_15px_rgba(204,255,0,0.15)] focus:outline-none transition-all duration-200 resize-none"
               />
             </div>
 
@@ -183,7 +183,7 @@ export function Contact() {
                 type="submit"
                 disabled={status === "submitting"}
                 data-cursor-label="DISPATCH_QUERY"
-                className="justify-center items-center py-3.5 flex gap-2 font-bold w-full cursor-none"
+                className="justify-center items-center py-3.5 flex gap-2 font-bold w-full"
               >
                 {status === "submitting" ? (
                   <>

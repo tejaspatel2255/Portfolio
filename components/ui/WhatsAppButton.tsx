@@ -27,23 +27,26 @@ export function WhatsAppButton({
   const href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
   return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.span
       data-cursor="CHAT"
       animate={shouldReduceMotion ? {} : { scale: [1, 1.025, 1] }}
       transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
       whileTap={{ scale: 0.95 }}
-      className={cn("inline-block cursor-none select-none", className)}
+      className={cn("inline-block select-none", className)}
     >
-      <Button variant={variant} size={size}>
+      <Button
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        variant={variant}
+        size={size}
+      >
         {children || (
           <>
             WhatsApp <WhatsappIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
           </>
         )}
       </Button>
-    </motion.a>
+    </motion.span>
   );
 }

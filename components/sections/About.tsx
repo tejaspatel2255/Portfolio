@@ -157,7 +157,7 @@ export function About() {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               data-cursor="3D TILT"
-              className="relative w-full max-w-[340px] aspect-[4/5] cursor-none group select-none"
+              className="relative w-full max-w-[340px] aspect-[4/5] group select-none"
               style={{ perspective: 1000 }}
             >
               {/* Background absolute offset shadow */}

@@ -25,6 +25,8 @@ export function CustomCursor() {
   useEffect(() => {
     if (!finePointer || shouldReduceMotion) return;
 
+    document.documentElement.classList.add("has-custom-cursor");
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -70,6 +72,7 @@ export function CustomCursor() {
     window.addEventListener("mouseover", handleMouseOver);
 
     return () => {
+      document.documentElement.classList.remove("has-custom-cursor");
       window.removeEventListener("mousemove", moveCursor);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);

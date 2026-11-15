@@ -452,7 +452,7 @@ export function Projects() {
           onClick={() => handleRowClick(project.id)}
           aria-expanded={isExpanded}
           data-cursor-label={`PROJECT_${project.num}`}
-          className="w-full flex items-center justify-between py-6 text-left cursor-none select-none focus:outline-none"
+          className="w-full flex items-center justify-between py-6 text-left select-none focus:outline-none"
         >
           <div className="flex items-center gap-6 md:gap-8 flex-1">
             <span className="font-mono text-xs md:text-sm text-ink-muted font-bold block">
@@ -533,30 +533,28 @@ export function Projects() {
                   {/* Links & Badges Row */}
                   <div className="flex flex-wrap items-center gap-3 mt-2">
                     {project.githubUrl && (
-                      <a
+                      <Button
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         data-cursor-label="VIEW_CODE"
-                        className="inline-block"
+                        variant="brutalist"
+                        size="sm"
                       >
-                        <Button variant="brutalist" size="sm">
-                          View Code <GithubIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
-                        </Button>
-                      </a>
+                        View Code <GithubIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
+                      </Button>
                     )}
                     {project.demoUrl && (
-                      <a
+                      <Button
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         data-cursor-label="LIVE_DEMO"
-                        className="inline-block"
+                        variant="secondary"
+                        size="sm"
                       >
-                        <Button variant="secondary" size="sm">
-                          {project.githubUrl ? "Live Demo" : "Visit Site"} <ArrowUpRight className="w-3.5 h-3.5 ml-1 inline-block" />
-                        </Button>
-                      </a>
+                        {project.githubUrl ? "Live Demo" : "Visit Site"} <ArrowUpRight className="w-3.5 h-3.5 ml-1 inline-block" />
+                      </Button>
                     )}
                     {project.clientLabel && (
                       <span className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-accent/30 bg-accent/10 font-mono text-[10px] text-accent uppercase tracking-wider">

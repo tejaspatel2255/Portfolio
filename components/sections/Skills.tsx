@@ -82,7 +82,7 @@ export function Skills() {
   ];
 
 
-  const handleSkillHover = (skill: SkillItem) => {
+  const handleSkillSelect = (skill: SkillItem) => {
     setActiveSkill(skill.name);
     setActiveContext(skill.context);
   };
@@ -121,13 +121,17 @@ export function Skills() {
 
           {/* Dual Infinite Auto-Scrolling Marquee Banner */}
           {!shouldReduceMotion && (
-            <div className="flex flex-col gap-3 overflow-hidden py-2 border-y border-border-strong bg-surface/10 select-none">
+            <div
+              aria-hidden="true"
+              className="flex flex-col gap-3 overflow-hidden py-2 border-y border-border-strong bg-surface/10 select-none"
+            >
               {/* Row 1: Leftward infinite scroll */}
               <div className="flex w-max gap-3 animate-marquee hover:[animation-play-state:paused]">
                 {[...marqueeRow1, ...marqueeRow1, ...marqueeRow1].map((skill, idx) => (
                   <button
                     key={`r1-${idx}`}
-                    onMouseEnter={() => handleSkillHover(skill)}
+                    tabIndex={-1}
+                    onMouseEnter={() => handleSkillSelect(skill)}
                     onMouseLeave={handleSkillLeave}
                     className="px-3 py-1 border border-border-subtle bg-background font-mono text-[10px] uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors"
                   >
@@ -141,7 +145,8 @@ export function Skills() {
                 {[...marqueeRow2, ...marqueeRow2, ...marqueeRow2].map((skill, idx) => (
                   <button
                     key={`r2-${idx}`}
-                    onMouseEnter={() => handleSkillHover(skill)}
+                    tabIndex={-1}
+                    onMouseEnter={() => handleSkillSelect(skill)}
                     onMouseLeave={handleSkillLeave}
                     className="px-3 py-1 border border-border-subtle bg-background font-mono text-[10px] uppercase tracking-wider text-ink-secondary hover:border-accent hover:text-accent transition-colors"
                   >
@@ -175,9 +180,12 @@ export function Skills() {
                     return (
                       <button
                         key={skill.name}
-                        onMouseEnter={() => handleSkillHover(skill)}
+                        onMouseEnter={() => handleSkillSelect(skill)}
                         onMouseLeave={handleSkillLeave}
-                        className={`px-3 py-1.5 border font-mono text-xs transition-all duration-200 cursor-none select-none ${
+                        onFocus={() => handleSkillSelect(skill)}
+                        onBlur={handleSkillLeave}
+                        onClick={() => handleSkillSelect(skill)}
+                        className={`px-3 py-1.5 border font-mono text-xs transition-all duration-200 select-none ${
                           isCurrent
                             ? "bg-accent border-accent text-accent-foreground font-semibold translate-y-[-1px]"
                             : "bg-surface/30 border-border-subtle text-ink-secondary hover:border-border-strong hover:text-ink-primary"
@@ -199,7 +207,7 @@ export function Skills() {
             </div>
             <div className="flex-1 font-mono text-xs">
               <span className="text-ink-muted block mb-1">query_status_output:</span>
-              <p className="text-ink-primary min-h-[36px] leading-relaxed transition-all duration-200">
+              <p aria-live="polite" className="text-ink-primary min-h-[36px] leading-relaxed transition-all duration-200">
                 &gt; {activeContext}
               </p>
             </div>
