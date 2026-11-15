@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
@@ -11,7 +11,6 @@ import { Mail, ArrowUpRight, Send, Loader2 } from "lucide-react";
 export function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
-  const shouldReduceMotion = useReducedMotion();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

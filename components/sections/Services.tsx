@@ -4,14 +4,14 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
-import { Code, Cpu, LineChart } from "lucide-react";
+import { Code, Cpu, LineChart, type LucideIcon } from "lucide-react";
 
 interface ServiceItem {
   num: string;
   name: string;
   benefit: string;
   techTags: string[];
-  icon: React.ComponentType<any>;
+  icon: LucideIcon;
 }
 
 export function Services() {

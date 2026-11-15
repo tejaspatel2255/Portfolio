@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
@@ -20,7 +20,7 @@ import {
   Package, 
   Users, 
   Building2,
-  Cpu
+  type LucideIcon
 } from "lucide-react";
 import { GithubIcon } from "@/components/ui/Icons";
 
@@ -34,7 +34,7 @@ interface Project {
   githubUrl?: string;
   demoUrl?: string;
   clientLabel?: string;
-  icon: React.ComponentType<any>;
+  icon: LucideIcon;
   themeColor: string;
   mockupType: string;
 }
@@ -201,12 +201,7 @@ export function Projects() {
     },
   ];
 
-  const reducedMotionPref = useReducedMotion();
-  const [shouldReduceMotion, setShouldReduceMotion] = useState(false);
-
-  useEffect(() => {
-    setShouldReduceMotion(Boolean(reducedMotionPref));
-  }, [reducedMotionPref]);
+  const shouldReduceMotion = useReducedMotion();
 
   const renderMockup = (type: string) => {
     switch (type) {

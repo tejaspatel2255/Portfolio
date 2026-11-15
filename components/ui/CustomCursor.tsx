@@ -2,15 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { useMediaQuery } from "@/lib/useMediaQuery";
 
 export function CustomCursor() {
-  const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [cursorText, setCursorText] = useState<string | null>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isClicking, setIsClicking] = useState(false);
   const shouldReduceMotion = useReducedMotion();
+  const finePointer = useMediaQuery("(pointer: fine)");
 
   // Raw position coordinates
   const cursorX = useMotionValue(-100);
@@ -22,11 +23,7 @@ export function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    if (typeof window === "undefined" || shouldReduceMotion) return;
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
-    if (!isFinePointer) return;
-
-    setMounted(true);
+    if (!finePointer || shouldReduceMotion) return;
 
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
@@ -80,9 +77,9 @@ export function CustomCursor() {
       window.removeEventListener("mouseup", handleMouseUp);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [cursorX, cursorY, isVisible, shouldReduceMotion]);
+  }, [cursorX, cursorY, finePointer, shouldReduceMotion, isVisible]);
 
-  if (!mounted || shouldReduceMotion || !isVisible) return null;
+  if (!finePointer || shouldReduceMotion || !isVisible) return null;
 
   const hasLabel = !!cursorText;
 

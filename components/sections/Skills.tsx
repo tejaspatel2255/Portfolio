@@ -205,6 +205,7 @@ export function Skills() {
             </div>
           </div>
         </div>
+      </div>
     </SectionWrapper>
   );
 }

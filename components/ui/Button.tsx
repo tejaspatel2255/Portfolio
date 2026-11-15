@@ -31,7 +31,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const variantStyles = {
-      primary: "bg-accent text-accent-foreground font-semibold border border-transparent hover:bg-opacity-95 hover:scale-[1.01] transition-transform duration-200",
+      primary: "bg-accent text-accent-foreground font-semibold border border-transparent hover:brightness-95 hover:scale-[1.01] transition-transform duration-200",
       secondary: "bg-surface text-ink-primary border border-border-subtle hover:bg-surface-hover hover:border-border-strong hover:scale-[1.01] transition-transform duration-200",
       brutalist: "bg-background text-ink-primary border border-border-strong shadow-[4px_4px_0px_0px_var(--color-accent)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_var(--color-accent)] transition-all duration-200",
       ghost: "bg-transparent text-ink-secondary hover:text-ink-primary hover:bg-surface",

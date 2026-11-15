@@ -4,7 +4,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
-import { Calendar, GraduationCap, Award, Briefcase } from "lucide-react";
+import { GraduationCap, Award, Briefcase, type LucideIcon } from "lucide-react";
 
 interface Milestone {
   id: number;
@@ -14,7 +14,7 @@ interface Milestone {
   company: string;
   description: string;
   tags?: string[];
-  icon: React.ComponentType<any>;
+  icon: LucideIcon;
 }
 
 export function Experience() {
