@@ -4,7 +4,7 @@ import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
-import { Code, Cpu, LineChart, ArrowUpRight } from "lucide-react";
+import { Code, Cpu, LineChart } from "lucide-react";
 
 interface ServiceItem {
   num: string;
@@ -108,16 +108,6 @@ export function Services() {
           })}
         </div>
 
-        {/* Bridge CTA */}
-        <div className="flex justify-end mt-4 border-t border-border-subtle pt-6">
-          <a
-            href="#skills"
-            className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
-          >
-            <span>NEXT: EXPLORE DETAILED TECH SKILLS</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
-          </a>
-        </div>
       </div>
     </SectionWrapper>
   );

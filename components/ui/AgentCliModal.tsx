@@ -15,14 +15,13 @@ export function AgentCliModal() {
   const [inputVal, setInputVal] = useState("");
   const [history, setHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState<number>(-1);
-  const [isExecuting, setIsExecuting] = useState(false);
   
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const [logs, setLogs] = useState<LogEntry[]>([
-    { id: "1", type: "system", text: "TEJAS PATEL // COMMAND PALETTE & AI AGENT CLI v2.4.0" },
-    { id: "2", type: "system", text: "Type 'help' for commands (e.g., 'work', 'skills', 'contact', 'copy email', 'resume', 'run agent')." },
+    { id: "1", type: "system", text: "TEJAS PATEL // COMMAND PALETTE & AI AGENT CLI" },
+    { id: "2", type: "system", text: "Type 'help' for commands (e.g., 'work', 'about', 'skills', 'experience', 'contact', 'copy email', 'resume')." },
   ]);
 
   // Console.log easter-egg hint on initial page load
@@ -84,7 +83,7 @@ export function AgentCliModal() {
   const handleCommandSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const cmd = inputVal.trim();
-    if (!cmd || isExecuting) return;
+    if (!cmd) return;
 
     // Record in input history
     setHistory((prev) => [cmd, ...prev]);
@@ -110,11 +109,10 @@ export function AgentCliModal() {
       addLog("output", "  about              — Jump to Bio & Architecture details");
       addLog("output", "  services           — Jump to Core Offerings grid");
       addLog("output", "  skills             — Jump to Technical Marquee section");
+      addLog("output", "  experience         — Jump to Experience Timeline section");
       addLog("output", "  contact            — Jump to Query Dispatcher form");
       addLog("output", "  copy email         — Copy email address to clipboard");
       addLog("output", "  resume / view resume — Open CV / Resume PDF");
-      addLog("output", "  run agent          — Trigger autonomous LLM reasoning loop simulation");
-      addLog("output", "  status             — Print system diagnostics & memory latency");
       addLog("output", "  clear / exit       — Clear logs or close palette modal");
       return;
     }
@@ -136,12 +134,12 @@ export function AgentCliModal() {
       scrollToSection("skills");
       return;
     }
-    if (lowerCmd === "contact") {
-      scrollToSection("contact");
+    if (lowerCmd === "experience") {
+      scrollToSection("experience");
       return;
     }
-    if (lowerCmd === "testimonials") {
-      scrollToSection("testimonials");
+    if (lowerCmd === "contact") {
+      scrollToSection("contact");
       return;
     }
 
@@ -159,36 +157,6 @@ export function AgentCliModal() {
     if (lowerCmd === "resume" || lowerCmd === "view resume") {
       window.open("/resume.pdf", "_blank");
       addLog("success", "Opened /resume.pdf in a new tab.");
-      return;
-    }
-
-    if (lowerCmd === "status") {
-      addLog("system", "SYSTEM_DIAGNOSTICS:");
-      addLog("output", "  Framework: Next.js 16 / React 19 / TypeScript");
-      addLog("output", "  Animation Engine: GSAP ScrollTrigger + Lenis Smooth Scroll");
-      addLog("output", "  Memory Buffer: 256MB allocated");
-      addLog("output", "  Latency: 38ms average across agent nodes");
-      addLog("success", "  All agentic subroutines operating at 100% efficiency.");
-      return;
-    }
-
-    if (lowerCmd === "run agent" || lowerCmd === "agent") {
-      setIsExecuting(true);
-      addLog("system", "[AGENT_START] Initializing multi-node reasoning loop...");
-
-      const steps = [
-        { type: "output" as const, text: "[STEP 1/4] Parsing repository AST nodes and code state...", delay: 400 },
-        { type: "output" as const, text: "[STEP 2/4] Querying Vector Database for semantic context matches...", delay: 900 },
-        { type: "output" as const, text: "[STEP 3/4] Synthesizing tool calls & autonomous execution graph...", delay: 1400 },
-        { type: "success" as const, text: "[STEP 4/4] SUCCESS: Autonomous task completed in 42ms with 0 errors.", delay: 1900 },
-      ];
-
-      for (const step of steps) {
-        await new Promise((res) => setTimeout(res, step.delay));
-        addLog(step.type, step.text);
-      }
-
-      setIsExecuting(false);
       return;
     }
 
@@ -295,14 +263,12 @@ export function AgentCliModal() {
                   value={inputVal}
                   onChange={(e) => setInputVal(e.target.value)}
                   onKeyDown={handleKeyDownHistory}
-                  disabled={isExecuting}
-                  placeholder={isExecuting ? "Executing command..." : "Type command e.g. 'work', 'skills', 'copy email', 'resume', 'run agent'"}
+                  placeholder="Type command e.g. 'work', 'skills', 'experience', 'contact', 'copy email', 'resume'"
                   className="flex-1 bg-transparent font-mono text-xs text-ink-primary focus:outline-none placeholder:text-ink-muted/50 cursor-text"
                 />
                 <button
                   type="submit"
-                  disabled={isExecuting}
-                  className="px-3 py-1.5 border border-border-strong bg-background hover:border-accent hover:text-accent font-mono text-[10px] uppercase text-ink-primary flex items-center gap-1 transition-colors"
+                  className="px-3 py-1.5 border border-border-strong bg-background hover:border-accent hover:text-accent font-mono text-[10px] uppercase text-ink-primary flex items-center gap-1 transition-colors cursor-pointer"
                 >
                   <span>EXEC</span>
                   <CornerDownLeft className="w-3 h-3" />

@@ -4,10 +4,7 @@ import "./globals.css";
 import AnimationProvider from "@/components/ui/AnimationProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
-import { PageIntroLoader } from "@/components/ui/PageIntroLoader";
 import { AgentCliModal } from "@/components/ui/AgentCliModal";
-import { ScrollCircuitThread } from "@/components/ui/ScrollCircuitThread";
-import { DynamicScrollNoise } from "@/components/ui/DynamicScrollNoise";
 
 const syne = Syne({
   variable: "--font-display",
@@ -124,10 +121,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full bg-background text-foreground selection:bg-accent selection:text-accent-foreground font-body overflow-x-hidden">
-        <DynamicScrollNoise />
-        <PageIntroLoader />
         <ScrollProgressBar />
-        <ScrollCircuitThread />
         <CustomCursor />
         <AgentCliModal />
         <AnimationProvider>{children}</AnimationProvider>

@@ -15,7 +15,6 @@ const NAV_LINKS = [
   { label: "Services", href: "#services", id: "services" },
   { label: "Skills", href: "#skills", id: "skills" },
   { label: "Experience", href: "#experience", id: "experience" },
-  { label: "Testimonials", href: "#testimonials", id: "testimonials" },
   { label: "Contact", href: "#contact", id: "contact" },
 ];
 
@@ -208,7 +207,7 @@ export function Navigation() {
                 </WhatsAppButton>
 
                 <div className="flex items-center justify-between text-[10px] font-mono text-ink-muted">
-                  <span>© 2026 TEJAS PATEL</span>
+                  <span>© {new Date().getFullYear()} TEJAS PATEL</span>
                   <div className="flex gap-4">
                     <a
                       href="https://github.com/tejaspatel2255"

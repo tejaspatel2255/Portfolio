@@ -237,8 +237,7 @@ export function Contact() {
       {/* Styled Footer Block */}
       <footer className="border-t border-border-subtle mt-16 md:mt-24 py-12 flex flex-col sm:flex-row justify-between items-center gap-6 font-mono text-[10px] text-ink-muted">
         <div className="flex flex-col gap-1 items-center sm:items-start text-center sm:text-left">
-          <span>© 2026 TEJAS PATEL // PORTFOLIO</span>
-          <span>ALL RIGHTS RESERVED // V1.0.0</span>
+          <span>© {new Date().getFullYear()} TEJAS PATEL</span>
         </div>
 
         {/* Stack Credits */}

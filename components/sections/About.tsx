@@ -6,7 +6,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
-import { MapPin, Briefcase, Calendar, Target, ArrowUpRight } from "lucide-react";
+import { MapPin, Briefcase, Calendar, Target } from "lucide-react";
 
 export function About() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -208,16 +208,6 @@ export function About() {
             </div>
           </div>
 
-          {/* Next Section Bridge */}
-          <div className="lg:col-span-12 flex justify-end mt-8 border-t border-border-subtle pt-6">
-            <a
-              href="#services"
-              className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
-            >
-              <span>NEXT: VIEW MY SERVICES</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
-            </a>
-          </div>
         </div>
       </SectionWrapper>
     </section>

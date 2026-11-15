@@ -75,15 +75,6 @@ export default async function Image() {
             />
             AVAILABLE FOR ROLES &amp; CONTRACTS // NADIAD, INDIA
           </div>
-          <div
-            style={{
-              fontSize: "16px",
-              color: "#9ca3af",
-              fontFamily: "monospace",
-            }}
-          >
-            EST. 2026
-          </div>
         </div>
 
         {/* Center Title Block */}

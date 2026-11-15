@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
-import { Terminal, Cpu, ArrowUpRight } from "lucide-react";
+import { Terminal } from "lucide-react";
 
 interface SkillItem {
   name: string;
@@ -81,19 +81,6 @@ export function Skills() {
     { name: "Supabase", context: "Supabase — Utilizing real-time databases, authentication flows, and Storage buckets." },
   ];
 
-  // Grid sizes for Github contribution mockup flourish
-  const cols = 15;
-  const rows = 5;
-  const totalBlocks = cols * rows;
-
-  const getContributionColor = (idx: number) => {
-    const val = (idx * 17) % 7;
-    if (val === 0) return "bg-surface-hover/30 border-transparent";
-    if (val === 1) return "bg-accent/10 border-accent/20";
-    if (val === 2) return "bg-accent/20 border-accent/30";
-    if (val === 3) return "bg-accent/40 border-accent/50";
-    return "bg-accent/60 border-accent/70";
-  };
 
   const handleSkillHover = (skill: SkillItem) => {
     setActiveSkill(skill.name);
@@ -125,8 +112,8 @@ export function Skills() {
   return (
     <SectionWrapper id="skills" borderTop={true}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        {/* Left Side: Skills Category Grid & Dual Infinite Marquee */}
-        <div className="lg:col-span-8 flex flex-col gap-8">
+        {/* Skills Category Grid & Dual Infinite Marquee */}
+        <div className="lg:col-span-12 flex flex-col gap-8">
           <div>
             <span className="font-mono text-[10px] text-accent uppercase tracking-widest block">// CAPABILITIES</span>
             <Heading tag="h2" size="h2" animate="words" titleText="SKILLS PROFILE" className="text-ink-primary mt-2" />
@@ -218,68 +205,6 @@ export function Skills() {
             </div>
           </div>
         </div>
-
-        {/* Right Side: GitHub activity flourish */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
-          <div className="border border-border-strong p-6 bg-surface/20 flex flex-col gap-6">
-            <div>
-              <p className="font-mono text-[9px] text-accent uppercase tracking-widest mb-1">// Active Contributions</p>
-              <h4 className="font-display font-bold text-lg text-ink-primary uppercase">Always Building</h4>
-              <p className="text-xs text-ink-muted mt-2 leading-relaxed font-light">
-                Continuous iteration on personal workflows, package structures, and open-source contributions.
-              </p>
-            </div>
-
-            {/* Grid display mimicking a GitHub activity graph */}
-            <div className="border border-border-subtle bg-background/50 p-4 flex flex-col items-center justify-center">
-              <span className="font-mono text-[8px] text-ink-muted uppercase mb-3 block self-start">git_activity_visual_map:</span>
-              <div
-                className="grid gap-1.5"
-                style={{
-                  gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-                  gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
-                }}
-              >
-                {Array.from({ length: totalBlocks }).map((_, idx) => (
-                  <motion.div
-                    key={idx}
-                    whileHover={{ scale: 1.35, backgroundColor: "var(--color-accent)", borderColor: "var(--color-accent)" }}
-                    transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    className={`w-3.5 h-3.5 border ${getContributionColor(idx)} transition-colors duration-300`}
-                  />
-                ))}
-              </div>
-              <div className="w-full flex justify-between font-mono text-[8px] text-ink-muted mt-3 uppercase">
-                <span>Less</span>
-                <div className="flex gap-1 items-center">
-                  <div className="w-2 h-2 border border-transparent bg-surface-hover/30" />
-                  <div className="w-2 h-2 border border-accent/20 bg-accent/10" />
-                  <div className="w-2 h-2 border border-accent/30 bg-accent/20" />
-                  <div className="w-2 h-2 border border-accent/50 bg-accent/40" />
-                  <div className="w-2 h-2 border border-accent/70 bg-accent/60" />
-                  <span>More</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-3 items-center border-t border-border-subtle pt-6 text-[10px] font-mono text-ink-muted">
-              <Cpu className="w-3.5 h-3.5 text-accent animate-pulse" />
-              <span>LOG: GitHub integration ready for live endpoints.</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Next Section Bridge */}
-        <div className="lg:col-span-12 w-full flex justify-end mt-12 border-t border-border-subtle pt-6">
-          <a
-            href="#testimonials"
-            className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
-          >
-            <span>NEXT: VIEW RECOMMENDATIONS</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
-          </a>
-        </div>
-      </div>
     </SectionWrapper>
   );
 }

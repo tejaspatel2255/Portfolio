@@ -625,18 +625,6 @@ export function Projects() {
             {clientProjects.map((project, idx) => renderProjectRow(project, idx))}
           </div>
         </div>
-
-        {/* Next Section Bridge */}
-        <div className="w-full flex justify-end border-t border-border-subtle pt-6">
-          <a 
-            href="#about" 
-            className="group flex items-center gap-2 font-mono text-xs text-ink-secondary hover:text-accent transition-colors cursor-none"
-          >
-            <span>NEXT: DISCOVER WHO I AM</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-ink-muted group-hover:text-accent transition-colors" />
-          </a>
-        </div>
-
       </div>
     </SectionWrapper>
   );
