@@ -7,6 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Heading } from "@/components/ui/Heading";
 import { MapPin, Briefcase, Calendar, Target } from "lucide-react";
+import Image from "next/image";
+import { name, location } from "@/data/site";
 
 export function About() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -76,9 +78,9 @@ export function About() {
   };
 
   const quickFacts = [
-    { icon: MapPin, label: "Location", value: "Nadiad, Gujarat, India" },
-    { icon: Calendar, label: "Experience", value: "3+ Years Building [VERIFY]" },
-    { icon: Target, label: "Primary Focus", value: "Full-Stack + Agentic AI Systems" },
+    { icon: MapPin, label: "Location", value: location },
+    { icon: Calendar, label: "Experience", value: "1+ Years (Intern & Freelance)" },
+    { icon: Target, label: "Primary Focus", value: "Full-Stack + Applied AI Systems" },
     { icon: Briefcase, label: "Availability", value: "Open for Roles / Contracts" },
   ];
 
@@ -95,37 +97,11 @@ export function About() {
 
             <div className="flex flex-col gap-6 text-base text-ink-secondary leading-relaxed font-light">
               <p>
-                <strong className="text-ink-primary font-medium">[EDIT ME]</strong> I am a Software Developer specializing in building structured, high-performance web products and engineering applied artificial intelligence systems. My technical interests sit at the boundary where clean, scalable full-stack codebases meet autonomous, LLM-driven agentic architectures.
+                I am a final-year B.Tech Computer Science student at Charotar University of Science and Technology (CHARUSAT, CGPA 8.97). I have built websites and applications for real clients, including a production company website and an enterprise ERP system with 13 modules.
               </p>
               <p>
-                My background involves crafting user-centric products and backend systems. Notable projects reflecting this experience include:
+                My work spans applied AI systems—such as multi-agent disaster response networks, financial signal predictors, and real-time procedure supervisors. I work primarily with React, Next.js, TypeScript, Node.js, Python, and PostgreSQL/Supabase, focused on building software that solves user needs with clean architecture, performance, and intelligence.
               </p>
-              <ul className="list-none flex flex-col gap-3 pl-0">
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-accent text-xs mt-1.5">/*</span>
-                  <span>
-                    <strong className="text-ink-primary font-medium">[PLACEHOLDER — VERIFY] Environmental Education Platform</strong>: Built with React/TypeScript to deliver interactive learning maps.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-accent text-xs mt-1.5">/*</span>
-                  <span>
-                    <strong className="text-ink-primary font-medium">[PLACEHOLDER — VERIFY] Community Health Survey Tool</strong>: Created for secure collection and aggregation of remote wellness metrics.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-accent text-xs mt-1.5">/*</span>
-                  <span>
-                    <strong className="text-ink-primary font-medium">[PLACEHOLDER — VERIFY] Retail POS System</strong>: A desktop/web hybrid point-of-sale engine designed to optimize high-volume operations.
-                  </span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="font-mono text-accent text-xs mt-1.5">/*</span>
-                  <span>
-                    <strong className="text-ink-primary font-medium">[PLACEHOLDER — VERIFY] Agentic AI Node Graph</strong>: Engineered in Python to route structured tasks through autonomous LLM tool integrations.
-                  </span>
-                </li>
-              </ul>
             </div>
 
             {/* Quick Facts Grid */}
@@ -166,43 +142,33 @@ export function About() {
               {/* Main Interactive Card */}
               <motion.div
                 style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-                className="relative w-full h-full border-2 border-border-strong bg-surface z-10 p-6 flex flex-col justify-between"
+                className="relative w-full h-full border-2 border-border-strong bg-surface z-10 p-4 flex flex-col justify-between overflow-hidden"
               >
                 {/* Corner crosshairs decoration */}
-                <span className="absolute top-2 left-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
-                <span className="absolute top-2 right-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
-                <span className="absolute bottom-2 left-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
-                <span className="absolute bottom-2 right-2 font-mono text-[11px] text-border-strong pointer-events-none">+</span>
+                <span className="absolute top-2 left-2 font-mono text-[11px] text-border-strong pointer-events-none z-20">+</span>
+                <span className="absolute top-2 right-2 font-mono text-[11px] text-border-strong pointer-events-none z-20">+</span>
+                <span className="absolute bottom-2 left-2 font-mono text-[11px] text-border-strong pointer-events-none z-20">+</span>
+                <span className="absolute bottom-2 right-2 font-mono text-[11px] text-border-strong pointer-events-none z-20">+</span>
 
-                {/* Card Header info */}
-                <div className="flex justify-between items-start pt-2">
-                  <span className="font-mono text-[11px] text-accent uppercase tracking-widest">// PORTRAIT_IMG_VAR</span>
-                  <span className="font-mono text-[11px] text-ink-muted">SYS_READY</span>
-                </div>
-
-                {/* Stylized Avatar Placeholder */}
-                <div className="my-auto flex flex-col items-center justify-center border border-border-subtle/50 aspect-square w-full bg-background/40 relative overflow-hidden group/pic">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 to-transparent pointer-events-none z-0" />
-                  <div className="w-16 h-16 border-2 border-dashed border-accent/40 rounded-full flex items-center justify-center p-2 z-10 transition-transform duration-500 group-hover/pic:rotate-45">
-                    <div className="w-full h-full bg-accent/20 rounded-full border border-accent flex items-center justify-center">
-                      <span className="font-display font-extrabold text-accent text-sm">TP</span>
-                    </div>
-                  </div>
-                  <span className="font-mono text-[11px] text-ink-muted uppercase mt-4 tracking-widest z-10">
-                    Portrait Placeholder
-                  </span>
-                  <span className="font-mono text-[11px] text-accent mt-1 z-10">
-                    [ REPLACE WITH REAL IMAGE ]
-                  </span>
+                {/* Portrait Photo */}
+                <div className="relative w-full flex-1 min-h-[280px] border border-border-subtle bg-background/40 overflow-hidden">
+                  <Image
+                    src="/images/portrait.jpg"
+                    alt={name}
+                    fill
+                    sizes="340px"
+                    className="object-cover"
+                    priority
+                  />
                 </div>
 
                 {/* Card Footer info */}
-                <div className="flex justify-between items-center border-t border-border-subtle pt-4">
+                <div className="flex justify-between items-center border-t border-border-subtle pt-3 mt-3 z-10">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    <span className="font-mono text-[11px] text-ink-secondary">TEJAS PATEL</span>
+                    <span className="font-mono text-[11px] text-ink-secondary">{name.toUpperCase()}</span>
                   </div>
-                  <span className="font-mono text-[11px] text-ink-muted">W:340px // H:425px</span>
+                  <span className="font-mono text-[11px] text-ink-muted">CHARUSAT // 2027</span>
                 </div>
               </motion.div>
             </div>

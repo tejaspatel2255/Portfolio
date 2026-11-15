@@ -10,6 +10,7 @@ import { InteractiveCanvas } from "@/components/ui/InteractiveCanvas";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { WhatsappIcon } from "@/components/ui/Icons";
 import { ArrowDown, Eye } from "lucide-react";
+import { resumePath, location } from "@/data/site";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
@@ -131,14 +132,14 @@ export function Hero() {
               <WhatsAppButton variant="secondary">
                 Chat on WhatsApp <WhatsappIcon className="w-3.5 h-3.5 ml-1.5 inline-block" />
               </WhatsAppButton>
-              <Button href="/resume.pdf" download="Tejas_Patel_Resume.pdf" data-cursor="CV" variant="ghost">
+              <Button href={resumePath} download="Tejas_Patel_Resume.pdf" data-cursor="CV" variant="ghost">
                 Download CV <ArrowDown className="w-4 h-4 ml-1 inline-block" />
               </Button>
             </motion.div>
 
             {/* Sub-meta details */}
             <motion.div variants={itemVariants} className="flex gap-8 items-center text-xs font-mono text-ink-muted border-t border-border-subtle pt-6 mt-4">
-              <span>LOC // NADIAD, INDIA</span>
+              <span>LOC // {location.toUpperCase()}</span>
               <span className="text-accent">// SOFTWARE &amp; AI ENGINEER</span>
             </motion.div>
 

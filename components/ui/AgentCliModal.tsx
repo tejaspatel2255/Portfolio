@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal, X, CornerDownLeft } from "lucide-react";
 import { useLenis } from "@/components/ui/AnimationProvider";
+import { email, resumePath } from "@/data/site";
 
 interface LogEntry {
   id: string;
@@ -167,21 +168,21 @@ export function AgentCliModal() {
     if (lowerCmd === "copy email" || lowerCmd === "email") {
       if (typeof navigator !== "undefined" && navigator.clipboard) {
         try {
-          await navigator.clipboard.writeText("placeholder_email@gmail.com");
-          addLog("success", "SUCCESS: Email 'placeholder_email@gmail.com' copied to clipboard.");
+          await navigator.clipboard.writeText(email);
+          addLog("success", `SUCCESS: Email '${email}' copied to clipboard.`);
         } catch {
-          addLog("output", "Email: placeholder_email@gmail.com");
+          addLog("output", `Email: ${email}`);
         }
       } else {
-        addLog("output", "Email: placeholder_email@gmail.com");
+        addLog("output", `Email: ${email}`);
       }
       inputRef.current?.focus();
       return;
     }
 
     if (lowerCmd === "resume" || lowerCmd === "view resume") {
-      window.open("/resume.pdf", "_blank");
-      addLog("success", "Opened /resume.pdf in a new tab.");
+      window.open(resumePath, "_blank");
+      addLog("success", `Opened ${resumePath} in a new tab.`);
       inputRef.current?.focus();
       return;
     }

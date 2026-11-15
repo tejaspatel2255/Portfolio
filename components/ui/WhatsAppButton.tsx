@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "./Button";
 import { WhatsappIcon } from "./Icons";
 import { cn } from "@/lib/utils";
+import { whatsappNumber } from "@/data/site";
 
 interface WhatsAppButtonProps {
   className?: string;
@@ -22,7 +23,6 @@ export function WhatsAppButton({
   children,
 }: WhatsAppButtonProps) {
   const shouldReduceMotion = useReducedMotion();
-  const whatsappNumber = "[INSERT_WHATSAPP_NUMBER]";
   const encodedMessage = encodeURIComponent(message);
   const href = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 

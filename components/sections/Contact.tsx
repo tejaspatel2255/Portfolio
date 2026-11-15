@@ -7,24 +7,46 @@ import { Heading } from "@/components/ui/Heading";
 import { Button } from "@/components/ui/Button";
 import { GithubIcon, LinkedinIcon, WhatsappIcon } from "@/components/ui/Icons";
 import { Mail, ArrowUpRight, Send, Loader2 } from "lucide-react";
+import { email, whatsappNumber, linkedinUrl, githubUrl, name } from "@/data/site";
 
 export function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [website, setWebsite] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
+    setErrorMessage("");
 
-    // Simulate form submission delay
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    }, 1200);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, website }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.ok) {
+        setStatus("error");
+        setErrorMessage(data.error || "Failed to send message. Please try again.");
+      } else {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setWebsite("");
+        setTimeout(() => {
+          setStatus("idle");
+        }, 5000);
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage("Network error. Please check your connection or contact directly via email.");
+    }
   };
 
   return (
@@ -52,7 +74,7 @@ export function Contact() {
           <div className="flex flex-col gap-3 mt-2">
             {/* WhatsApp - Primary Option */}
             <a
-              href="https://wa.me/[INSERT_WHATSAPP_NUMBER]?text=Hello%20Tejas%2C%20I%20visited%20your%20portfolio%20and%20would%20love%20to%20connect%21"
+              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Hello Tejas, I visited your portfolio and would love to connect!")}`}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="CHAT"
@@ -64,7 +86,7 @@ export function Contact() {
                 </div>
                 <div>
                   <span className="block font-mono text-[11px] text-ink-muted uppercase tracking-wider">INSTANT CONTACT</span>
-                  <span className="block text-sm font-semibold text-ink-primary mt-0.5">Chat on WhatsApp [INSERT_WHATSAPP_NUMBER]</span>
+                  <span className="block text-sm font-semibold text-ink-primary mt-0.5">Chat on WhatsApp +{whatsappNumber}</span>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-ink-muted group-hover/cta:text-accent transition-colors" />
@@ -72,7 +94,7 @@ export function Contact() {
 
             {/* Email - Secondary Option */}
             <a
-              href="mailto:placeholder_email@gmail.com"
+              href={`mailto:${email}`}
               data-cursor="EMAIL"
               className="group/cta border border-border-subtle p-4 bg-surface/10 hover:border-border-strong hover:bg-surface/20 transition-all duration-200 flex items-center justify-between select-none"
             >
@@ -82,7 +104,7 @@ export function Contact() {
                 </div>
                 <div>
                   <span className="block font-mono text-[11px] text-ink-muted uppercase tracking-wider">EMAIL DIRECT</span>
-                  <span className="block text-sm font-semibold text-ink-primary mt-0.5">placeholder_email@gmail.com</span>
+                  <span className="block text-sm font-semibold text-ink-primary mt-0.5">{email}</span>
                 </div>
               </div>
               <ArrowUpRight className="w-4 h-4 text-ink-muted group-hover/cta:text-accent transition-colors" />
@@ -90,7 +112,7 @@ export function Contact() {
 
             <div className="grid grid-cols-2 gap-3">
               <a
-                href="https://www.linkedin.com/in/pateltejasd"
+                href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="LINKEDIN"
@@ -104,7 +126,7 @@ export function Contact() {
               </a>
 
               <a
-                href="https://github.com/tejaspatel2255"
+                href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cursor="GITHUB"
@@ -125,6 +147,18 @@ export function Contact() {
           <p className="font-mono text-[11px] text-accent uppercase tracking-widest mb-6">// Query Dispatcher Form</p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            {/* Hidden Honeypot Field */}
+            <input
+              type="text"
+              name="website"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute opacity-0 pointer-events-none -left-[9999px]"
+            />
+
             {/* Input Row Name */}
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="font-mono text-xs text-ink-muted uppercase tracking-wider">
@@ -135,6 +169,7 @@ export function Contact() {
                 id="name"
                 name="name"
                 required
+                autoComplete="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="e.g. John Doe"
@@ -152,6 +187,7 @@ export function Contact() {
                 id="email"
                 name="email"
                 required
+                autoComplete="email"
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="e.g. john@company.com"
@@ -211,23 +247,32 @@ export function Contact() {
               </Button>
 
               {/* Status Alert logs */}
-              <AnimatePresence>
-                {status === "success" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="border border-emerald-500/30 bg-emerald-950/20 p-4 flex gap-3 items-start font-mono text-xs text-emerald-400"
-                  >
-                    <div>
-                      <span className="block font-bold">// STATUS: DISPATCH SUCCESS [MOCK]</span>
-                      <p className="mt-1 text-emerald-400/80 leading-relaxed">
-                        Message simulated successfully! Connect `Contact.tsx` to Formspree, Resend, or a Next.js Server Action to route live emails.
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div aria-live="polite">
+                <AnimatePresence>
+                  {status === "success" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="border border-emerald-500/30 bg-emerald-950/20 p-4 flex gap-3 items-center font-mono text-xs text-emerald-400"
+                    >
+                      <span className="font-bold">// STATUS: SUCCESS</span>
+                      <span>Your message has been sent. I will respond as soon as possible.</span>
+                    </motion.div>
+                  )}
+                  {status === "error" && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="border border-rose-500/30 bg-rose-950/20 p-4 flex gap-3 items-center font-mono text-xs text-rose-400"
+                    >
+                      <span className="font-bold">// STATUS: ERROR</span>
+                      <span>{errorMessage}</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
           </form>
         </div>
@@ -236,12 +281,12 @@ export function Contact() {
       {/* Styled Footer Block */}
       <footer className="border-t border-border-subtle mt-16 md:mt-24 py-12 flex flex-col sm:flex-row justify-between items-center gap-6 font-mono text-xs text-ink-muted">
         <div className="flex flex-col gap-1 items-center sm:items-start text-center sm:text-left">
-          <span>© {new Date().getFullYear()} TEJAS PATEL</span>
+          <span>© {new Date().getFullYear()} {name.toUpperCase()}</span>
         </div>
 
         {/* Stack Credits */}
         <div className="text-center sm:text-right flex flex-col gap-1 items-center sm:items-end">
-          <span>DESIGNED &amp; DEVELOPED BY TEJAS PATEL</span>
+          <span>DESIGNED &amp; DEVELOPED BY {name.toUpperCase()}</span>
           <span>NEXT.JS // TAILWIND V4 // GSAP // LENIS</span>
         </div>
       </footer>

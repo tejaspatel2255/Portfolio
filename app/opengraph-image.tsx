@@ -1,8 +1,9 @@
 import { ImageResponse } from "next/og";
+import { name, role, location, githubUrl, linkedinUrl } from "@/data/site";
 
 export const runtime = "nodejs";
 
-export const alt = "Tejas Patel — Software & AI Systems Engineer";
+export const alt = `${name} — ${role}`;
 export const size = {
   width: 1200,
   height: 630,
@@ -73,7 +74,7 @@ export default async function Image() {
                 backgroundColor: "#ccff00",
               }}
             />
-            AVAILABLE FOR ROLES &amp; CONTRACTS // NADIAD, INDIA
+            AVAILABLE FOR ROLES &amp; CONTRACTS // {location.toUpperCase()}
           </div>
         </div>
 
@@ -95,7 +96,7 @@ export default async function Image() {
               color: "#ffffff",
             }}
           >
-            TEJAS PATEL
+            {name.toUpperCase()}
           </div>
           <div
             style={{
@@ -105,7 +106,7 @@ export default async function Image() {
               letterSpacing: "-1px",
             }}
           >
-            SOFTWARE &amp; APPLIED AI SYSTEMS ENGINEER
+            {role.toUpperCase()}
           </div>
           <div
             style={{
@@ -133,10 +134,10 @@ export default async function Image() {
           }}
         >
           <div style={{ fontSize: "16px", color: "#e5e7eb", fontFamily: "monospace" }}>
-            github.com/tejaspatel2255
+            {githubUrl.replace("https://", "")}
           </div>
           <div style={{ fontSize: "16px", color: "#e5e7eb", fontFamily: "monospace" }}>
-            linkedin.com/in/pateltejasd
+            {linkedinUrl.replace("https://", "")}
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ import AnimationProvider from "@/components/ui/AnimationProvider";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { AgentCliModal } from "@/components/ui/AgentCliModal";
+import { siteConfig } from "@/data/site";
 
 const syne = Syne({
   variable: "--font-display",
@@ -23,18 +24,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tejaspatel2255.vercel.app";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: "Tejas Patel — Software & AI Systems Engineer",
-    template: "%s | Tejas Patel",
+    default: `${siteConfig.name} — ${siteConfig.role}`,
+    template: `%s | ${siteConfig.name}`,
   },
   description:
     "I engineer end-to-end web applications (TypeScript, Next.js, Node) and construct custom agentic AI systems (Python, LLM graphs). Focused on building software that solves user needs with performance and intelligence.",
   keywords: [
-    "Tejas Patel",
+    siteConfig.name,
     "Software Engineer",
     "AI Systems Engineer",
     "Agentic AI",
@@ -42,11 +41,11 @@ export const metadata: Metadata = {
     "React Developer",
     "Next.js Developer",
     "Python Developer",
-    "Nadiad Gujarat India",
+    siteConfig.location,
   ],
-  authors: [{ name: "Tejas Patel", url: "https://github.com/tejaspatel2255" }],
-  creator: "Tejas Patel",
-  publisher: "Tejas Patel",
+  authors: [{ name: siteConfig.name, url: siteConfig.githubUrl }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
   alternates: {
     canonical: "/",
   },
@@ -61,15 +60,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteUrl,
-    title: "Tejas Patel — Software & AI Systems Engineer",
+    url: siteConfig.siteUrl,
+    title: `${siteConfig.name} — ${siteConfig.role}`,
     description:
       "I engineer end-to-end web applications (TypeScript, Next.js, Node) and construct custom agentic AI systems (Python, LLM graphs). Focused on building software that solves user needs with performance and intelligence.",
-    siteName: "Tejas Patel Portfolio",
+    siteName: `${siteConfig.name} Portfolio`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tejas Patel — Software & AI Systems Engineer",
+    title: `${siteConfig.name} — ${siteConfig.role}`,
     description:
       "I engineer end-to-end web applications (TypeScript, Next.js, Node) and construct custom agentic AI systems (Python, LLM graphs).",
     creator: "@pateltejasd",
@@ -79,12 +78,12 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Tejas Patel",
-  "jobTitle": "Software & Applied AI Systems Engineer",
-  "url": siteUrl,
+  "name": siteConfig.name,
+  "jobTitle": siteConfig.role,
+  "url": siteConfig.siteUrl,
   "sameAs": [
-    "https://github.com/tejaspatel2255",
-    "https://www.linkedin.com/in/pateltejasd"
+    siteConfig.githubUrl,
+    siteConfig.linkedinUrl
   ],
   "address": {
     "@type": "PostalAddress",

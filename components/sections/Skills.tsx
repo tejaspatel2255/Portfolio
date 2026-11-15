@@ -9,12 +9,39 @@ import { Terminal } from "lucide-react";
 interface SkillItem {
   name: string;
   context: string;
+  category: "frontend" | "backend" | "ai" | "tools";
 }
 
 interface SkillCategory {
   title: string;
   skills: SkillItem[];
 }
+
+const ALL_SKILLS: SkillItem[] = [
+  // 01 / Frontend Core
+  { name: "React", context: "React — Building component-driven responsive user interfaces with complex state systems.", category: "frontend" },
+  { name: "Next.js", context: "Next.js — SSR, ISR, Turbopack, and App Router architectures for optimized load speed.", category: "frontend" },
+  { name: "TypeScript", context: "TypeScript — Strong type safety, interfaces, and generic constructs for bug-free compiles.", category: "frontend" },
+  { name: "Tailwind CSS", context: "Tailwind CSS — Writing semantic tokens, utility designs, and fluid layouts.", category: "frontend" },
+  { name: "Framer Motion", context: "Framer Motion — Staggered reveals, spring dynamics, and custom micro-interactions.", category: "frontend" },
+  
+  // 02 / Backend & Databases
+  { name: "Node.js", context: "Node.js — Constructing scalable, asynchronous server scripts and microservices.", category: "backend" },
+  { name: "Express", context: "Express — Setting up RESTful APIs, router files, and authentication middlewares.", category: "backend" },
+  { name: "PostgreSQL", context: "PostgreSQL — Designing relational tables, key constraints, and indexing queries.", category: "backend" },
+  { name: "Supabase", context: "Supabase — Utilizing real-time databases, authentication flows, and Storage buckets.", category: "backend" },
+  
+  // 03 / Applied AI & Data
+  { name: "Python", context: "Python — Writing data analysis scripts, neural nodes, and custom API servers.", category: "ai" },
+  { name: "LangChain", context: "LangChain — Integrating tool-calling pipelines, LLM chains, and history memory buffers.", category: "ai" },
+  { name: "LLMs / APIs", context: "LLMs / APIs — Direct scripting with Gemini, Groq and OpenRouter APIs.", category: "ai" },
+  
+  // 04 / Tools & Hosting
+  { name: "Git / GitHub", context: "Git / GitHub — Branching rules, repository pushes, pull requests, and Git workflows.", category: "tools" },
+  { name: "Vercel", context: "Vercel — CI/CD pipelines, instant deployments, and edge function setups.", category: "tools" },
+  { name: "Docker", context: "Docker — Containerizing full-stack environments for consistent server deployment.", category: "tools" },
+  { name: "Postman", context: "Postman — Querying endpoints, simulating headers, and verifying JSON response models.", category: "tools" },
+];
 
 export function Skills() {
   const [activeContext, setActiveContext] = useState<string>("Hover over any technology node to query capabilities...");
@@ -24,62 +51,24 @@ export function Skills() {
   const categories: SkillCategory[] = [
     {
       title: "01 / Frontend Core",
-      skills: [
-        { name: "React", context: "React — Building component-driven responsive user interfaces with complex state systems." },
-        { name: "Next.js", context: "Next.js — SSR, ISR, Turbopack, and App Router architectures for optimized load speed." },
-        { name: "TypeScript", context: "TypeScript — Strong type safety, interfaces, and generic constructs for bug-free compiles." },
-        { name: "Tailwind CSS", context: "Tailwind CSS — Writing semantic tokens, utility designs, and fluid layouts." },
-        { name: "Framer Motion", context: "Framer Motion — Staggered reveals, spring dynamics, and custom micro-interactions." },
-      ],
+      skills: ALL_SKILLS.filter((s) => s.category === "frontend"),
     },
     {
       title: "02 / Backend & Databases",
-      skills: [
-        { name: "Node.js", context: "Node.js — Constructing scalable, asynchronous server scripts and microservices." },
-        { name: "Java", context: "Java — Building modular, structured backend server architectures." },
-        { name: "Express", context: "Express — Setting up RESTful APIs, router files, and authentication middlewares." },
-        { name: "PostgreSQL", context: "PostgreSQL — Designing relational tables, key constraints, and indexing queries." },
-        { name: "Supabase", context: "Supabase — Utilizing real-time databases, authentication flows, and Storage buckets." },
-      ],
+      skills: ALL_SKILLS.filter((s) => s.category === "backend"),
     },
     {
       title: "03 / Applied AI & Data",
-      skills: [
-        { name: "Python", context: "Python — Writing data analysis scripts, neural nodes, and custom API servers." },
-        { name: "LangChain", context: "LangChain — Integrating tool-calling pipelines, LLM chains, and history memory buffers." },
-        { name: "LLMs / APIs", context: "LLMs / APIs — Direct scripting with Gemini, Claude, and OpenAI endpoints." },
-        { name: "Vector DBs", context: "Vector DBs — Implementing semantic lookups and RAG (Retrieval-Augmented Generation) contexts." },
-      ],
+      skills: ALL_SKILLS.filter((s) => s.category === "ai"),
     },
     {
       title: "04 / Tools & Hosting",
-      skills: [
-        { name: "Git / GitHub", context: "Git / GitHub — Branching rules, repository pushes, pull requests, and Git workflows." },
-        { name: "Vercel", context: "Vercel — CI/CD pipelines, instant deployments, and edge function setups." },
-        { name: "Docker", context: "Docker — Containerizing full-stack environments for consistent server deployment." },
-        { name: "Postman", context: "Postman — Querying endpoints, simulating headers, and verifying JSON response models." },
-      ],
+      skills: ALL_SKILLS.filter((s) => s.category === "tools"),
     },
   ];
 
-  const marqueeRow1: SkillItem[] = [
-    { name: "React", context: "React — Building component-driven responsive user interfaces with complex state systems." },
-    { name: "Next.js", context: "Next.js — SSR, ISR, Turbopack, and App Router architectures for optimized load speed." },
-    { name: "TypeScript", context: "TypeScript — Strong type safety, interfaces, and generic constructs for bug-free compiles." },
-    { name: "Tailwind CSS", context: "Tailwind CSS — Writing semantic tokens, utility designs, and fluid layouts." },
-    { name: "Node.js", context: "Node.js — Constructing scalable, asynchronous server scripts and microservices." },
-    { name: "Java", context: "Java — Building modular, structured backend server architectures." },
-    { name: "PostgreSQL", context: "PostgreSQL — Designing relational tables, key constraints, and indexing queries." },
-  ];
-
-  const marqueeRow2: SkillItem[] = [
-    { name: "Python", context: "Python — Writing data analysis scripts, neural nodes, and custom API servers." },
-    { name: "LangChain", context: "LangChain — Integrating tool-calling pipelines, LLM chains, and history memory buffers." },
-    { name: "LLMs / APIs", context: "LLMs / APIs — Direct scripting with Gemini, Claude, and OpenAI endpoints." },
-    { name: "Vector DBs", context: "Vector DBs — Implementing semantic lookups and RAG (Retrieval-Augmented Generation) contexts." },
-    { name: "Docker", context: "Docker — Containerizing full-stack environments for consistent server deployment." },
-    { name: "Supabase", context: "Supabase — Utilizing real-time databases, authentication flows, and Storage buckets." },
-  ];
+  const marqueeRow1 = ALL_SKILLS.slice(0, 8);
+  const marqueeRow2 = ALL_SKILLS.slice(8);
 
 
   const handleSkillSelect = (skill: SkillItem) => {

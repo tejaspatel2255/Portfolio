@@ -22,14 +22,14 @@ export function Services() {
       num: "01",
       name: "Full-Stack Web Products",
       benefit: "I build high-performance web products end-to-end—translating design requirements into responsive, type-safe React interfaces powered by robust server architectures.",
-      techTags: ["React / Next.js", "TypeScript", "Node.js / Java", "Tailwind CSS"],
+      techTags: ["React / Next.js", "TypeScript", "Node.js", "Tailwind CSS"],
       icon: Code,
     },
     {
       num: "02",
       name: "Autonomous AI Workflows",
       benefit: "I design and construct custom agentic AI systems that automate business operations, orchestrate tools, and generate structured data using LLM reasoning nodes.",
-      techTags: ["Python", "LangChain / Graph", "OpenAI / Anthropic", "Vector DBs"],
+      techTags: ["Python", "LangChain / Graph", "Groq / Gemini / OpenRouter"],
       icon: Cpu,
     },
     {

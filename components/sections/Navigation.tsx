@@ -9,6 +9,7 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { WhatsappIcon } from "@/components/ui/Icons";
 import { useMagnetic } from "@/lib/magnetic";
 import { useLenis } from "@/components/ui/AnimationProvider";
+import { githubUrl, linkedinUrl, name } from "@/data/site";
 
 const NAV_LINKS = [
   { label: "Work", href: "#work", id: "work" },
@@ -236,10 +237,10 @@ export function Navigation() {
                 </WhatsAppButton>
 
                 <div className="flex items-center justify-between text-xs font-mono text-ink-muted">
-                  <span>© {new Date().getFullYear()} TEJAS PATEL</span>
+                  <span>© {new Date().getFullYear()} {name.toUpperCase()}</span>
                   <div className="flex gap-4">
                     <a
-                      href="https://github.com/tejaspatel2255"
+                      href={githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-ink-primary p-1 transition-colors"
@@ -247,7 +248,7 @@ export function Navigation() {
                       <GithubIcon className="w-4.5 h-4.5" />
                     </a>
                     <a
-                      href="https://www.linkedin.com/in/pateltejasd"
+                      href={linkedinUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="hover:text-ink-primary p-1 transition-colors"
